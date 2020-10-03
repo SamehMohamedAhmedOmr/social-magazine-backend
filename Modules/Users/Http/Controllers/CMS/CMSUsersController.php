@@ -5,21 +5,20 @@ namespace Modules\Users\Http\Controllers\CMS;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Base\Requests\PaginationRequest;
-use Modules\Users\Http\Requests\AdminRequest;
-use Modules\Users\Http\Requests\CMS\ClientProductFilterRequest;
+use Modules\Users\Http\Requests\CMSUsersRequest;
 use Modules\Users\Http\Requests\ProfileRequest;
-use Modules\Users\Services\CMS\AdminService;
+use Modules\Users\Services\CMS\CMSUsersService;
 use Modules\Users\Services\Common\UserService;
 
-class AdminController extends Controller
+class CMSUsersController extends Controller
 {
     private $userService;
-    private $admin_service;
+    private $cms_users_service;
 
-    public function __construct(UserService $user, AdminService $admin)
+    public function __construct(UserService $user, CMSUsersService $admin)
     {
         $this->userService = $user;
-        $this->admin_service = $admin;
+        $this->cms_users_service = $admin;
     }
 
     // profile Method
@@ -35,40 +34,40 @@ class AdminController extends Controller
 
     // API RESOURCE METHODS
     /**
-     * Get all Admin
+     * Get all CMSUser
      *
      * @param PaginationRequest $request
      * @return JsonResponse
      */
     public function index(PaginationRequest $request)
     {
-        return $this->admin_service->index();
+        return $this->cms_users_service->index();
     }
 
     /**
-     * Handles Add New Admin
+     * Handles Add New CMSUser
      *
-     * @param AdminRequest $request
+     * @param CMSUsersRequest $request
      * @return JsonResponse
      */
-    public function store(AdminRequest $request)
+    public function store(CMSUsersRequest $request)
     {
-        return $this->admin_service->store($request);
+        return $this->cms_users_service->store($request);
     }
 
-    public function show(AdminRequest $request)
+    public function show(CMSUsersRequest $request)
     {
-        return $this->admin_service->show($request->admin);
+        return $this->cms_users_service->show($request->admin);
     }
 
-    public function update(AdminRequest $request)
+    public function update(CMSUsersRequest $request)
     {
-        return $this->admin_service->update($request->admin, $request);
+        return $this->cms_users_service->update($request->admin, $request);
     }
 
-    public function destroy(AdminRequest $request)
+    public function destroy(CMSUsersRequest $request)
     {
-        return $this->admin_service->delete($request->admin);
+        return $this->cms_users_service->delete($request->admin);
     }
 
     /**
@@ -78,6 +77,6 @@ class AdminController extends Controller
      */
     public function export(PaginationRequest $request)
     {
-        return $this->admin_service->export();
+        return $this->cms_users_service->export();
     }
 }

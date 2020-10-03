@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientTable extends Migration
+class CreateResearchersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,11 @@ class CreateClientTable extends Migration
         Schema::create('researchers', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('phone')->nullable();
 
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

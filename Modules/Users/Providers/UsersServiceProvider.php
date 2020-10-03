@@ -6,6 +6,7 @@ use App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Users\Helpers\UsersErrorsHelper;
+use Modules\Users\Helpers\UsersTypesHelper;
 
 class UsersServiceProvider extends ServiceProvider
 {
@@ -32,8 +33,17 @@ class UsersServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
+
+        $this->registerHelpers();
+    }
+
+    public function registerHelpers(){
         App::bind('UsersErrorsHelper', function () {
             return App::make(UsersErrorsHelper::class);
+        });
+
+        App::bind('UsersTypesHelper', function () {
+            return App::make(UsersTypesHelper::class);
         });
     }
 

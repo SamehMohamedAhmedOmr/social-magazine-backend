@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Modules\Users\Facades\UsersErrorsHelper;
 
-class ClientRequest extends FormRequest
+class ResearcherRequest extends FormRequest
 {
     protected $client_type = 2;
 

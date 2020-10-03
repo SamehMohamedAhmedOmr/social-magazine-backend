@@ -2,40 +2,28 @@
 
 namespace Modules\Users\Services\CMS;
 
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Maatwebsite\Excel\Facades\Excel;
 use Modules\Base\Facade\ExcelExportHelper;
 use Modules\Base\ResponseShape\ApiResponse;
-use Modules\Base\ResponseShape\ExportResource;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Users\ExcelExports\ClientExport;
-use Modules\Users\Repositories\AddressRepository;
-use Modules\Users\Repositories\ClientRepository;
+use Modules\Users\Facades\UsersTypesHelper;
+use Modules\Users\Repositories\ResearcherRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\ClientResource;
-use Modules\Users\Transformers\CMS\UserOrdersResource;
-use Modules\WareHouse\Repositories\DistrictRepository;
 use Throwable;
 
-class ClientService extends LaravelServiceClass
+class ResearcherService extends LaravelServiceClass
 {
     private $user_repo;
     private $clientRepository;
     private $addressRepository;
-    private $districtRepository;
-    protected $client_type = 2;
 
     public function __construct(UserRepository $user_repo,
-                                AddressRepository $addressRepository,
-                                DistrictRepository $districtRepository,
-                                ClientRepository $clientRepository)
+                                ResearcherRepository $clientRepository)
     {
         $this->user_repo = $user_repo;
         $this->clientRepository = $clientRepository;
-
-        $this->addressRepository = $addressRepository;
-        $this->districtRepository = $districtRepository;
 
     }
 
@@ -44,11 +32,11 @@ class ClientService extends LaravelServiceClass
         $pagination = null;
         if (request('is_pagination')) {
             list($users, $pagination) = parent::paginate($this->clientRepository, null, true, [
-                'user_type' => $this->client_type
+                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
             ]);
         } else {
             $users = parent::list($this->clientRepository, true, [
-                'user_type' => $this->client_type
+                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
             ]);
         }
 
@@ -65,7 +53,7 @@ class ClientService extends LaravelServiceClass
     }
 
     /**
-     * Handles Add New Admin
+     * Handles Add New CMSUser
      *
      * @param null $request
      * @return JsonResponse
@@ -75,7 +63,7 @@ class ClientService extends LaravelServiceClass
     {
         return \DB::transaction(function () use ($request) {
             $user_data = $request->all();
-            $user_data['user_type'] = $this->client_type;
+            $user_data['user_type'] =  UsersTypesHelper::RESEARCHER_TYPE();
 
             if (isset($user_data['password'])){
                 $user_data['password'] = bcrypt($user_data['password']);
@@ -91,23 +79,6 @@ class ClientService extends LaravelServiceClass
                 'phone' => $request->phone
             ]);
 
-            if (isset($user_data['address'])){
-                $address_data = $user_data['address'];
-                $district = $this->districtRepository->get($address_data['district_id']);
-
-                if (!isset($address_data['city_id'])) {
-                    $city_id = ($district->parent_id) ? $district->parent_id : $district->id;
-                    $address_data['city_id'] = $city_id;
-                }
-
-                if (!isset($address_data['country_id'])) {
-                    $address_data['country_id'] = $district->country_id;
-                }
-
-                $address_data['user_id'] = $user->id;
-
-                $this->addressRepository->create($address_data);
-            }
 
             $user = ClientResource::make($user);
             return ApiResponse::format(201, $user, 'Researcher Added!');
@@ -118,7 +89,7 @@ class ClientService extends LaravelServiceClass
     public function show($id)
     {
         $user = $this->user_repo->get($id, [
-            'user_type' => $this->client_type
+            'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
         ]);
 
         if (request('get_address')) {
@@ -151,23 +122,6 @@ class ClientService extends LaravelServiceClass
     {
         $user = $this->user_repo->delete($id);
         return ApiResponse::format(200, $user, 'Researcher Deleted!');
-    }
-
-    public function clientOrders($id){
-
-        $user = $this->user_repo->get($id);
-
-        $orders = $user->orders;
-
-        list($orders_count, $orders_total_price) = $this->calculateTotalAndPrice($orders);
-
-
-        $user_order_resource =  new UserOrdersResource(
-            $orders_count,
-            $orders_total_price
-        );
-
-        return ApiResponse::format(200, $user_order_resource);
     }
 
     public function calculateTotalAndPrice($orders)

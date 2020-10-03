@@ -18,7 +18,7 @@ class AdminTableSeeder extends Seeder
         $user = User::updateOrCreate([
             'email' => 'admin@magzine.com',
         ], [
-            'name' => 'Admin',
+            'name' => 'CMSUser',
             'password' => bcrypt('123456789'),
             'user_type' => 1
         ]);

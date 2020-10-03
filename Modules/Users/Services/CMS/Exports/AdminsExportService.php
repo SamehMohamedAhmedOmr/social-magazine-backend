@@ -11,9 +11,9 @@ class AdminsExportService extends ExportServiceClass
         foreach ($clients as $client){
 
             $excel_data [] = [
-                'Admin id' => $client['id'],
-                'Admin Name' => $client['name'],
-                'Admin Email' => $client['email'],
+                'CMSUser id' => $client['id'],
+                'CMSUser Name' => $client['name'],
+                'CMSUser Email' => $client['email'],
                 'countries' => isset($client['countries']) ? $this->prepareAttachments($client['countries']) : null,
                 'warehouses' => isset($client['warehouses']) ? $this->prepareAttachments($client['warehouses']) : null,
                 'roles' => isset($client['roles']) ? $this->prepareAttachments($client['roles']) : null,

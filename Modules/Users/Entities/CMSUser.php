@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class CMSUser extends Model
 {
     use SoftDeletes, Notifiable;
 
@@ -20,10 +20,8 @@ class Admin extends Model
         return $this->belongsTo(User::class);
     }
 
-
-
     public function receivesBroadcastNotificationsOn()
     {
-        return 'Modules.Users.Admin.'.$this->id;
+        return 'Modules.Users.CMSUser.'.$this->id;
     }
 }

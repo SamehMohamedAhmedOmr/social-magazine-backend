@@ -18,7 +18,7 @@ return [
      * Once you have downloaded the Service Account JSON file, you can use it
      * to configure the package.
      *
-     * If you don't provide credentials, the Firebase Admin SDK will try to
+     * If you don't provide credentials, the Firebase CMSUser SDK will try to
      * autodiscover them
      *
      * - by checking the environment variable FIREBASE_CREDENTIALS
@@ -27,7 +27,7 @@ return [
      * - by checking if the application is running on GCE/GCP
      *
      * If no credentials file can be found, an exception will be thrown the
-     * first time you try to access a component of the Firebase Admin SDK.
+     * first time you try to access a component of the Firebase CMSUser SDK.
      *
      */
     'credentials' => [
@@ -104,7 +104,7 @@ return [
      * Caching
      * ------------------------------------------------------------------------
      *
-     * The Firebase Admin SDK can cache some data returned from the Firebase
+     * The Firebase CMSUser SDK can cache some data returned from the Firebase
      * API, for example Google's public keys used to verify ID tokens.
      *
      */

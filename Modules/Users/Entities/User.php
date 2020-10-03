@@ -8,10 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Modules\ACL\Entities\Role;
 use Modules\ACL\Entities\UserHasRoles;
-use Modules\Catalogue\Entities\Product;
-use Modules\Catalogue\Entities\ProductNotification;
-use Modules\WareHouse\Entities\Order\Order;
-use Modules\WareHouse\Entities\Cart;
 
 class User extends Authenticatable
 {
@@ -46,14 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function client()
+    public function researcher()
     {
         return $this->hasOne(Researcher::class, 'user_id', 'id');
     }
 
-    public function admin()
+    public function cmsUser()
     {
-        return $this->hasOne(Admin::class, 'user_id', 'id');
+        return $this->hasOne(CMSUser::class, 'user_id', 'id');
     }
 
     public function address()
@@ -61,25 +57,6 @@ class User extends Authenticatable
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
 
-    public function cart()
-    {
-        return $this->hasOne(Cart::class, 'user_id', 'id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id', 'id');
-    }
-
-    public function favorites()
-    {
-        return $this->hasManyThrough(
-            Product::class,
-            Favorite::class,
-            'product_id',
-            'id'
-        );
-    }
 
     public function roles()
     {
@@ -92,14 +69,5 @@ class User extends Authenticatable
             ->using(UserHasRoles::class);
     }
 
-    public function productSubscribed()
-    {
-        return $this->belongsToMany(
-            Product::class,
-            'product_notification',
-            'user_id',
-            'product_id'
-        )->withPivot('warehouse_id')->using(ProductNotification::class);
-    }
 
 }

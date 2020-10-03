@@ -6,7 +6,7 @@ use http\Client;
 use Illuminate\Support\Facades\Auth;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
-use Modules\Users\Repositories\ClientRepository;
+use Modules\Users\Repositories\ResearcherRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\AdminResource;
 use Modules\Users\Transformers\ClientResource;
@@ -23,7 +23,7 @@ class UserService extends LaravelServiceClass
 
     public function __construct(
         UserRepository $user,
-        ClientRepository $client_repo
+        ResearcherRepository $client_repo
     )
     {
         $this->user_repo = $user;

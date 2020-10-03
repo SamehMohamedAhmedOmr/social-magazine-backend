@@ -7,13 +7,12 @@ use Modules\Base\Repositories\Classes\LaravelRepositoryClass;
 use Modules\Users\Entities\Researcher;
 use Modules\Users\Entities\User;
 
-class ClientRepository extends LaravelRepositoryClass
+class ResearcherRepository extends LaravelRepositoryClass
 {
     protected $user;
-    protected $client_type = 2;
-    public function __construct(Researcher $client, User $user)
+    public function __construct(Researcher $researcher, User $user)
     {
-        $this->model = $client;
+        $this->model = $researcher;
         $this->user = $user;
     }
 
@@ -34,12 +33,12 @@ class ClientRepository extends LaravelRepositoryClass
     private function filtering($search_keys){
         $query = $this->user;
 
-        $query = $query->with('client');
+        $query = $query->with('researcher');
 
         if ($search_keys) {
             $query = $query->where(function ($q) use ($search_keys){
 
-                $q = $q->whereHas('client', function ($client_query) use ($search_keys) {
+                $q = $q->whereHas('researcher', function ($client_query) use ($search_keys) {
                     if ($search_keys) {
                         $client_query->where('phone', 'LIKE', '%'.$search_keys.'%');
                     }
@@ -51,15 +50,6 @@ class ClientRepository extends LaravelRepositoryClass
             });
         }
 
-
-        if (request('subscribed_product')){
-
-            $query = $query->with('productSubscribed');
-
-            $query = $query->whereHas('productSubscribed', function ($product_query) {
-                $product_query->where('id', request('subscribed_product'));
-            });
-        }
         return $query;
     }
 

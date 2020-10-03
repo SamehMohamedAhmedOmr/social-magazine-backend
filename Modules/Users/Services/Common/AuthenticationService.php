@@ -12,7 +12,7 @@ use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Notifications\Services\CMS\EmailService;
 use Modules\Users\Entities\Researcher;
 use Modules\Users\Facades\UsersErrorsHelper;
-use Modules\Users\Repositories\AddressRepository;
+use Modules\Users\Facades\UsersTypesHelper;
 use Modules\Users\Repositories\ResetPasswordRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\UserResource;
@@ -22,23 +22,16 @@ class AuthenticationService extends LaravelServiceClass
 {
     private $user_repo;
     private $reset_password_repo;
-    private $address_repo;
     private $email_service;
-    private $MAGAZINE_EDITOR_TYPE = 1;
-    private $JOURNAL_EDITOR_DIRECTOR_TYPE = 2;
-    private $REFEREES_TYPE = 3;
-    private $RESEARCHER_TYPE = 4;
 
     public function __construct(
         UserRepository $user,
         ResetPasswordRepository $resetPassword,
-        AddressRepository $address,
         EmailService $email_service
     )
     {
         $this->user_repo = $user;
         $this->reset_password_repo = $resetPassword;
-        $this->address_repo = $address;
         $this->email_service = $email_service;
     }
 
@@ -54,7 +47,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type != $this->RESEARCHER_TYPE) { // should 4 to be Researcher
+            if ($user->user_type != UsersTypesHelper::RESEARCHER_TYPE()) { // should 4 to be Researcher
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -76,7 +69,7 @@ class AuthenticationService extends LaravelServiceClass
     }
 
     /**
-     * Handles Admin login
+     * Handles CMSUser login
      *
      * @return JsonResponse
      */
@@ -87,7 +80,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type == $this->RESEARCHER_TYPE) { // should not be 4 to be Admin
+            if ($user->user_type ==  UsersTypesHelper::RESEARCHER_TYPE()) { // should not be 4 to be CMSUser
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -123,7 +116,7 @@ class AuthenticationService extends LaravelServiceClass
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => bcrypt(request('password')),
-                'user_type' => $this->RESEARCHER_TYPE, // RESEARCHER_TYPE = 4
+                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE(), // RESEARCHER_TYPE = 4
             ]);
 
             // Create Researcher Record

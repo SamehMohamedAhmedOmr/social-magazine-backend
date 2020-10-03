@@ -3,7 +3,6 @@
 namespace Modules\Users\Http\Controllers\Frontend;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Users\Http\Requests\LoginRequest;
@@ -27,7 +26,6 @@ class UserAuthenticationController extends Controller
      *
      * @param loginRequest $request
      * @return JsonResponse
-     * @throws AuthenticationException
      */
     public function login(LoginRequest $request)
     {
@@ -56,7 +54,6 @@ class UserAuthenticationController extends Controller
      *
      * @param PasswordRequest $request
      * @return JsonResponse
-     * @throws AuthenticationException
      */
     public function resetPassword(PasswordRequest $request)
     {
@@ -73,7 +70,6 @@ class UserAuthenticationController extends Controller
      *
      * @param PasswordResetRequest $request
      * @return JsonResponse
-     * @throws AuthenticationException
      */
     public function forgetChangePassword(PasswordResetRequest $request)
     {

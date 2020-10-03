@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Modules\Users\Facades\UsersErrorsHelper;
 
-class AdminRequest extends FormRequest
+class CMSUsersRequest extends FormRequest
 {
     protected $admin_type = 1;
 
@@ -39,11 +39,6 @@ class AdminRequest extends FormRequest
                     'email' => 'required|email:rfc,filter|unique:users,email',
                     'password' => 'required|string|min:6',
 
-                    'countries' => 'required|array',
-                    'countries.*' => 'required|integer|exists:countries,id'.$delete_check,
-
-                    'warehouses' => 'required|array',
-                    'warehouses.*' => 'required|integer|exists:countries,id'.$delete_check,
 
                     'roles' => 'required|array',
                     'roles.*' => 'required|integer|exists:roles,id'.$delete_check,
@@ -65,12 +60,6 @@ class AdminRequest extends FormRequest
                     ],
 
                     'is_active' => 'boolean',
-
-                    'countries' => 'array',
-                    'countries.*' => 'required|integer|exists:countries,id'.$delete_check,
-
-                    'warehouses' => 'array',
-                    'warehouses.*' => 'required|integer|exists:countries,id'.$delete_check,
 
                     'roles' => 'array',
                     'roles.*' => 'required|integer|exists:roles,id'.$delete_check,

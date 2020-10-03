@@ -12,6 +12,6 @@
 */
 
 
-Broadcast::channel('Modules.Users.Admin.{id}', function ($user, $id) {
+Broadcast::channel('Modules.Users.CMSUser.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 }, ['guards' => ['api']]);

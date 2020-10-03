@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Modules\Base\Facade\ExcelExportHelper;
-use Modules\Users\Services\CMS\AdminService;
+use Modules\Users\Services\CMS\CMSUsersService;
 use Modules\Users\Services\CMS\Exports\AdminsExportService;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -23,7 +23,7 @@ class AdminExport implements FromArray , WithHeadings, ShouldAutoSize, WithStyle
      */
     public function array(): array
     {
-        $data = ExcelExportHelper::prepareDataForExport(App::make(AdminService::class),
+        $data = ExcelExportHelper::prepareDataForExport(App::make(CMSUsersService::class),
             App::make(AdminsExportService::class));
 
         $this->data_length = count($data);

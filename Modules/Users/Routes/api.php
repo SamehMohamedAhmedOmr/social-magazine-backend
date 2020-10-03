@@ -25,12 +25,6 @@ Route::namespace('Frontend')->prefix('v1')->group(function () {
         Route::group(['middleware' => ['auth:api']], function () {
             Route::post('logout', 'UserAuthenticationController@logout');
             Route::post('reset/password', 'UserAuthenticationController@resetPassword');
-            Route::apiResource('addresses', 'AddressController');
-            Route::prefix('favorites')->group(function () {
-                Route::get('/', 'FavoriteController@index');
-                Route::post('/', 'FavoriteController@store');
-                Route::delete('/{favorite_id?}', 'FavoriteController@destroy');
-            });
             Route::prefix('profile')->group(function () {
                 Route::get('/', 'UserController@show');
                 Route::match(['PUT', 'PATCH'], '/', 'UserController@updateProfile');
@@ -49,36 +43,24 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
     });
 
     Route::middleware('auth:api')->as('admins.')->group(function () {
+
         Route::prefix('profile')->as('profile.')->group(function () {
-            Route::get('/', 'AdminController@get')->name('show');
-            Route::put('/', 'AdminController@updateProfile')->name('update');
+            Route::get('/', 'CMSUsersController@get')->name('show');
+            Route::put('/', 'CMSUsersController@updateProfile')->name('update');
         });
-        Route::apiResource('admins', 'AdminController');
-        Route::prefix('admins')->as('admins.')->group(function () {
-            Route::get('/sheet/export', 'AdminController@export')->name('export');
+        Route::apiResource('cms-users', 'CMSUsersController');
+        Route::prefix('cms-users')->as('cms-users.')->group(function () {
+            Route::get('/sheet/export', 'CMSUsersController@export')->name('export');
         });
 
-        Route::apiResource('users', 'ClientController');
+        Route::apiResource('researchers', 'ResearcherController');
 
         Route::prefix('users')->as('users.')->group(function () {
-            Route::get('/orders/{user}', 'ClientController@clientOrders')->name('orders');
-            Route::get('/sheet/export', 'ClientController@export')->name('export');
+            Route::get('/sheet/export', 'ResearcherController@export')->name('export');
         });
 
-
-
-
-        Route::apiResource('addresses', 'AddressController');
 
         Route::post('logout', 'AdminAuthenticationController@logout')->name('logout');
         Route::post('reset/password', 'AdminAuthenticationController@resetPassword')->name('admin.reset.password');
-    });
-});
-
-/* Authenticated APIs */
-Route::middleware('auth:api')->group(function () {
-    Route::prefix('admins')->as('admins.')->group(function () {
-        Route::namespace('Common')->group(function () {
-        });
     });
 });

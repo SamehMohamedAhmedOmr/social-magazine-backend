@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
-use Modules\Users\Repositories\ClientRepository;
+use Modules\Users\Repositories\ResearcherRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\AuthResource;
 use Modules\Users\Transformers\UserResource;
@@ -21,7 +21,7 @@ class SocialAuthenticationService extends LaravelServiceClass
     private $client_repo;
     private $client_type = 2;
 
-    public function __construct(UserRepository $user, ClientRepository $client)
+    public function __construct(UserRepository $user, ResearcherRepository $client)
     {
         $this->user_repo = $user;
         $this->client_repo = $client;

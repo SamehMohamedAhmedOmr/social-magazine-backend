@@ -7,17 +7,18 @@ use Modules\Base\Facade\ExcelExportHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Users\ExcelExports\AdminExport;
-use Modules\Users\Repositories\AdminRepository;
+use Modules\Users\Facades\UsersTypesHelper;
+use Modules\Users\Repositories\CMSUsersRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\AdminResource;
 
-class AdminService extends LaravelServiceClass
+class CMSUsersService extends LaravelServiceClass
 {
     private $user_repo;
     private $adminRepository;
     protected $admin_type = 1;
 
-    public function __construct(UserRepository $user_repo, AdminRepository $adminRepository)
+    public function __construct(UserRepository $user_repo, CMSUsersRepository $adminRepository)
     {
         $this->user_repo = $user_repo;
         $this->adminRepository = $adminRepository;
@@ -27,11 +28,11 @@ class AdminService extends LaravelServiceClass
     {
         if (request('is_pagination')) {
             list($users, $pagination) = parent::paginate($this->user_repo, null, true, [
-                'user_type' => $this->admin_type
+                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
             ]);
         } else {
             $users = parent::list($this->user_repo, true, [
-                'user_type' => $this->admin_type
+                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
             ]);
             $pagination = null;
         }
@@ -45,7 +46,7 @@ class AdminService extends LaravelServiceClass
     }
 
     /**
-     * Handles Add New Admin
+     * Handles Add New CMSUser
      *
      * @param null $request
      * @return JsonResponse
@@ -53,33 +54,25 @@ class AdminService extends LaravelServiceClass
     public function store($request = null)
     {
         $user_data = $request->all();
-        $user_data['user_type'] = $this->admin_type;
+        $user_data['user_type'] =  UsersTypesHelper::RESEARCHER_TYPE();
         $user_data['password'] = bcrypt($user_data['password']);
 
         $user =  $this->user_repo->create($user_data);
 
         $this->user_repo->syncRoles($user, $request->roles);
 
-
-        $admin = $this->adminRepository->create([
-            'user_id' => $user->id
-        ]);
-
-        $this->adminRepository->syncCountries($admin, $request->countries);
-        $this->adminRepository->syncWarehouses($admin, $request->warehouses);
-
         $user->load([
             'roles',
         ]);
 
         $user = AdminResource::make($user);
-        return ApiResponse::format(201, $user, 'Admin Added!');
+        return ApiResponse::format(201, $user, 'CMSUser Added!');
     }
 
     public function show($id)
     {
         $user = $this->user_repo->get($id, [
-            'user_type' => $this->admin_type
+            'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
         ]);
 
         $user->load([
@@ -94,23 +87,11 @@ class AdminService extends LaravelServiceClass
     {
         $user = $this->user_repo->update($id, $request->only('name', 'email', 'is_active'));
 
-        $admin = $user->admin;
-
         if ($request->roles) {
             $this->user_repo->syncRoles($user, $request->roles);
         }
 
-        if ($request->countries) {
-            $this->adminRepository->syncCountries($admin, $request->countries);
-        }
-
-        if ($request->warehouses) {
-            $this->adminRepository->syncWarehouses($admin, $request->warehouses);
-        }
-
         $user->load([
-            'admin.countries.language',
-            'admin.warehouses.language',
             'roles',
         ]);
 
@@ -121,7 +102,7 @@ class AdminService extends LaravelServiceClass
     public function delete($id)
     {
         $user = $this->user_repo->delete($id);
-        return ApiResponse::format(200, $user, 'Admin Deleted!');
+        return ApiResponse::format(200, $user, 'CMSUser Deleted!');
     }
 
     public function export(){

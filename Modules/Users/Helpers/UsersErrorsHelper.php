@@ -52,7 +52,8 @@ class UsersErrorsHelper
         ]);
     }
 
-    public function regexName(){
+    public function regexName()
+    {
         return '/^[a-z ,.\'_-]+$/i';
     }
 }

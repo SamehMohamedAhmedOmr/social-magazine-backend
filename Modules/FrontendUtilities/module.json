@@ -1,0 +1,13 @@
+{
+    "name": "FrontendUtilities",
+    "alias": "frontendutilities",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\FrontendUtilities\\Providers\\FrontendUtilitiesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

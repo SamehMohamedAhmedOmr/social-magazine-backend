@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/facebookcatalogue",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\FacebookCatalogue\\Providers\\FacebookCatalogueServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\FacebookCatalogue\\": ""
+        }
+    }
+}

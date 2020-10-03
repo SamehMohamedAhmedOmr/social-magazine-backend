@@ -1,0 +1,13 @@
+{
+    "name": "FacebookCatalogue",
+    "alias": "facebookcatalogue",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\FacebookCatalogue\\Providers\\FacebookCatalogueServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

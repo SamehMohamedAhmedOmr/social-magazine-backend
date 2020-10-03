@@ -1,0 +1,26 @@
+{
+    "name": "nwidart/frontendutilities",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\FrontendUtilities\\Providers\\FrontendUtilitiesServiceProvider"
+            ],
+            "aliases": {
+                "PromocodeValidationHelper": "Modules\\FrontendUtilities\\Facades\\PromocodeValidationHelper",
+                "PromocodeErrorsHelper": "Modules\\FrontendUtilities\\Facades\\PromocodeErrorsHelper"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\FrontendUtilities\\": ""
+        }
+    }
+}

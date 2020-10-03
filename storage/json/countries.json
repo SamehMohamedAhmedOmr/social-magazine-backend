@@ -1,0 +1,149 @@
+[
+    {
+        "name" : {
+            "en" : "Algeria",
+            "ar" : "الجزائر"
+        },
+        "code": "DZ"
+    },
+    {
+        "name" : {
+            "en" : "Bahrain",
+            "ar" : "البحرين"
+        },
+        "code": "BH"
+    },
+    {
+        "name" : {
+            "en" : "Egypt",
+            "ar" : "مصر"
+        },
+        "code": "EG"
+    },
+    {
+        "name" : {
+            "en" : "Iran",
+            "ar" : "ايران"
+        },
+        "code": "IR"
+    },
+    {
+        "name" : {
+            "en" : "Iraq",
+            "ar" : "العراق"
+        },
+        "code": "IQ"
+    },
+    {
+        "name" : {
+            "en" : "Jordan",
+            "ar" : "الادرن"
+        },
+        "code": "JO"
+    },
+    {
+        "name" : {
+            "en" : "Kuwait",
+            "ar" : "الكويت"
+        },
+        "code": "KW"
+    },
+    {
+        "name" : {
+            "en" : "Lebanon",
+            "ar" : "لبنان"
+        },
+        "code": "LB"
+    },
+    {
+        "name" : {
+            "en" : "Libya",
+            "ar" : "ليبيا"
+        },
+        "code": "LY"
+    },
+    {
+        "name" : {
+            "en" : "Morocco",
+            "ar" : "المغرب"
+        },
+        "code": "MA"
+    },
+    {
+        "name" : {
+            "en" : "Oman",
+            "ar" : "عمان"
+        },
+        "code": "OM"
+    },
+    {
+        "name" : {
+            "en" : "Palestine",
+            "ar" : "فلسطين"
+        },
+        "code": "PS"
+    },
+    {
+        "name" : {
+            "en" : "Qatar",
+            "ar" : "قطر"
+        },
+        "code": "QA"
+    },
+    {
+        "name" : {
+            "en" : "Saudi Arabia",
+            "ar" : "المملكة العربية السعودية"
+        },
+        "code": "SA"
+    },
+    {
+        "name" : {
+            "en" : "Somalia",
+            "ar" : "الصومال"
+        },
+        "code": "SO"
+    },
+    {
+        "name" : {
+            "en" : "Sudan",
+            "ar" : "السودان"
+        },
+        "code": "SD"
+    },
+    {
+        "name" : {
+            "en" : "Syria",
+            "ar" : "سوريا"
+        },
+        "code": "SY"
+    },
+    {
+        "name" : {
+            "en" : "Tunisia",
+            "ar" : "تونس"
+        },
+        "code": "TN"
+    },
+    {
+        "name" : {
+            "en" : "Turkey",
+            "ar" : "تركيا"
+        },
+        "code": "TR"
+    },
+    {
+        "name" : {
+            "en" : "United Arab Emirates",
+            "ar" : "الامارات العربية المتحدة"
+        },
+        "code": "AE"
+    },
+    {
+        "name" : {
+            "en" : "Yemen",
+            "ar" : "اليمن"
+        },
+        "code": "YE"
+    }
+]

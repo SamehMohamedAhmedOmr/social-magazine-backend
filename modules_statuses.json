@@ -1,0 +1,15 @@
+{
+    "Catalogue": true,
+    "Settings": true,
+    "FrontendUtilities": true,
+    "Users": true,
+    "WareHouse": true,
+    "Notifications": true,
+    "Loyality": true,
+    "ACL": true,
+    "FacebookCatalogue": true,
+    "Reports": true,
+    "Gallery": true,
+    "Base": true,
+    "Configuration": true
+}

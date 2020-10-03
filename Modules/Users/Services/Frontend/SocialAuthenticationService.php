@@ -90,7 +90,7 @@ class SocialAuthenticationService extends LaravelServiceClass
             'facebook_id' => $user_information->id,
             'user_id' => $facebook_user->id
         ];
-        // Create Client Record
+        // Create Researcher Record
         $this->client_repo->create($client_data);
         return $facebook_user;
     }

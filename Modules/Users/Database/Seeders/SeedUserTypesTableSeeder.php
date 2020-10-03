@@ -3,7 +3,6 @@
 namespace Modules\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Users\Entities\UserTypes;
 
 class SeedUserTypesTableSeeder extends Seeder
@@ -15,17 +14,32 @@ class SeedUserTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        //Model::unguard();
+        $types = collect([
+            collect([
+                'key' => 'MAGAZINE_EDITOR',
+                'name' => 'رئيس التحرير'
+            ]),
+            collect([
+                'key' => 'JOURNAL_EDITOR_DIRECTOR',
+                'name' => 'مدير التحرير'
+            ]),
+            collect([
+                'key' => 'REFEREES',
+                'name' => 'محكم'
+            ]),
+            collect([
+                'key' => 'RESEARCHER',
+                'name' => 'باحث'
+            ]),
+        ]);
 
-        UserTypes::updateOrCreate([
-            'name' => 'Admin'
-        ]);
-        UserTypes::updateOrCreate([
-            'name' => 'Client'
-        ]);
-        UserTypes::updateOrCreate([
-            'name' => 'Driver'
-        ]);
-        // $this->call("OthersTableSeeder");
+
+        foreach ($types as $type) {
+            UserTypes::updateOrCreate([
+                'key' => $type->key,
+                'name' => $type->name
+            ]);
+        }
+
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Notifications\Services\CMS\EmailService;
-use Modules\Users\Entities\Client;
+use Modules\Users\Entities\Researcher;
 use Modules\Users\Facades\UsersErrorsHelper;
 use Modules\Users\Repositories\AddressRepository;
 use Modules\Users\Repositories\ResetPasswordRepository;
@@ -56,7 +56,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type != $this->client_type) { // should 2 to be Client
+            if ($user->user_type != $this->client_type) { // should 2 to be Researcher
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -128,8 +128,8 @@ class AuthenticationService extends LaravelServiceClass
                 'user_type' => $this->client_type, // client type = 2
             ]);
 
-            // Create Client Record
-            $client = new Client();
+            // Create Researcher Record
+            $client = new Researcher();
             $client->phone = request('phone');
             $user->client()->save($client);
 

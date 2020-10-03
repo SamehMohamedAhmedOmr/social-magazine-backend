@@ -110,7 +110,7 @@ class ClientService extends LaravelServiceClass
             }
 
             $user = ClientResource::make($user);
-            return ApiResponse::format(201, $user, 'Client Added!');
+            return ApiResponse::format(201, $user, 'Researcher Added!');
         });
 
     }
@@ -150,7 +150,7 @@ class ClientService extends LaravelServiceClass
     public function delete($id)
     {
         $user = $this->user_repo->delete($id);
-        return ApiResponse::format(200, $user, 'Client Deleted!');
+        return ApiResponse::format(200, $user, 'Researcher Deleted!');
     }
 
     public function clientOrders($id){

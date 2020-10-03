@@ -169,7 +169,6 @@ return [
         /*
          * Package Service Providers...
          */
-         App\Providers\TenancyProvider::class,
 
         /*
          * Application Service Providers...

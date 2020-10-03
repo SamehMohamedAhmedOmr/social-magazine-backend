@@ -4,14 +4,14 @@ namespace Modules\Users\Repositories;
 
 use Carbon\Carbon;
 use Modules\Base\Repositories\Classes\LaravelRepositoryClass;
-use Modules\Users\Entities\Client;
+use Modules\Users\Entities\Researcher;
 use Modules\Users\Entities\User;
 
 class ClientRepository extends LaravelRepositoryClass
 {
     protected $user;
     protected $client_type = 2;
-    public function __construct(Client $client, User $user)
+    public function __construct(Researcher $client, User $user)
     {
         $this->model = $client;
         $this->user = $user;

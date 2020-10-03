@@ -11,7 +11,7 @@ class ClientsExportService extends ExportServiceClass
         foreach ($clients as $client){
 
             $excel_data [] = [
-                'Client id' => $client['id'],
+                'Researcher id' => $client['id'],
                 'Customer Name' => $client['name'],
                 'Customer Email' => $client['email'],
                 'Phone' => isset($client['phone']) ? $client['phone'] : '',

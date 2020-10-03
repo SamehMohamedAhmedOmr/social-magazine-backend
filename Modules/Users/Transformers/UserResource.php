@@ -53,7 +53,7 @@ class UserResource extends Resource
 
         if ($this->user_type == $this->admin_type) { // Admin
             $data = [];
-        } elseif ($this->user_type == $this->client_type) { // Client
+        } elseif ($this->user_type == $this->client_type) { // Researcher
             $data = [
                 'phone' => $this->client->phone,
             ];

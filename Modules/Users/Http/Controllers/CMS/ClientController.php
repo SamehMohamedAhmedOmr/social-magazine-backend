@@ -37,7 +37,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Handles Add New Client
+     * Handles Add New Researcher
      *
      * @param ClientRequest $request
      * @return JsonResponse

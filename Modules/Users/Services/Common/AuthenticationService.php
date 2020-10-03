@@ -17,23 +17,22 @@ use Modules\Users\Repositories\ResetPasswordRepository;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\UserResource;
 use Illuminate\Support\Facades\Hash;
-use Modules\WareHouse\Repositories\DistrictRepository;
 
 class AuthenticationService extends LaravelServiceClass
 {
     private $user_repo;
     private $reset_password_repo;
     private $address_repo;
-    private $districtRepository;
     private $email_service;
-    private $admin_type = 1;
-    private $client_type = 2;
+    private $MAGAZINE_EDITOR_TYPE = 1;
+    private $JOURNAL_EDITOR_DIRECTOR_TYPE = 2;
+    private $REFEREES_TYPE = 3;
+    private $RESEARCHER_TYPE = 4;
 
     public function __construct(
         UserRepository $user,
         ResetPasswordRepository $resetPassword,
         AddressRepository $address,
-        DistrictRepository $districtRepository,
         EmailService $email_service
     )
     {
@@ -41,7 +40,6 @@ class AuthenticationService extends LaravelServiceClass
         $this->reset_password_repo = $resetPassword;
         $this->address_repo = $address;
         $this->email_service = $email_service;
-        $this->districtRepository = $districtRepository;
     }
 
     /**
@@ -56,7 +54,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type != $this->client_type) { // should 2 to be Researcher
+            if ($user->user_type != $this->RESEARCHER_TYPE) { // should 4 to be Researcher
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -89,7 +87,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type != $this->admin_type) { // should 1 to be Admin
+            if ($user->user_type == $this->RESEARCHER_TYPE) { // should not be 4 to be Admin
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -125,17 +123,13 @@ class AuthenticationService extends LaravelServiceClass
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => bcrypt(request('password')),
-                'user_type' => $this->client_type, // client type = 2
+                'user_type' => $this->RESEARCHER_TYPE, // RESEARCHER_TYPE = 4
             ]);
 
             // Create Researcher Record
             $client = new Researcher();
             $client->phone = request('phone');
             $user->client()->save($client);
-
-            if (request()->has('district_id')) { // Check one of the required fields is exists
-                $this->address_repo->createAddress($this->districtRepository, $user);
-            }
 
             // Save token Last Renew
             $tokenResult = $user->createToken(env('APP_NAME'));
@@ -269,6 +263,7 @@ class AuthenticationService extends LaravelServiceClass
         );
 
 
-        return ApiResponse::format(200, null, 'Your password change Successfully, Please login with the new password');
+        return ApiResponse::format(200, null,
+            'Your password change Successfully, Please login with the new password');
     }
 }

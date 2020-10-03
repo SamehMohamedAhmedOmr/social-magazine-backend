@@ -37,8 +37,6 @@ class AdminService extends LaravelServiceClass
         }
 
         $users->load([
-            'admin.countries.currentLanguage',
-            'admin.warehouses.currentLanguage',
             'roles',
         ]);
 
@@ -71,8 +69,6 @@ class AdminService extends LaravelServiceClass
         $this->adminRepository->syncWarehouses($admin, $request->warehouses);
 
         $user->load([
-            'admin.countries.language',
-            'admin.warehouses.language',
             'roles',
         ]);
 
@@ -87,8 +83,6 @@ class AdminService extends LaravelServiceClass
         ]);
 
         $user->load([
-            'admin.countries.currentLanguage',
-            'admin.warehouses.currentLanguage',
             'roles',
         ]);
 

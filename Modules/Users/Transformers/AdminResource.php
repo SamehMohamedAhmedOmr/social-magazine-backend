@@ -21,8 +21,6 @@ class AdminResource extends Resource
             'name' => $this->name,
             'email' => $this->email,
             'is_active' => $this->is_active,
-            'countries' => AdminCountryResource::make($this->whenLoaded('admin')),
-            'warehouses' => AdminWarehouseResource::make($this->whenLoaded('admin')),
             'roles' => RoleResource::collection($this->whenLoaded('roles'))
         ];
     }

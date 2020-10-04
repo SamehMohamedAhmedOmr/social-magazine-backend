@@ -14,11 +14,6 @@ class BaseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('language', function()
-        {
-            return App::make(\Modules\Base\Helpers\LanguageHelper::class);
-        });
-
         App::bind('pagination', function()
         {
             return App::make(\Modules\Base\Helpers\Pagination::class);

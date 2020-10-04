@@ -6,8 +6,6 @@ use Closure;
 use Illuminate\Foundation\Application as App;
 use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager as Session;
-use Modules\Settings\Repositories\LanguageRepository;
-use Languages;
 
 class SetLanguage
 {
@@ -20,15 +18,13 @@ class SetLanguage
      *
      * @param   App $app
      * @param   Session $session
-     * @param   LanguageRepository $language_repository
      *
      * @return  void
      */
-    public function __construct(App $app, Session $session, LanguageRepository $language_repository)
+    public function __construct(App $app, Session $session)
     {
         $this->app = $app;
         $this->session = $session;
-        $this->language_repository = $language_repository;
     }
 
     /**
@@ -41,9 +37,8 @@ class SetLanguage
     public function handle($request, Closure $next)
     {
         $acceptLanguage = $request->header('Accept-Language');
-        $locale = in_array($acceptLanguage, Languages::getActiveISO()) ? $acceptLanguage : config('app.fallback_locale');
-        $this->app->setLocale($locale);
-        $this->session->put('language_id', $this->language_repository->getLangId($locale));
+        $this->app->setLocale($acceptLanguage);
+        $this->session->put('language_id', $this->language_repository->getLangId($acceptLanguage));
 
         return $next($request);
     }

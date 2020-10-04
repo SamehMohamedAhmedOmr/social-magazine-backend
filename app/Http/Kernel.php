@@ -4,7 +4,6 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Modules\ACL\Http\Middleware\PermissionMiddleware;
-use Modules\WareHouse\Http\Middleware\DetectCountry;
 
 class Kernel extends HttpKernel
 {
@@ -43,8 +42,6 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\Base\Middleware\SetLanguage::class,
-            \Modules\WareHouse\Http\Middleware\DetectCountry::class,
-            \Modules\Catalogue\Http\Middleware\DetectWarehouse::class,
             \Modules\ACL\Http\Middleware\PermissionMiddleware::class,
         ],
     ];
@@ -67,7 +64,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'check.logged_in' => \Modules\Catalogue\Http\Middleware\CheckIfAuthBeUsed::class,
     ];
 
     /**

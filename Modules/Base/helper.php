@@ -3,31 +3,6 @@
 // get Language for any Api Request
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
-use \Modules\Settings\Repositories\LanguageRepository;
-use \Modules\Settings\Entities\Language;
-
-/**
- * @return array iso for the active languages
- */
-function getActiveISO()
-{
-    return (new LanguageRepository(new Language()))->getActiveISO();
-}
-
-// get Lang ID
-function getLang()
-{
-    $lang_iso = app('request')->header('Accept-Language');
-    $lang_repo =  new LanguageRepository(new Language());
-    return  $lang_repo->getLangId($lang_iso);
-}
-
-// get all active languages
-function getAllActiveLanguages()
-{
-    $lang_repo =  new LanguageRepository(new Language());
-    return $lang_repo->getLang();
-}
 
 // upload file take two arguments (Request File , the name of the folder to be store in)
 function uploadImage($image, $folder)

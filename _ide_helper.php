@@ -20500,23 +20500,8 @@ namespace  {
 
     class Pagination extends \Modules\Base\Facade\Pagination {}
 
-    class Languages extends \Modules\Base\Facade\LanguageFacade {}
-
     class UtilitiesHelper extends \Modules\Base\Facade\UtilitiesHelper {}
 
-    class PromocodeValidationHelper extends \Modules\FrontendUtilities\Facades\PromocodeValidationHelper {}
-
-    class PromocodeErrorsHelper extends \Modules\FrontendUtilities\Facades\PromocodeErrorsHelper {}
-
-    class ValidationHelper extends \Modules\Loyality\Helpers\Facades\ValidationHelper {}
-
-    class CheckoutErrorsHelper extends \Modules\WareHouse\Facades\CheckoutErrorsHelper {}
-
-    class VariantRepoResource extends \Modules\Catalogue\Transformers\Repo\Facades\VariantResource {}
-
-    class VariantValueRepoResource extends \Modules\Catalogue\Transformers\Repo\Facades\VariantValueResource {}
-
-    class ProductRepoResource extends \Modules\Catalogue\Transformers\Repo\Facades\ProductResource {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
 

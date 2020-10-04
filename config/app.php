@@ -235,18 +235,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         'Pagination' => Modules\Base\Facade\Pagination::class,
-        'Languages' => Modules\Base\Facade\LanguageFacade::class,
         'UtilitiesHelper' => Modules\Base\Facade\UtilitiesHelper::class,
-        'PromocodeValidationHelper' => Modules\FrontendUtilities\Facades\PromocodeValidationHelper::class,
-        'PromocodeErrorsHelper' => Modules\FrontendUtilities\Facades\PromocodeErrorsHelper::class,
-        'ValidationHelper' => \Modules\Loyality\Helpers\Facades\ValidationHelper::class,
-
-        'CheckoutErrorsHelper' => \Modules\WareHouse\Facades\CheckoutErrorsHelper::class,
-
-        ## Repo Resources
-        'VariantRepoResource' => \Modules\Catalogue\Transformers\Repo\Facades\VariantResource::class,
-        'VariantValueRepoResource' => \Modules\Catalogue\Transformers\Repo\Facades\VariantValueResource::class,
-        'ProductRepoResource' => \Modules\Catalogue\Transformers\Repo\Facades\ProductResource::class,
 
     ]
 

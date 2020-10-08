@@ -20,29 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('family_name');
 
-            $table->unsignedInteger('title_id'); // Mr, Ms , etc
-            $table->foreign('title_id')->references('id')
-                ->on('titles')->onDelete('restrict')->onUpdate('cascade');
-
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('alternative_email')->nullable();
-
             $table->dateTime('token_last_renew')->nullable();
-
-            $table->unsignedInteger('educational_level_id'); // دكتوره / ماجستير
-            $table->foreign('educational_level_id')->references('id')
-                ->on('educational_levels')->onDelete('restrict')->onUpdate('cascade');
-
-            $table->unsignedInteger('educational_degree_id'); // أستاذ / أستاذ مشارك / أستاذ مساعد
-            $table->foreign('educational_degree_id')->references('id')
-                ->on('educational_degrees')->onDelete('restrict')->onUpdate('cascade');
-
-            $table->text('educational_field');
-
-            $table->string('university')->nullable();
-            $table->string('faculty')->nullable();
 
             $table->unsignedInteger('user_type');
             $table->foreign('user_type')->references('id')
@@ -50,12 +32,32 @@ class CreateUsersTable extends Migration
 
             $table->boolean('is_active')->default(1);
 
+            $table->unsignedInteger('gender_id'); // male / female
+            $table->foreign('gender_id')->references('id')
+                ->on('genders')->onDelete('restrict')->onUpdate('cascade');
+
+            $table->unsignedInteger('title_id')->nullable(); // Mr, Ms , etc
+            $table->foreign('title_id')->references('id')
+                ->on('titles')->onDelete('restrict')->onUpdate('cascade');
+
+
+            $table->unsignedInteger('educational_level_id')->nullable(); // دكتوره / ماجستير
+            $table->foreign('educational_level_id')->references('id')
+                ->on('educational_levels')->onDelete('restrict')->onUpdate('cascade');
+
+            $table->unsignedInteger('educational_degree_id')->nullable(); // أستاذ / أستاذ مشارك / أستاذ مساعد
+            $table->foreign('educational_degree_id')->references('id')
+                ->on('educational_degrees')->onDelete('restrict')->onUpdate('cascade');
+
+            $table->text('educational_field')->nullable();
+
+            $table->string('university')->nullable();
+            $table->string('faculty')->nullable();
+
             $table->string('phone_number')->nullable();
             $table->string('fax_number')->nullable();
 
-
             $table->text('address')->nullable();
-
 
             $table->timestamps();
             $table->softDeletes();

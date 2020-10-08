@@ -21,7 +21,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_type', 'is_active', 'token_last_renew'
+        'first_name', 'family_name' , 'email', 'email_verified_at' ,'password',
+        'alternative_email' , 'token_last_renew',
+        'user_type', 'is_active',
+        'title_id' , 'educational_level_id', 'educational_degree_id',
+        'educational_field' , 'university', 'faculty', 'phone_number',
+        'fax_number', 'address'
     ];
 
     /**
@@ -42,20 +47,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function researcher()
-    {
-        return $this->hasOne(Researcher::class, 'user_id', 'id');
-    }
-
-    public function cmsUser()
-    {
-        return $this->hasOne(CMSUser::class, 'user_id', 'id');
-    }
-
-    public function address()
-    {
-        return $this->hasMany(Address::class, 'user_id', 'id');
-    }
 
 
     public function roles()

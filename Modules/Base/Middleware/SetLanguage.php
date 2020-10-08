@@ -36,9 +36,9 @@ class SetLanguage
      */
     public function handle($request, Closure $next)
     {
-        $acceptLanguage = $request->header('Accept-Language');
+        $acceptLanguage = 'ar';
         $this->app->setLocale($acceptLanguage);
-        $this->session->put('language_id', $this->language_repository->getLangId($acceptLanguage));
+       // $this->session->put('language_id', $this->language_repository->getLangId($acceptLanguage));
 
         return $next($request);
     }

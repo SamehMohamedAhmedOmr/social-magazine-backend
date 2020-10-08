@@ -20,6 +20,7 @@ class BasicDatabaseSeeder extends Seeder
         $this->call(EducationalLevelsTableSeeder::class);
         $this->call(GenderTableSeeder::class);
         $this->call(TitlesTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
         // $this->call("OthersTableSeeder");
     }
 }

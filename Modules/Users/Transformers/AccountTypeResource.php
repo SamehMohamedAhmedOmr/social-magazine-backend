@@ -4,9 +4,8 @@ namespace Modules\Users\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\Resource;
-use Modules\ACL\Transformers\RoleResource;
 
-class AdminResource extends Resource
+class AccountTypeResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +18,7 @@ class AdminResource extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'is_active' => $this->is_active,
-            'roles' => RoleResource::collection($this->whenLoaded('roles'))
+            'key' => $this->key,
         ];
     }
 }

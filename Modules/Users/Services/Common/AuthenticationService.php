@@ -73,14 +73,23 @@ class AuthenticationService extends LaravelServiceClass
      *
      * @return JsonResponse
      */
-    public function loginAsAdmin()
+    public function loginForCMS()
     {
         $loginStatus = $this->user_repo->AuthAttempt();
 
         if ($loginStatus) {
             $user =  Auth::user();
 
-            if ($user->user_type ==  UsersTypesHelper::RESEARCHER_TYPE()) { // should not be 4 to be CMSUser
+            $user->load([
+                'accountTypes'
+            ]);
+
+            $types = $user->accountTypes->pluck('id');
+
+            if (!($types->contains(UsersTypesHelper::MAGAZINE_EDITOR_MANAGER_TYPE()) ||
+                $types->contains(UsersTypesHelper::JOURNAL_EDITOR_DIRECTOR_TYPE()) ||
+                $types->contains(UsersTypesHelper::REFEREES_TYPE())))
+            {
                 UsersErrorsHelper::unAuthenticated();
             }
 
@@ -91,6 +100,10 @@ class AuthenticationService extends LaravelServiceClass
             $token = $tokenResult->token;
             (request('remember_me'))? $token->expires_at = Carbon::now()->addMinutes(120) : $token->expires_at = Carbon::now()->addMinutes(60);
             $token->save();
+
+            $user->load([
+                'accountTypes'
+            ]);
 
             // Determine The Response Shape in login
             $auth = new UserResource($user, $tokenResult->accessToken, $token->expires_at);

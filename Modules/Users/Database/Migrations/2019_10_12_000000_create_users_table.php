@@ -26,10 +26,6 @@ class CreateUsersTable extends Migration
             $table->string('alternative_email')->nullable();
             $table->dateTime('token_last_renew')->nullable();
 
-            $table->unsignedInteger('user_type');
-            $table->foreign('user_type')->references('id')
-                ->on('user_types')->onDelete('restrict')->onUpdate('cascade');
-
             $table->boolean('is_active')->default(1);
 
             $table->unsignedInteger('gender_id'); // male / female
@@ -58,6 +54,10 @@ class CreateUsersTable extends Migration
             $table->string('fax_number')->nullable();
 
             $table->text('address')->nullable();
+
+            $table->unsignedInteger('country_id')->nullable(); // أستاذ / أستاذ مشارك / أستاذ مساعد
+            $table->foreign('country_id')->references('id')
+                ->on('countries')->onDelete('restrict')->onUpdate('cascade');
 
             $table->timestamps();
             $table->softDeletes();

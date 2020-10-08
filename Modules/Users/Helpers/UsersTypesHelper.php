@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 class UsersTypesHelper
 {
 
-    public function MAGAZINE_EDITOR_TYPE(){
+    public function MAGAZINE_EDITOR_MANAGER_TYPE(){
         return 1;
     }
 

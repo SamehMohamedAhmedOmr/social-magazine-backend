@@ -17,7 +17,8 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        $user_types = UserTypes::where('key','MAGAZINE_EDITOR_MANAGER')->first();
+        $user_types = UserTypes::where('key','MAGAZINE_EDITOR_MANAGER')
+            ->orWhere('key','RESEARCHER')->pluck('id');
         $gender = Gender::where('key','MALE')->first();
 
         $user = User::updateOrCreate([
@@ -26,9 +27,11 @@ class AdminTableSeeder extends Seeder
             'first_name' => 'Admin',
             'family_name' => 'of Magazine',
             'password' => bcrypt('123456789'),
-            'user_type' => $user_types->id,
             'gender_id' => $gender->id,
         ]);
+
+        $user->accountTypes()->detach();
+        $user->accountTypes()->attach($user_types);
 
 
 //        $role = Role::where('key', 'SUPER_ROLE')->first();

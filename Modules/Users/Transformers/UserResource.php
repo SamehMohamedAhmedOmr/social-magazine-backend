@@ -21,8 +21,6 @@ class UserResource extends Resource
     private $expires_at;
     private $is_register;
 
-    protected $admin_type = 1;
-    protected $client_type = 2;
 
     public function __construct($resource, $token = null, $expires_at = null, $is_register = false)
     {
@@ -47,21 +45,15 @@ class UserResource extends Resource
         if ((Auth::id() == $this->id || $this->is_register == true) && isset($this->token) && isset($this->expires_at)) {
             $token = [
                 'token' => $this->token,
-                'expire_at' => $this->expires_at
-            ];
-        }
-
-        if ($this->user_type == $this->admin_type) { // CMSUser
-            $data = [];
-        } elseif ($this->user_type == $this->client_type) { // Researcher
-            $data = [
-                'phone' => $this->client->phone,
+                'expire_at' => $this->expires_at,
             ];
         }
 
         $default = [
-            'name' => $this->name,
+            'first_name' => $this->first_name,
+            'family_name' => $this->family_name,
             'email' => $this->email,
+            'account_types' => AccountTypeResource::collection($this->whenLoaded('accountTypes')),
         ];
 
         return array_merge($token, $default, $data);

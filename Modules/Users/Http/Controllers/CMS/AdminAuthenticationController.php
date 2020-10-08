@@ -25,11 +25,10 @@ class AdminAuthenticationController extends Controller
      *
      * @param loginRequest $request
      * @return JsonResponse
-     * @throws AuthenticationException
      */
     public function login(LoginRequest $request)
     {
-        return $this->authService->loginAsAdmin();
+        return $this->authService->loginForCMS();
     }
 
     public function logout()

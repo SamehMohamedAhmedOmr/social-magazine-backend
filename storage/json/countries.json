@@ -1,6 +1,13 @@
 [
     {
         "name" : {
+            "en" : "Egypt",
+            "ar" : "مصر"
+        },
+        "code": "EG"
+    },
+    {
+        "name" : {
             "en" : "Algeria",
             "ar" : "الجزائر"
         },
@@ -12,13 +19,6 @@
             "ar" : "البحرين"
         },
         "code": "BH"
-    },
-    {
-        "name" : {
-            "en" : "Egypt",
-            "ar" : "مصر"
-        },
-        "code": "EG"
     },
     {
         "name" : {

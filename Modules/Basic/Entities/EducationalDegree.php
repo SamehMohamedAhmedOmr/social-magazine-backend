@@ -9,7 +9,7 @@ class EducationalDegree extends Model
 {
     use SoftDeletes;
     protected $table = 'educational_degrees';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'key'];
 
 
 }

@@ -16,6 +16,7 @@ class CreateEducationalDegreesTable extends Migration
         Schema::create('educational_degrees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('key');
             $table->timestamps();
             $table->softDeletes();
         });

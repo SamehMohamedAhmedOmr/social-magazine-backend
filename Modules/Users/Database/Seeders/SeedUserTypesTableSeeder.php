@@ -15,29 +15,29 @@ class SeedUserTypesTableSeeder extends Seeder
     public function run()
     {
         $types = collect([
-            collect([
-                'key' => 'MAGAZINE_EDITOR',
+            [
+                'key' => 'MAGAZINE_EDITOR_MANAGER',
                 'name' => 'رئيس التحرير'
-            ]),
-            collect([
+            ],
+            [
                 'key' => 'JOURNAL_EDITOR_DIRECTOR',
                 'name' => 'مدير التحرير'
-            ]),
-            collect([
+            ],
+            [
                 'key' => 'REFEREES',
                 'name' => 'محكم'
-            ]),
-            collect([
+            ],
+            [
                 'key' => 'RESEARCHER',
                 'name' => 'باحث'
-            ]),
+            ],
         ]);
 
 
         foreach ($types as $type) {
             UserTypes::updateOrCreate([
-                'key' => $type->key,
-                'name' => $type->name
+                'key' => $type['key'],
+                'name' => $type['name']
             ]);
         }
 

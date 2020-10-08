@@ -25,6 +25,7 @@ class User extends Authenticatable
         'alternative_email' , 'token_last_renew',
         'user_type', 'is_active',
         'title_id' , 'educational_level_id', 'educational_degree_id',
+        'gender_id',
         'educational_field' , 'university', 'faculty', 'phone_number',
         'fax_number', 'address'
     ];

@@ -16,7 +16,7 @@ class ACLDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
+//        $this->call(PermissionsTableSeeder::class);
+//        $this->call(RolesTableSeeder::class);
     }
 }

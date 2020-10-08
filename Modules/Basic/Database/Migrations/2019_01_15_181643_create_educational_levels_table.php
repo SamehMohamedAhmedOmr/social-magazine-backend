@@ -16,6 +16,7 @@ class CreateEducationalLevelsTable extends Migration
         Schema::create('educational_levels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('key');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -9,7 +9,7 @@ class Title extends Model
 {
     use SoftDeletes;
     protected $table = 'titles';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'key'];
 
 
 }

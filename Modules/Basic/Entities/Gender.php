@@ -9,6 +9,6 @@ class Gender extends Model
 {
     use SoftDeletes;
     protected $table = 'genders';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'key'];
 
 }

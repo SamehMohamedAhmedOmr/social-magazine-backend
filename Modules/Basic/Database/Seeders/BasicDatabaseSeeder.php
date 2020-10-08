@@ -16,6 +16,10 @@ class BasicDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call(EducationalDegreesTableSeeder::class);
+        $this->call(EducationalLevelsTableSeeder::class);
+        $this->call(GenderTableSeeder::class);
+        $this->call(TitlesTableSeeder::class);
         // $this->call("OthersTableSeeder");
     }
 }

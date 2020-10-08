@@ -1,0 +1,13 @@
+{
+    "name": "Basic",
+    "alias": "basic",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Basic\\Providers\\BasicServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -9,7 +9,6 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
-use Modules\WareHouse\Exceptions\ShipmentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -85,11 +84,6 @@ class Handler extends ExceptionHandler
             $errors = [
                 'unauthorized' => [$exception->getMessage()]
             ];
-        }
-        elseif ($exception instanceof ShipmentException) {
-            $code = 400;
-            $errors = $exception->errors();
-            $message = $exception->getMessage();
         }
         else {
             $code = 400;

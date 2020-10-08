@@ -3,5 +3,6 @@
     "Notifications": true,
     "ACL": true,
     "Gallery": true,
-    "Base": true
+    "Base": true,
+    "Basic": true
 }

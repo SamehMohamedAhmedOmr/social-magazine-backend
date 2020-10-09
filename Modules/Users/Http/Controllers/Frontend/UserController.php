@@ -18,16 +18,12 @@ class UserController extends Controller
 
     public function show()
     {
-        return $this->userService->get();
+        return $this->userService->get(false);
     }
 
     public function updateProfile(ProfileRequest $profile)
     {
-        return $this->userService->update(Auth()->id(), $profile);
+        return $this->userService->update(Auth()->id(), $profile, false);
     }
 
-    public function userSummary(PaginationRequest $request)
-    {
-        return $this->userService->userSummary();
-    }
 }

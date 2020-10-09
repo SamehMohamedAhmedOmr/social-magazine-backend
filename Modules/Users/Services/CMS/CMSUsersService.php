@@ -8,20 +8,16 @@ use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Users\ExcelExports\AdminExport;
 use Modules\Users\Facades\UsersTypesHelper;
-use Modules\Users\Repositories\CMSUsersRepository;
+use Modules\Users\Http\Requests\ProfileRequest;
 use Modules\Users\Repositories\UserRepository;
-use Modules\Users\Transformers\AdminResource;
 
 class CMSUsersService extends LaravelServiceClass
 {
     private $user_repo;
-    private $adminRepository;
-    protected $admin_type = 1;
 
-    public function __construct(UserRepository $user_repo, CMSUsersRepository $adminRepository)
+    public function __construct(UserRepository $user_repo)
     {
         $this->user_repo = $user_repo;
-        $this->adminRepository = $adminRepository;
     }
 
     public function index()
@@ -41,7 +37,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $users = AdminResource::collection($users);
+        $users = ProfileRequest::collection($users);
         return ApiResponse::format(200, $users, null, $pagination);
     }
 
@@ -65,7 +61,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = AdminResource::make($user);
+        $user = ProfileRequest::make($user);
         return ApiResponse::format(201, $user, 'CMSUser Added!');
     }
 
@@ -79,7 +75,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = AdminResource::make($user);
+        $user = ProfileRequest::make($user);
         return ApiResponse::format(201, $user);
     }
 
@@ -95,7 +91,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = AdminResource::make($user);
+        $user = ProfileRequest::make($user);
         return ApiResponse::format(200, $user);
     }
 

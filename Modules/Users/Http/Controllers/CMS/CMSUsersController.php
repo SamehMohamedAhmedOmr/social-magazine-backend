@@ -24,12 +24,12 @@ class CMSUsersController extends Controller
     // profile Method
     public function get()
     {
-        return $this->userService->get();
+        return $this->userService->get(true);
     }
 
     public function updateProfile(ProfileRequest $profile)
     {
-        return $this->userService->update(Auth()->id());
+        return $this->userService->update(Auth()->id(), $profile, true);
     }
 
     // API RESOURCE METHODS

@@ -32,7 +32,6 @@ Route::namespace('Frontend')->group(function () {
             Route::prefix('profile')->group(function () {
                 Route::get('/', 'UserController@show');
                 Route::match(['PUT', 'PATCH'], '/', 'UserController@updateProfile');
-                Route::get('list', 'UserController@userSummary');
             });
         });
     });

@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/basic', function (Request $request) {
-    return $request->user();
-});
+Route::get('countries','CountryController@index');
+Route::get('educational-degrees','EducationalDegreeController@index');
+Route::get('educational-levels','EducationalLevelController@index');
+Route::get('genders','GenderController@index');
+Route::get('titles','TitleController@index');
+

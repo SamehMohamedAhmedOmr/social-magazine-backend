@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::namespace('Common')->group(function () {
+    Route::get('user-types','UserTypesController@index');
+});
+
 Route::namespace('Frontend')->group(function () {
     Route::prefix('users')->group(function () {
         Route::post('login', 'UserAuthenticationController@login');

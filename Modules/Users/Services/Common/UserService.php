@@ -2,15 +2,10 @@
 
 namespace Modules\Users\Services\Common;
 
-use http\Client;
 use Illuminate\Support\Facades\Auth;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
-use Modules\Users\Repositories\ResearcherRepository;
 use Modules\Users\Repositories\UserRepository;
-use Modules\Users\Transformers\AdminResource;
-use Modules\Users\Transformers\ClientResource;
-use Modules\Users\Transformers\UserResource;
 use Modules\Users\Transformers\UserSummaryResource;
 
 class UserService extends LaravelServiceClass
@@ -22,12 +17,10 @@ class UserService extends LaravelServiceClass
 
 
     public function __construct(
-        UserRepository $user,
-        ResearcherRepository $client_repo
+        UserRepository $user
     )
     {
         $this->user_repo = $user;
-        $this->client_repo = $client_repo;
     }
 
     public function userSummary()

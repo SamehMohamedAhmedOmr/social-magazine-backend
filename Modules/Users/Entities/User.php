@@ -26,11 +26,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'family_name' , 'email', 'email_verified_at' ,'password',
-        'alternative_email' , 'token_last_renew', 'is_active',
-        'title_id' , 'educational_level_id', 'educational_degree_id', 'gender_id',
-        'educational_field' , 'university', 'faculty', 'phone_number',
-        'fax_number', 'address', 'country_id'
+        // register Form Attributes
+        'first_name', 'family_name' , 'email' ,'password',
+        'title_id' , 'gender_id', 'country_id', 'phone_number',
+
+        // Auth attributes
+        'email_verified_at', 'token_last_renew',
+
+        // cms attributes
+        'is_active',
+
+        // Submit Research Data
+        'alternative_email' , 'educational_level_id', 'educational_degree_id',
+        'educational_field' , 'university', 'faculty',
+        'fax_number', 'address',
     ];
 
     /**

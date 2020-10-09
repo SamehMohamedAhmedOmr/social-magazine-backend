@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Notifications\Services\CMS\EmailService;
-use Modules\Users\Entities\Researcher;
 use Modules\Users\Facades\UsersErrorsHelper;
 use Modules\Users\Facades\UsersTypesHelper;
 use Modules\Users\Repositories\ResetPasswordRepository;
@@ -46,10 +45,6 @@ class AuthenticationService extends LaravelServiceClass
 
         if ($loginStatus) {
             $user =  Auth::user();
-
-            if ($user->user_type != UsersTypesHelper::RESEARCHER_TYPE()) { // should 4 to be Researcher
-                UsersErrorsHelper::unAuthenticated();
-            }
 
             $tokenResult = $user->createToken(env('APP_NAME'));
 
@@ -126,16 +121,22 @@ class AuthenticationService extends LaravelServiceClass
         try {
             //Create User Record
             $user = $this->user_repo->create([
-                'name' => request('name'),
+                'first_name' => request('first_name'),
+                'family_name' => request('family_name'),
+
                 'email' => request('email'),
                 'password' => bcrypt(request('password')),
-                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE(), // RESEARCHER_TYPE = 4
+
+                'phone_number' => request('phone_number'),
+                'country_id' => request('country_id'),
+                'gender_id' => request('gender_id'),
+                'title_id' => request('title_id'),
             ]);
 
-            // Create Researcher Record
-            $client = new Researcher();
-            $client->phone = request('phone');
-            $user->client()->save($client);
+
+            $user->accountTypes()->sync([
+                UsersTypesHelper::RESEARCHER_TYPE()
+            ]);
 
             // Save token Last Renew
             $tokenResult = $user->createToken(env('APP_NAME'));
@@ -145,6 +146,10 @@ class AuthenticationService extends LaravelServiceClass
             $token = $tokenResult->token;
             $token->expires_at = Carbon::now()->addMonths(1);
             $token->save();
+
+            $user->load([
+                'accountTypes'
+            ]);
 
             // Determine The Response Shape in register
             $auth = new UserResource($user, $tokenResult->accessToken, $token->expires_at, true);

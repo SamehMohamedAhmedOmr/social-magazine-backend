@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Frontend')->prefix('v1')->group(function () {
+Route::namespace('Frontend')->group(function () {
     Route::prefix('users')->group(function () {
         Route::post('login', 'UserAuthenticationController@login');
         Route::post('login/facebook', 'SocialAuthenticationController@facebookLogin');

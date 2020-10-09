@@ -99,9 +99,11 @@ class Handler extends ExceptionHandler
                     'route' => [$exception->getMessage()]
                 ];
             }
-            $errors['line'] = $exception->getLine();
-            $errors['trace'] = $exception->getTrace();
 
+            if ($code != 422){
+                $errors['line'] = $exception->getLine();
+                $errors['trace'] = $exception->getTrace();
+            }
         }
 
         return response()->json([

@@ -18,72 +18,29 @@ class RegisterRequest extends FormRequest
 
         return [
             // Basic Information
-            'name' => 'required|string|regex:'.UsersErrorsHelper::regexName().'|max:255',
+            'first_name' => 'required|string|regex:'.UsersErrorsHelper::regexName().'|max:255',
+            'family_name' => 'required|string|regex:'.UsersErrorsHelper::regexName().'|max:255',
+
             'email' => 'required|email:rfc,filter|unique:users,email',
             'password' => 'required|string|min:6',
-            'phone' => 'required|string|min:4|max:14',
+            'phone_number' => 'required|string|min:4|max:14',
 
-            // Required Address Info
+            'country_id' => 'required|integer|exists:countries,id'.$delete_check,
+            'gender_id' => 'required|integer|exists:genders,id'.$delete_check,
+            'title_id' => 'required|integer|exists:titles,id'.$delete_check,
+        ];
+    }
 
-            'country_id' => 'integer|exists:countries,id'.$delete_check,
-            'city_id' => 'integer|exists:districts,id'.$delete_check,
 
-
-            'street' => 'required_with:'.
-                                'country_id,'.
-                                'city_id,'.
-                                'title,'.
-                                'district_id,'.
-                                'nearest_landmark,'.
-                                'building_no,'.
-                                'apartment_no,'.
-                                'floor_no,'.
-                                'lat,'.
-                                'lng|string|max:254',
-
-            'title' => 'required_with:'.
-                                'country_id,'.
-                                'city_id,'.
-                                'street,'.
-                                'district_id,'.
-                                'nearest_landmark,'.
-                                'building_no,'.
-                                'apartment_no,'.
-                                'floor_no,'.
-                                'lat,'.
-                                'lng|string|max:254',
-
-            'district_id' => 'required_with:'.
-                                'country_id,'.
-                                'city_id,'.
-                                'title,'.
-                                'street,'.
-                                'nearest_landmark,'.
-                                'building_no,'.
-                                'apartment_no,'.
-                                'floor_no,'.
-                                'lat,'.
-                                'lng|integer|exists:districts,id'.$delete_check,
-
-            'nearest_landmark' => 'required_with:'.
-                                'country_id,'.
-                                'city_id,'.
-                                'title,'.
-                                'district_id,'.
-                                'street,'.
-                                'building_no,'.
-                                'apartment_no,'.
-                                'floor_no,'.
-                                'lat,'.
-                                'lng|string|max:254',
-
-            // Optional Address Info
-            'address_phone' => 'nullable|string|max:254',
-            'building_no' => 'nullable|string|max:254',
-            'apartment_no' => 'nullable|string|max:254',
-            'floor_no' => 'nullable|string|max:254',
-            'lat' => 'nullable|string|max:254',
-            'lng' => 'nullable|string|max:254',
+    public function attributes()
+    {
+        return [
+            'first_name' => 'الاسم الاول',
+            'family_name' => 'اسم العائلة',
+            'phone_number' => 'رقم الهاتف',
+            'country_id' => 'الدولة',
+            'gender_id' => 'النوع',
+            'title_id' => 'اللقب',
         ];
     }
 

@@ -44,13 +44,13 @@ class RetailkBaseMail extends Mailable
     public function build()
     {
         if (isset($this->attachment) && isset($this->filename)) {
-            $mail = $this->from(env('MAIL_USERNAME'), env('APP_NAME'))
+            $mail = $this->from(env('MAIL_USERNAME'), config('app.application_name'))
                 ->subject($this->subject_name)
                 ->view($this->view_name)
                 ->with(['render_data' => $this->render_data])
                 ->attach($this->attachment, ['as' => $this->filename]);
         } else {
-            $mail = $this->from(env('MAIL_USERNAME'), env('APP_NAME'))
+            $mail = $this->from(env('MAIL_USERNAME'), config('app.application_name'))
                 ->subject($this->subject_name)
                 ->view($this->view_name)
                 ->with(['render_data' => $this->render_data]);

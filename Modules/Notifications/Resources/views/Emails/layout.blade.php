@@ -12,7 +12,7 @@
             font-size: 16px;
             line-height: 1.5em;
             margin-top: 0;
-            text-align: left;
+            text-align: right !important;
         }
 
         h2.greeting{
@@ -21,7 +21,7 @@
             color: #3d4852;
             font-size: 16px;
             line-height: 1.5em;
-            text-align: left;
+            text-align: right !important;
         }
 
         div.mail-body{
@@ -75,8 +75,8 @@
                 <!-- Email Header -->
                 <tr>
                     <td class="header" style="background-color: {{env('APP_EMAIL_BACKGROUND')}} !important;">
-                        <p style="color: #fff !important; text-align: center !important;">
-                            <img src="{{env('APP_LOGO')}}" alt="">
+                        <p style="color: #fff !important; text-align: center !important; font-size: 25px !important;">
+                            {{config('app.application_name')}}
                         </p>
                     </td>
                 </tr>
@@ -87,15 +87,15 @@
                         <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
                             <!-- Body content -->
                             <tr>
-                                <td class="content-cell email-content">
+                                <td class="content-cell email-content" style="direction: rtl !important; text-align: right;">
                                     <div class="mail-body">
-                                        <h2 class="greeting">Hello {{ $render_data['recipient'] }} </h2>
+                                        <h2 class="greeting">مرحبا {{ $render_data['recipient'] }} </h2>
 
                                         @yield('email-content')
 
-                                        <p>Regards,</p>
+                                        <p>تحايتنا</p>
                                         <p>
-                                            <strong>{{config('app.name')}}</strong>
+                                            <strong>{{config('app.application_name')}}</strong>
                                         </p>
 
                                     </div>
@@ -108,7 +108,7 @@
                 <!-- Email Footer -->
                 <tr class="email-footer">
                     <td style="width: 100%; text-align: center; color: #fff;">
-                        &copy; {{ date('Y') }} {{ env('APP_NAME') }}. All rights reserved.
+                        {{config('app.application_name')}}  جميع الحقوق محفوظة  &copy; {{ date('Y') }}
                     </td>
                 </tr>
 

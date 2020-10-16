@@ -226,7 +226,7 @@ class AuthenticationService extends LaravelServiceClass
         if ($user && $passwordReset) {
             $render_data = [
                 'token' => $passwordReset->token,
-                'recipient' => $user->name,
+                'recipient' => $user->first_name,
             ];
 
             // Send email with token
@@ -234,7 +234,7 @@ class AuthenticationService extends LaravelServiceClass
                 $user->email,
                 'users',
                 'Reset-Password.reset-password',
-                '['.config('app.name').'] Please reset your Password',
+                config('app.application_name').' | اعادة تعيين كلمة المرور',
                 $render_data
             );
         }
@@ -282,7 +282,7 @@ class AuthenticationService extends LaravelServiceClass
             $user->email,
             'users',
             'Reset-Password.success-reset-password',
-            '['.config('app.name').'] Password Change Successfully',
+            config('app.application_name').' | تغيير كلمة المرور بنجاح',
             $render_data
         );
 

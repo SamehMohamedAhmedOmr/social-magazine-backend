@@ -2,8 +2,8 @@
 
 @section('email-content')
 
-    <p>You are changed your password successful.</p>
-    <p>If you did change password, no further action is required.</p>
-    <p>If you did not change password, protect your account.</p>
+    <p>لقد تم تغير كلمة مرورك بنجاح</p>
+    <p>اذا قمت بتغيير كلمة مرورك ، لا ينبغي عليك اتخاذ اي اجراء</p>
+    <p>اذا لم تم بتغيير كلمة مرورك تواصل معنا لاستعادة حسابك</p>
 
 @endsection

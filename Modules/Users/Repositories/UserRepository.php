@@ -13,7 +13,8 @@ class UserRepository extends LaravelRepositoryClass
         $this->model = $user;
     }
 
-    public function paginate($per_page = 15, $conditions = [], $search_keys = null, $sort_key = 'id', $sort_order = 'asc', $lang = null)
+    public function paginate($per_page = 15, $conditions = [], $search_keys = null,
+                             $sort_key = 'id', $sort_order = 'asc', $lang = null)
     {
         $query = $this->filtering($search_keys);
 
@@ -30,6 +31,17 @@ class UserRepository extends LaravelRepositoryClass
     private function filtering($search_keys){
         $query = $this->model;
 
+        $account_type_id = request('account_type_id');
+
+
+        if ($account_type_id){
+            $query = $query->with(['accountTypes']);
+
+            $query = $query->whereHas('accountTypes', function ($account_type_query) use ($account_type_id) {
+                $account_type_query->where('id', $account_type_id)->where('main_type', 1);
+            });
+        }
+
         if ($search_keys) {
             $query = $query->where(function ($q) use ($search_keys){
                 $q->where('first_name', 'LIKE', '%'.$search_keys.'%')
@@ -38,6 +50,7 @@ class UserRepository extends LaravelRepositoryClass
                     ->orWhere('id', 'LIKE', '%'.$search_keys.'%');
             });
         }
+
         return $query;
     }
 
@@ -53,15 +66,15 @@ class UserRepository extends LaravelRepositoryClass
         $model->roles()->attach($roles);
     }
 
-    public function relationships(){
-        return [
+    public function relationships($extra_relationships = []){
+        return array_merge([
             'gender',
             'title',
             'educationalLevel',
             'educationalDegree',
             'country',
             'accountTypes'
-        ];
+        ],$extra_relationships);
     }
 
     public function AuthAttempt()

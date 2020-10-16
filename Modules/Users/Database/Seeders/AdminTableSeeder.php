@@ -19,7 +19,7 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         $user_types = UserTypes::where('key','MAGAZINE_EDITOR_MANAGER')
-            ->orWhere('key','RESEARCHER')->pluck('id');
+            ->orWhere('key','RESEARCHER')->get();
         $gender = Gender::where('key','MALE')->first();
 
         $country = Country::where('country_code','EG')->first();
@@ -34,8 +34,21 @@ class AdminTableSeeder extends Seeder
             'country_id' => $country->id
         ]);
 
+        $admin_types = [];
+
+        foreach ($user_types as $type){
+            $main_type = ($type->key == 'MAGAZINE_EDITOR_MANAGER' ) ? 1 : 0;
+
+            $admin_types [] = [
+                'user_type_id' => $type->id,
+                'main_type' => $main_type,
+            ];
+        }
+
+
+
         $user->accountTypes()->detach();
-        $user->accountTypes()->attach($user_types);
+        $user->accountTypes()->attach($admin_types);
 
 
 //        $role = Role::where('key', 'SUPER_ROLE')->first();

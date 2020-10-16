@@ -5,6 +5,7 @@ namespace Modules\Users\Services\Common;
 use Illuminate\Http\JsonResponse;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
+use Modules\Users\Facades\UsersHelper;
 use Modules\Users\Facades\UsersTypesHelper;
 use Modules\Users\Repositories\UserRepository;
 use Modules\Users\Transformers\CMS\AccountResource;
@@ -44,66 +45,70 @@ class AccountService extends LaravelServiceClass
     public function store($request = null)
     {
         return \DB::transaction(function () use ($request) {
-            $user_data = $request->all();
-            $user_data['user_type'] =  UsersTypesHelper::RESEARCHER_TYPE();
+            $request_data = UsersHelper::prepareCreateAccount($request->all());
 
-            if (isset($user_data['password'])){
-                $user_data['password'] = bcrypt($user_data['password']);
+            $request_data['password'] = bcrypt($request_data['password']);
+
+            $user =  $this->user_repo->create($request_data);
+
+            $account_type = $request_data['account_type_id'];
+
+            $types = [];
+            $types = $this->generateTypes($types, $account_type, 1);
+            if ($account_type != UsersTypesHelper::RESEARCHER_TYPE()){
+                $types = $this->generateTypes($types, UsersTypesHelper::RESEARCHER_TYPE(), 0);
             }
-            else{
-                $user_data['password'] = bcrypt($this->randomPassword());
-            }
 
-            $user =  $this->user_repo->create($user_data);
+            $user->accountTypes()->detach();
+            $user->accountTypes()->attach($types);
 
-            $this->clientRepository->create([
-                'user_id' => $user->id,
-                'phone' => $request->phone
-            ]);
+            $user->load($this->user_repo->relationships());
 
-
-            $user = ClientResource::make($user);
-            return ApiResponse::format(201, $user, 'Researcher Added!');
+            $user = AccountResource::make($user);
+            return ApiResponse::format(201, $user, 'Account Created!');
         });
 
     }
 
     public function show($id)
     {
-        $user = $this->user_repo->get($id, [
-            'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
-        ]);
+        $user = $this->user_repo->get($id);
 
-        if (request('get_address')) {
-            $user->load('address');
-        }
+        $user->load($this->user_repo->relationships());
 
-        if (request('get_orders')) {
-            $user->load('orders');
-        }
 
-        $user = ClientResource::make($user);
+        $user = AccountResource::make($user);
         return ApiResponse::format(200, $user);
     }
 
     public function update($id, $request = null)
     {
-        $user = $this->user_repo->update($id, $request->only('name', 'email', 'is_active'));
+        $request_data = UsersHelper::prepareUpdateAccount($request->all());
 
-        if ($request->phone) {
-            $this->clientRepository->update($user->id, [
-                'phone' => $request->phone
-            ], [], 'user_id');
+        $user = $this->user_repo->update($id, $request_data);
+
+        if (isset($request_data['account_type_id'])){
+            $account_type = $request_data['account_type_id'];
+
+            $types = [];
+            $types = $this->generateTypes($types, $account_type, 1);
+            if ($account_type != UsersTypesHelper::RESEARCHER_TYPE()){
+                $types = $this->generateTypes($types, UsersTypesHelper::RESEARCHER_TYPE(), 0);
+            }
+
+            $user->accountTypes()->detach();
+            $user->accountTypes()->attach($types);
         }
 
-        $user = ClientResource::make($user);
+        $user->load($this->user_repo->relationships());
+
         return ApiResponse::format(200, $user);
     }
 
     public function delete($id)
     {
         $user = $this->user_repo->delete($id);
-        return ApiResponse::format(200, $user, 'Researcher Deleted!');
+        return ApiResponse::format(200, $user, 'Account Deleted!');
     }
 
 
@@ -116,6 +121,14 @@ class AccountService extends LaravelServiceClass
             $pass[] = $alphabet[$n];
         }
         return implode($pass); //turn the array into a string
+    }
+
+    public function generateTypes($types, $account_type, $main_type = 0){
+        $types [] = [
+            'user_type_id' => $account_type,
+            'main_type' => $main_type,
+        ];
+        return $types;
     }
 
 }

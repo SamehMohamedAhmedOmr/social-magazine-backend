@@ -22,6 +22,8 @@ class CreateAccountTypesTable extends Migration
             $table->foreign('user_type_id')->references('id')
                 ->on('user_types')->onDelete('restrict')->onUpdate('cascade');
 
+            $table->boolean('main_type')->default(0);
+
             $table->primary(['user_id','user_type_id']);
         });
     }

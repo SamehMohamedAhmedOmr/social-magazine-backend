@@ -22,6 +22,7 @@ class AccountResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'first_name' => $this->first_name,
             'family_name' => $this->family_name,
 

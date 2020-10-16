@@ -47,7 +47,7 @@ class ProfileRequest extends FormRequest
             'family_name' => 'اسم العائلة',
 
             'email' => 'البريد الالكتروني',
-            'alternative_email' => 'البريد الاكلتروني البديل',
+            'alternative_email' => 'البريد الالكتروني البديل',
             'is_active' => 'التفعيل',
             'phone_number' => 'رقم الموبايل',
 

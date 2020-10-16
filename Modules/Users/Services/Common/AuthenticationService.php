@@ -142,9 +142,14 @@ class AuthenticationService extends LaravelServiceClass
             ]);
 
 
-            $user->accountTypes()->sync([
-                UsersTypesHelper::RESEARCHER_TYPE()
-            ]);
+            $accountType = [];
+
+            $accountType [] = [
+                'user_type_id' => UsersTypesHelper::RESEARCHER_TYPE(),
+                'main_type' => 1,
+            ];
+
+            $user->accountTypes()->sync($accountType);
 
             // Save token Last Renew
             $tokenResult = $user->createToken(env('APP_NAME'));

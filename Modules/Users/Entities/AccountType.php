@@ -8,7 +8,7 @@ class AccountType extends Pivot
 {
     protected $table = 'account_types';
     protected $fillable = [
-        'user_id', 'user_type_id'
+        'user_id', 'user_type_id', 'main_type'
     ];
 
 }

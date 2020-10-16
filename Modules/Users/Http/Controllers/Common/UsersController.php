@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Base\Requests\PaginationRequest;
 use Modules\Users\Http\Requests\AccountRequest;
+use Modules\Users\Http\Requests\AccountTypeIdRequest;
 use Modules\Users\Services\Common\AccountService;
 use Throwable;
 
@@ -24,9 +25,10 @@ class UsersController extends Controller
     /**
      *
      * @param PaginationRequest $request
+     * @param AccountTypeIdRequest $accountTypeIdRequest
      * @return JsonResponse
      */
-    public function index(PaginationRequest $request)
+    public function index(PaginationRequest $request, AccountTypeIdRequest $accountTypeIdRequest)
     {
         return $this->accountService->index();
     }

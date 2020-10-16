@@ -18,26 +18,50 @@ class ProfileRequest extends FormRequest
 
         $user_id = \Auth::id();
         return [
-            'first_name' => 'string|regex:'.UsersErrorsHelper::regexName().'|max:255',
-            'family_name' => 'required|string|regex:'.UsersErrorsHelper::regexName().'|max:255',
+            'first_name' => 'nullable|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
+            'family_name' => 'nullable|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
 
-            'email' => 'email:rfc,filter|unique:users,email,'.$user_id,
-            'alternative_email' => 'email:rfc,filter',
-            'is_active' => 'boolean',
-            'password' => 'string|min:6',
-            'phone_number' => 'string|min:4|max:14',
+            'email' => 'nullable|email:rfc,filter|unique:users,email,' . $user_id,
+            'alternative_email' => 'nullable|email:rfc,filter',
+            'phone_number' => 'nullable|string|min:4|max:14',
 
-            'country_id' => 'integer|exists:countries,id'.$delete_check,
-            'gender_id' => 'integer|exists:genders,id'.$delete_check,
-            'title_id' => 'integer|exists:titles,id'.$delete_check,
-            'educational_level_id' => 'integer|exists:educational_levels,id'.$delete_check,
-            'educational_degree_id' => 'integer|exists:educational_degrees,id'.$delete_check,
+            'country_id' => 'nullable|integer|exists:countries,id' . $delete_check,
+            'gender_id' => 'nullable|integer|exists:genders,id' . $delete_check,
+            'title_id' => 'nullable|integer|exists:titles,id' . $delete_check,
+            'educational_level_id' => 'nullable|integer|exists:educational_levels,id' . $delete_check,
+            'educational_degree_id' => 'nullable|integer|exists:educational_degrees,id' . $delete_check,
 
-            'educational_field' => 'string|max:255',
-            'university' => 'string|max:255',
-            'faculty' => 'string|max:255',
-            'fax_number' => 'string|max:255',
-            'address' => 'string|max:255',
+            'educational_field' => 'nullable|string|max:255',
+            'university' => 'nullable|string|max:255',
+            'faculty' => 'nullable|string|max:255',
+            'fax_number' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+        ];
+    }
+
+
+    public function attributes()
+    {
+        return [
+            'first_name' => 'الاسم الاول',
+            'family_name' => 'اسم العائلة',
+
+            'email' => 'البريد الالكتروني',
+            'alternative_email' => 'البريد الاكلتروني البديل',
+            'is_active' => 'التفعيل',
+            'phone_number' => 'رقم الموبايل',
+
+            'country_id' => 'الدولة',
+            'gender_id' => 'النوع',
+            'title_id' => 'اللقب',
+            'educational_level_id' => 'المستوى التعليمي',
+            'educational_degree_id' => 'الدرجة العلمية',
+
+            'educational_field' => '',
+            'university' => 'الجامعة',
+            'faculty' => 'الكلية',
+            'fax_number' => 'رقم الفاكس',
+            'address' => 'العنوان',
         ];
     }
 

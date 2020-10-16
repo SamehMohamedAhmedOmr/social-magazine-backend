@@ -25,6 +25,15 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'email' => 'البريد الالكتروني',
+            'password' => 'كلمة السر',
+            'remember_me' => 'تذكرني'
+        ];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *

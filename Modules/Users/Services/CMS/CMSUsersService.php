@@ -8,8 +8,8 @@ use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Users\ExcelExports\AdminExport;
 use Modules\Users\Facades\UsersTypesHelper;
-use Modules\Users\Http\Requests\ProfileRequest;
 use Modules\Users\Repositories\UserRepository;
+use Modules\Users\Transformers\CMS\ProfileResource;
 
 class CMSUsersService extends LaravelServiceClass
 {
@@ -37,7 +37,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $users = ProfileRequest::collection($users);
+        $users = ProfileResource::collection($users);
         return ApiResponse::format(200, $users, null, $pagination);
     }
 
@@ -61,7 +61,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = ProfileRequest::make($user);
+        $user = ProfileResource::make($user);
         return ApiResponse::format(201, $user, 'CMSUser Added!');
     }
 
@@ -75,7 +75,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = ProfileRequest::make($user);
+        $user = ProfileResource::make($user);
         return ApiResponse::format(201, $user);
     }
 
@@ -91,7 +91,7 @@ class CMSUsersService extends LaravelServiceClass
             'roles',
         ]);
 
-        $user = ProfileRequest::make($user);
+        $user = ProfileResource::make($user);
         return ApiResponse::format(200, $user);
     }
 

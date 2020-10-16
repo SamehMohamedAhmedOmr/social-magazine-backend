@@ -1,9 +1,15 @@
 <?php
 
-namespace Modules\Users\Transformers;
+namespace Modules\Users\Transformers\FRONT;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Basic\Transformers\CountryResource;
+use Modules\Basic\Transformers\EducationalDegreeResource;
+use Modules\Basic\Transformers\EducationalLevelResource;
+use Modules\Basic\Transformers\GenderResource;
+use Modules\Basic\Transformers\TitleResource;
+use Modules\Users\Transformers\AccountTypeResource;
 
 class ProfileResource extends Resource
 {
@@ -21,14 +27,12 @@ class ProfileResource extends Resource
 
             'email' => $this->email,
             'alternative_email' => $this->alternative_email,
-            'is_active' => $this->is_active,
 
-            'gender_id' => $this->gender_id, // TODO
-            'title_id' => $this->title_id, // TODO
-            'educational_level_id' => $this->educational_level_id, // TODO
-            'educational_degree_id' => $this->educational_degree_id, // TODO
-            'country_id' => $this->country_id, // TODO
-            'types' => $this->type, // TODO
+            'gender' => GenderResource::make($this->whenLoaded('gender')),
+            'title' => TitleResource::make($this->whenLoaded('title')),
+            'educational_level' => EducationalLevelResource::make($this->whenLoaded('educationalLevel')),
+            'educational_degree' => EducationalDegreeResource::make($this->whenLoaded('educationalDegree')),
+            'country' => CountryResource::make($this->whenLoaded('country')),
 
             'educational_field' => $this->educational_field,
             'university' => $this->university,

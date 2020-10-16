@@ -46,6 +46,10 @@ class AuthenticationService extends LaravelServiceClass
         if ($loginStatus) {
             $user =  Auth::user();
 
+            if (!$user->is_active){
+                UsersErrorsHelper::unAuthenticated();
+            }
+
             $tokenResult = $user->createToken(env('APP_NAME'));
 
             $user = $this->user_repo->update($user->id, ['token_last_renew' => Carbon::now()]);
@@ -74,6 +78,10 @@ class AuthenticationService extends LaravelServiceClass
 
         if ($loginStatus) {
             $user =  Auth::user();
+
+            if (!$user->is_active){
+                UsersErrorsHelper::unAuthenticated();
+            }
 
             $user->load([
                 'accountTypes'

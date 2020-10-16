@@ -1,0 +1,13 @@
+{
+    "name": "Sections",
+    "alias": "sections",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Sections\\Providers\\SectionsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

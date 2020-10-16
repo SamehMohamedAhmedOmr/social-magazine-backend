@@ -4,5 +4,6 @@
     "ACL": true,
     "Gallery": true,
     "Base": true,
-    "Basic": true
+    "Basic": true,
+    "Sections": true
 }

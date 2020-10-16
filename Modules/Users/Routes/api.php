@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Common')->group(function () {
+Route::namespace('Frontend')->group(function () {
     Route::get('user-types','UserTypesController@index');
 });
 
@@ -57,7 +57,7 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
     });
 });
 
-Route::namespace('Common')->prefix('admins')->group(function () {
+Route::namespace('Frontend')->prefix('admins')->group(function () {
 
     Route::middleware('auth:api')->as('admins.')->group(function () {
         Route::apiResource('users', 'UsersController');

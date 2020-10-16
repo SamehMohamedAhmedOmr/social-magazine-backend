@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Modules\Base\Facade\ExcelExportHelper;
-use Modules\Users\Services\CMS\ResearcherService;
+use Modules\Users\Services\CMS\AccountService;
 use Modules\Users\Services\CMS\Exports\ClientsExportService;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
@@ -23,7 +23,7 @@ class ClientExport implements FromArray , WithHeadings, ShouldAutoSize, WithStyl
      */
     public function array(): array
     {
-        $data = ExcelExportHelper::prepareDataForExport(App::make(ResearcherService::class),
+        $data = ExcelExportHelper::prepareDataForExport(App::make(AccountService::class),
             App::make(ClientsExportService::class));
 
         $this->data_length = count($data);

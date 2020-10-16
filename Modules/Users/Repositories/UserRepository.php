@@ -32,7 +32,8 @@ class UserRepository extends LaravelRepositoryClass
 
         if ($search_keys) {
             $query = $query->where(function ($q) use ($search_keys){
-                $q->where('name', 'LIKE', '%'.$search_keys.'%')
+                $q->where('first_name', 'LIKE', '%'.$search_keys.'%')
+                    ->orWhere('family_name', 'LIKE', '%'.$search_keys.'%')
                     ->orWhere('email', 'LIKE', '%'.$search_keys.'%')
                     ->orWhere('id', 'LIKE', '%'.$search_keys.'%');
             });
@@ -50,6 +51,17 @@ class UserRepository extends LaravelRepositoryClass
     {
         $model->roles()->detach();
         $model->roles()->attach($roles);
+    }
+
+    public function relationships(){
+        return [
+            'gender',
+            'title',
+            'educationalLevel',
+            'educationalDegree',
+            'country',
+            'accountTypes'
+        ];
     }
 
     public function AuthAttempt()

@@ -51,19 +51,17 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
             Route::get('/', 'CMSUsersController@get')->name('show');
             Route::put('/', 'CMSUsersController@updateProfile')->name('update');
         });
-        Route::apiResource('cms-users', 'CMSUsersController');
-        Route::prefix('cms-users')->as('cms-users.')->group(function () {
-            Route::get('/sheet/export', 'CMSUsersController@export')->name('export');
-        });
-
-        Route::apiResource('researchers', 'ResearcherController');
-
-        Route::prefix('users')->as('users.')->group(function () {
-            Route::get('/sheet/export', 'ResearcherController@export')->name('export');
-        });
-
 
         Route::post('logout', 'AdminAuthenticationController@logout')->name('logout');
         Route::post('reset/password', 'AdminAuthenticationController@resetPassword')->name('admin.reset.password');
     });
 });
+
+Route::namespace('Common')->prefix('admins')->group(function () {
+
+    Route::middleware('auth:api')->as('admins.')->group(function () {
+        Route::apiResource('users', 'UsersController');
+    });
+
+});
+

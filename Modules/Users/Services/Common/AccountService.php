@@ -1,54 +1,36 @@
 <?php
 
-namespace Modules\Users\Services\CMS;
+namespace Modules\Users\Services\Common;
 
 use Illuminate\Http\JsonResponse;
-use Modules\Base\Facade\ExcelExportHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
-use Modules\Users\ExcelExports\ClientExport;
 use Modules\Users\Facades\UsersTypesHelper;
-use Modules\Users\Repositories\ResearcherRepository;
 use Modules\Users\Repositories\UserRepository;
-use Modules\Users\Transformers\ClientResource;
+use Modules\Users\Transformers\CMS\AccountResource;
 use Throwable;
 
-class ResearcherService extends LaravelServiceClass
+class AccountService extends LaravelServiceClass
 {
     private $user_repo;
-    private $clientRepository;
-    private $addressRepository;
 
-    public function __construct(UserRepository $user_repo,
-                                ResearcherRepository $clientRepository)
+    public function __construct(UserRepository $user_repo)
     {
         $this->user_repo = $user_repo;
-        $this->clientRepository = $clientRepository;
-
     }
 
     public function index()
     {
         $pagination = null;
         if (request('is_pagination')) {
-            list($users, $pagination) = parent::paginate($this->clientRepository, null, true, [
-                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
-            ]);
+            list($users, $pagination) = parent::paginate($this->user_repo, null, true);
         } else {
-            $users = parent::list($this->clientRepository, true, [
-                'user_type' =>  UsersTypesHelper::RESEARCHER_TYPE()
-            ]);
+            $users = parent::list($this->user_repo, true);
         }
 
-        if (request('get_address')) {
-            $users->load('address');
-        }
+        $users->load($this->user_repo->relationships());
 
-        if (request('get_orders')) {
-            $users->load('orders');
-        }
-
-        $users = ClientResource::collection($users);
+        $users = AccountResource::collection($users);
         return ApiResponse::format(200, $users, null, $pagination);
     }
 
@@ -124,20 +106,6 @@ class ResearcherService extends LaravelServiceClass
         return ApiResponse::format(200, $user, 'Researcher Deleted!');
     }
 
-    public function calculateTotalAndPrice($orders)
-    {
-        $count = $orders->count();
-
-        $total_price = 0;
-
-        foreach ($orders as $order) {
-            $total_order_price = ($order->total_price + $order->shipping_price + $order->vat) - $order->discount;
-
-            $total_price += $total_order_price;
-        }
-
-        return [$count, $total_price];
-    }
 
     function randomPassword() {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -150,9 +118,4 @@ class ResearcherService extends LaravelServiceClass
         return implode($pass); //turn the array into a string
     }
 
-    public function export(){
-        $file_path = ExcelExportHelper::export('Customers', \App::make(ClientExport::class));
-
-        return ApiResponse::format(200, $file_path);
-    }
 }

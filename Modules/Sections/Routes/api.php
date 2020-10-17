@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/sections', function (Request $request) {
-    return $request->user();
+
+Route::namespace('CMS')->prefix('admins')->group(function () {
+    Route::middleware('auth:api')->as('admins.')->group(function () {
+
+        Route::apiResource('who-is-us-sections','WhoIsUsController');
+    });
 });

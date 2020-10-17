@@ -2,78 +2,73 @@
 
 namespace Modules\Sections\Http\Controllers\CMS;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Modules\Base\Requests\PaginationRequest;
+use Modules\Sections\Http\Requests\CMS\WhoIsUsRequest;
+use Modules\Sections\Services\CMS\WhoIsUsService;
+use Throwable;
 
 class WhoIsUsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
+
+    private $whoIsUsService;
+
+    public function __construct(WhoIsUsService $whoIsUsService)
     {
-        return view('sections::index');
+        $this->whoIsUsService = $whoIsUsService;
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Response
+     * Display a listing of the resource.
+     * @param PaginationRequest $request
+     * @return JsonResponse|void
      */
-    public function create()
+    public function index(PaginationRequest $request)
     {
-        return view('sections::create');
+        return $this->whoIsUsService->index();
     }
+
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
+     * @param WhoIsUsRequest $request
+     * @return JsonResponse
+     * @throws Throwable
      */
-    public function store(Request $request)
+    public function store(WhoIsUsRequest $request)
     {
-        //
+        return $this->whoIsUsService->store($request);
     }
 
     /**
      * Show the specified resource.
-     * @param int $id
-     * @return Response
+     * @param WhoIsUsRequest $request
+     * @return JsonResponse|void
      */
-    public function show($id)
+    public function show(WhoIsUsRequest $request)
     {
-        return view('sections::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('sections::edit');
+        return $this->whoIsUsService->show($request->x);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
+     * @param WhoIsUsRequest $request
+     * @return JsonResponse|void
      */
-    public function update(Request $request, $id)
+    public function update(WhoIsUsRequest $request)
     {
-        //
+        return $this->whoIsUsService->update($request->x,$request);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
+     * @param WhoIsUsRequest $request
+     * @return JsonResponse|void
      */
-    public function destroy($id)
+    public function destroy(WhoIsUsRequest $request)
     {
-        //
+        return $this->whoIsUsService->delete($request->x);
     }
+
 }

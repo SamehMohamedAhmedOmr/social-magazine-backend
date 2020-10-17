@@ -15,8 +15,10 @@ class CreateMagazineGoalsTable extends Migration
     {
         Schema::create('magazine_goals', function (Blueprint $table) {
             $table->increments('id');
-
+            $table->text('content');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

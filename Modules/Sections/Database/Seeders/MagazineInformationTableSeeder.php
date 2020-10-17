@@ -4,8 +4,9 @@ namespace Modules\Sections\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Sections\Entities\MagazineInformation;
 
-class SectionsDatabaseSeeder extends Seeder
+class MagazineInformationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +17,6 @@ class SectionsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(MagazineInformationTableSeeder::class);
-        // $this->call("OthersTableSeeder");
+        MagazineInformation::updateOrCreate(['title' => config('app.application_name'),], []);
     }
 }

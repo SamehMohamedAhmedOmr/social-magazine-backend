@@ -15,7 +15,17 @@ class CreateMagazineInformationTable extends Migration
     {
         Schema::create('magazine_information', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title')->nullable();
+            $table->text('vision')->nullable();
+            $table->text('mission')->nullable();
+            $table->text('address')->nullable();
 
+            $table->string('phone')->nullable();
+            $table->string('fax_number')->nullable();
+
+            $table->string('email')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->bigInteger('visitor_number')->default(0);
             $table->timestamps();
         });
     }

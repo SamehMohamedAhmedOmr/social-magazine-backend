@@ -15,8 +15,10 @@ class CreateWhoIsUsTable extends Migration
     {
         Schema::create('who_is_us', function (Blueprint $table) {
             $table->increments('id');
-
+            $table->longText('content');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

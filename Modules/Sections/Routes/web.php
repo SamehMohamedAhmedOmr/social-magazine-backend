@@ -11,6 +11,3 @@
 |
 */
 
-Route::prefix('sections')->group(function() {
-    Route::get('/', 'SectionsController@index');
-});

@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Frontend')->group(function () {
+Route::namespace('Common')->group(function () {
     Route::get('user-types','UserTypesController@index');
 });
 
 Route::namespace('Frontend')->group(function () {
     Route::prefix('users')->group(function () {
         Route::post('login', 'UserAuthenticationController@login');
-        Route::post('login/facebook', 'SocialAuthenticationController@facebookLogin');
+//        Route::post('login/facebook', 'SocialAuthenticationController@facebookLogin');
         Route::post('register', 'UserAuthenticationController@register');
         Route::prefix('passwords')->group(function () {
             Route::post('forget', 'UserAuthenticationController@forgetPassword');

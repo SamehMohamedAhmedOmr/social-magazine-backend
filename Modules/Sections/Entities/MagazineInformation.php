@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class MagazineInformation extends Model
 {
-    protected $fillable = [];
+    protected $table = 'magazine_information';
+    protected $fillable = [
+        'title', 'vision', 'mission', 'address',
+        'phone' , 'fax_number', 'email', 'postal_code',
+        'visitor_number'
+    ];
+
+
 }

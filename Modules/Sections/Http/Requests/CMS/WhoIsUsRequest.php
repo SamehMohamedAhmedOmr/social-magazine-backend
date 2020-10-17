@@ -24,7 +24,7 @@ class WhoIsUsRequest extends FormRequest
                 break;
             case 'POST':
                 $default = [
-                    'content' => 'required|string|max:100000',
+                    'content' => 'required|string|max:4294967295',
                     'is_active' => 'boolean',
                 ];
                 break;
@@ -32,7 +32,7 @@ class WhoIsUsRequest extends FormRequest
                 $default = [
                     'who_is_us_section' => 'required|integer|exists:who_is_us,id' . $delete_check,
 
-                    'content' => 'nullable|string|max:100000',
+                    'content' => 'nullable|string|max:4294967295',
                     'is_active' => 'boolean',
                 ];
                 break;

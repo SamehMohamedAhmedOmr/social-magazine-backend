@@ -2,78 +2,43 @@
 
 namespace Modules\Sections\Http\Controllers\CMS;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Sections\Http\Requests\CMS\MagazineInformationRequest;
+use Modules\Sections\Services\CMS\MagazineInformationService;
+use Throwable;
 
 class MagazineInformationController extends Controller
 {
+    private $magazineInformationService;
+
+    public function __construct(MagazineInformationService $magazineInformationService)
+    {
+        $this->magazineInformationService = $magazineInformationService;
+    }
+
+
     /**
      * Display a listing of the resource.
-     * @return Response
+     * @return JsonResponse|void
      */
     public function index()
     {
-        return view('sections::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('sections::create');
+        return $this->magazineInformationService->index();
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
+     * @param MagazineInformationRequest $request
+     * @return JsonResponse
+     * @throws Throwable
      */
-    public function store(Request $request)
+    public function store(MagazineInformationRequest $request)
     {
-        //
+        return $this->magazineInformationService->store($request);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('sections::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('sections::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
+

@@ -25,7 +25,6 @@ class CreateMagazineInformationTable extends Migration
 
             $table->string('email')->nullable();
             $table->string('postal_code')->nullable();
-            $table->bigInteger('visitor_number')->default(0);
             $table->timestamps();
         });
     }

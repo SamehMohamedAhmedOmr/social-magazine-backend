@@ -14,4 +14,8 @@ class SectionsCache
         return 'who_is_us';
     }
 
+    public function magazineInformation(){
+        return 'magazine_information';
+    }
+
 }

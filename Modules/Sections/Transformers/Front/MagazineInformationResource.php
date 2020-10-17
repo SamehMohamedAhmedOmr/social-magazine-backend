@@ -16,15 +16,14 @@ class MagazineInformationResource extends Resource
     public function toArray($request)
     {
         return [
+            'title' => $this->title,
             'vision' => $this->vision,
             'mission' => $this->mission,
-            'title' => $this->title,
             'address' => $this->address,
             'phone' => $this->phone,
             'fax_number' => $this->fax_number,
             'email' => $this->email,
             'postal_code' => $this->postal_code,
-            'visitor_number' => $this->visitor_number,
         ];
     }
 }

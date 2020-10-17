@@ -5,6 +5,7 @@ namespace Modules\Sections\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Sections\Helpers\SectionsCache;
+use Modules\Sections\Helpers\SectionsHelper;
 
 class SectionsServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,11 @@ class SectionsServiceProvider extends ServiceProvider
         \App::bind('SectionsCache', function()
         {
             return \App::make(SectionsCache::class);
+        });
+
+        \App::bind('SectionsHelper', function()
+        {
+            return \App::make(SectionsHelper::class);
         });
     }
 

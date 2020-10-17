@@ -12,6 +12,10 @@ class MagazineInformationRepository extends LaravelRepositoryClass
         $this->model = $magazineInformation;
     }
 
+    public function getFirstRecord(){
+        return $this->model->first();
+    }
+
     public function paginate($per_page = 15, $conditions = [], $search_keys = null, $sort_key = 'id', $sort_order = 'asc', $lang = null)
     {
         $query = $this->filtering($search_keys);

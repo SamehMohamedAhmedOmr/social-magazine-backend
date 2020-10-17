@@ -14,7 +14,13 @@ class MagazineInformationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'vision' => 'nullable|string|max:65535',
+            'mission' => 'nullable|string|max:65535',
+            'address' => 'nullable|string|max:65535',
+            'phone' => 'nullable|string|max:255',
+            'fax_number' => 'nullable|string|max:255',
+            'email' => 'nullable|email:rfc,filter',
+            'postal_code' => 'nullable|string|max:255',
         ];
     }
 

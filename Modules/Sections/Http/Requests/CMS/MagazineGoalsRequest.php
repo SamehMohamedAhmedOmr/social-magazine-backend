@@ -24,7 +24,7 @@ class MagazineGoalsRequest extends FormRequest
                 break;
             case 'POST':
                 $default = [
-                    'content' => 'required|string|max:100000',
+                    'content' => 'required|string|max:65535',
                     'is_active' => 'boolean',
                 ];
                 break;
@@ -32,7 +32,7 @@ class MagazineGoalsRequest extends FormRequest
                 $default = [
                     'magazine_goal' => 'required|integer|exists:magazine_goals,id' . $delete_check,
 
-                    'content' => 'nullable|string|max:100000',
+                    'content' => 'nullable|string|max:65535',
                     'is_active' => 'boolean',
                 ];
                 break;

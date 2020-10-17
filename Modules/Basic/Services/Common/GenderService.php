@@ -2,11 +2,11 @@
 
 namespace Modules\Basic\Services\Common;
 
+use Modules\Base\Facade\CacheHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
-use Modules\Basic\Repositories\CountryRepository;
+use Modules\Basic\Facade\BasicCache;
 use Modules\Basic\Repositories\GenderRepository;
-use Modules\Basic\Transformers\CountryResource;
 use Modules\Basic\Transformers\GenderResource;
 
 class GenderService extends LaravelServiceClass
@@ -20,7 +20,13 @@ class GenderService extends LaravelServiceClass
 
     public function index()
     {
-        $genders = $this->genderRepository->all();
+        $genders = CacheHelper::getCache(BasicCache::genders());
+
+        if (!$genders){
+            $genders = $this->genderRepository->all();
+            CacheHelper::putCache(BasicCache::genders(), $genders);
+        }
+
         $genders = GenderResource::collection($genders);
         return ApiResponse::format(200, $genders);
     }

@@ -3,7 +3,9 @@
 namespace Modules\Basic\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Base\Facade\CacheHelper;
 use Modules\Basic\Entities\EducationalLevel;
+use Modules\Basic\Facade\BasicCache;
 
 class EducationalLevelsTableSeeder extends Seeder
 {
@@ -32,6 +34,8 @@ class EducationalLevelsTableSeeder extends Seeder
                 'name' => 'ليسانس'
             ],
         ]);
+
+        CacheHelper::forgetCache(BasicCache::educationalLevels());
 
         foreach ($levels as $level){
             EducationalLevel::updateOrCreate([

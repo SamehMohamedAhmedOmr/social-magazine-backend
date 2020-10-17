@@ -4,6 +4,7 @@ namespace Modules\Basic\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Basic\Helpers\BasicCache;
 
 class BasicServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,15 @@ class BasicServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->registerHelpers();
+    }
+
+    private function registerHelpers(){
+        \App::bind('BasicCache', function()
+        {
+            return \App::make(BasicCache::class);
+        });
     }
 
     /**

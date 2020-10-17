@@ -5,6 +5,7 @@ namespace Modules\Users\Providers;
 use App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Users\Helpers\UserCache;
 use Modules\Users\Helpers\UsersErrorsHelper;
 use Modules\Users\Helpers\UsersHelper;
 use Modules\Users\Helpers\UsersTypesHelper;
@@ -49,6 +50,10 @@ class UsersServiceProvider extends ServiceProvider
 
         App::bind('UsersHelper', function () {
             return App::make(UsersHelper::class);
+        });
+
+        App::bind('UserCache', function () {
+            return App::make(UserCache::class);
         });
     }
 

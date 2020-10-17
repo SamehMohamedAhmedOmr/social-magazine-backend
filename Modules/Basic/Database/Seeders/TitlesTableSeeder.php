@@ -3,7 +3,9 @@
 namespace Modules\Basic\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Base\Facade\CacheHelper;
 use Modules\Basic\Entities\Title;
+use Modules\Basic\Facade\BasicCache;
 
 class TitlesTableSeeder extends Seeder
 {
@@ -32,6 +34,8 @@ class TitlesTableSeeder extends Seeder
                 'name' => 'السيدة'
             ],
         ]);
+
+        CacheHelper::forgetCache(BasicCache::titles());
 
         foreach ($titles as $title) {
             Title::updateOrCreate([

@@ -3,7 +3,9 @@
 namespace Modules\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Base\Facade\CacheHelper;
 use Modules\Users\Entities\UserTypes;
+use Modules\Users\Facades\UserCache;
 
 class SeedUserTypesTableSeeder extends Seeder
 {
@@ -33,6 +35,7 @@ class SeedUserTypesTableSeeder extends Seeder
             ],
         ]);
 
+        CacheHelper::forgetCache(UserCache::userType());
 
         foreach ($types as $type) {
             UserTypes::updateOrCreate([

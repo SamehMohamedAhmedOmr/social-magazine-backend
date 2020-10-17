@@ -18,5 +18,7 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
     Route::middleware('auth:api')->as('admins.')->group(function () {
 
         Route::apiResource('who-is-us-sections','WhoIsUsController');
+        Route::apiResource('magazine-goals','MagazineGoalsController');
+
     });
 });

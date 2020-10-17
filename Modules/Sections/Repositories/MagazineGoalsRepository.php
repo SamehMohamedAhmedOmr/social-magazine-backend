@@ -32,7 +32,7 @@ class MagazineGoalsRepository extends LaravelRepositoryClass
         if ($search_keys) {
             $query = $query->where(function ($q) use ($search_keys){
 
-                $q->where('name', 'LIKE', '%'.$search_keys.'%')
+                $q->where('content', 'LIKE', '%'.$search_keys.'%')
                     ->orWhere('id', 'LIKE', '%'.$search_keys.'%');
             });
         }

@@ -13,8 +13,43 @@ class MagazineGoalsRequest extends FormRequest
      */
     public function rules()
     {
+        $delete_check = ',deleted_at,NULL';
+
+        switch ($this->getMethod()) {
+            case 'GET':
+            case 'DELETE':
+                $default = [
+                    'magazine_goal' => 'required|integer|exists:magazine_goals,id' . $delete_check,
+                ];
+                break;
+            case 'POST':
+                $default = [
+                    'content' => 'required|string|max:100000',
+                    'is_active' => 'boolean',
+                ];
+                break;
+            case 'PUT':
+                $default = [
+                    'magazine_goal' => 'required|integer|exists:magazine_goals,id' . $delete_check,
+
+                    'content' => 'nullable|string|max:100000',
+                    'is_active' => 'boolean',
+                ];
+                break;
+
+            default:
+                $default = [];
+                break;
+        }
+
+        return $default;
+
+    }
+
+    public function attributes()
+    {
         return [
-            //
+            'magazine_goal' => 'المحتوى'
         ];
     }
 
@@ -27,4 +62,10 @@ class MagazineGoalsRequest extends FormRequest
     {
         return true;
     }
+
+    protected function prepareForValidation()
+    {
+        prepareBeforeValidation($this, [], 'magazine_goal');
+    }
+
 }

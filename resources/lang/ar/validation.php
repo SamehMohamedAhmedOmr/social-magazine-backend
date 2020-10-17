@@ -111,6 +111,7 @@ return [
     */
 
     'attributes'           => [
+        'is_active'             => 'التفعيل',
         'name'                  => 'الاسم',
         'username'              => 'اسم المُستخدم',
         'email'                 => 'البريد الالكتروني',

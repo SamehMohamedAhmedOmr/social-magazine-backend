@@ -48,7 +48,7 @@ class WhoIsUsController extends Controller
      */
     public function show(WhoIsUsRequest $request)
     {
-        return $this->whoIsUsService->show($request->x);
+        return $this->whoIsUsService->show($request->who_is_us_section);
     }
 
     /**
@@ -58,7 +58,7 @@ class WhoIsUsController extends Controller
      */
     public function update(WhoIsUsRequest $request)
     {
-        return $this->whoIsUsService->update($request->x,$request);
+        return $this->whoIsUsService->update($request->who_is_us_section, $request);
     }
 
     /**
@@ -68,7 +68,7 @@ class WhoIsUsController extends Controller
      */
     public function destroy(WhoIsUsRequest $request)
     {
-        return $this->whoIsUsService->delete($request->x);
+        return $this->whoIsUsService->delete($request->who_is_us_section);
     }
 
 }

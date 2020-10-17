@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 */
 
 
+Route::namespace('FRONT')->group(function () {
+    Route::get('who-is-us','WhoIsUsController@index');
+    Route::get('magazine-goals','MagazineGoalsController@index');
+});
+
 Route::namespace('CMS')->prefix('admins')->group(function () {
     Route::middleware('auth:api')->as('admins.')->group(function () {
 

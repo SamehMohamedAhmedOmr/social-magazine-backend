@@ -3,8 +3,10 @@
 namespace Modules\Sections\Services\CMS;
 
 use Illuminate\Http\JsonResponse;
+use Modules\Base\Facade\CacheHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
+use Modules\Sections\Facade\SectionsCache;
 use Modules\Sections\Repositories\MagazineGoalsRepository;
 use Modules\Sections\Transformers\CMS\MagazineGoalsResource;
 use Throwable;
@@ -44,6 +46,8 @@ class MagazineGoalsService extends LaravelServiceClass
 
             $goals =  $this->magazineGoalsRepository->create($request->all());
 
+            CacheHelper::forgetCache(SectionsCache::magazineGoals());
+
             $goals = MagazineGoalsResource::make($goals);
             return ApiResponse::format(201, $goals, 'Content Created!');
         });
@@ -63,6 +67,8 @@ class MagazineGoalsService extends LaravelServiceClass
     {
         $goals = $this->magazineGoalsRepository->update($id, $request->all());
 
+        CacheHelper::forgetCache(SectionsCache::magazineGoals());
+
         $goals = MagazineGoalsResource::make($goals);
 
         return ApiResponse::format(200, $goals,'Content Updated');
@@ -71,6 +77,7 @@ class MagazineGoalsService extends LaravelServiceClass
     public function delete($id)
     {
         $goals = $this->magazineGoalsRepository->delete($id);
+        CacheHelper::forgetCache(SectionsCache::magazineGoals());
         return ApiResponse::format(200, $goals, 'Content Deleted!');
     }
 

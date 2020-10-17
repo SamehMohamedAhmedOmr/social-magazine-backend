@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 class ApiResponse extends Controller
 {
-    public static function format($code, $body = [], $message = '', $pagination = null)
+    public static function format($code, $body = [], $message = null, $pagination = null)
     {
-        $message = $message ?? '';
+        $message = $message ?? null;
 
         return response()->json([
             'message' => $message,

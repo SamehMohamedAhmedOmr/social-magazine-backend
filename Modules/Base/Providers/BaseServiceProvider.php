@@ -33,6 +33,11 @@ class BaseServiceProvider extends ServiceProvider
         {
             return App::make(\Modules\Base\Helpers\ExcelExportHelper::class);
         });
+
+        App::bind('CacheHelper', function()
+        {
+            return App::make(\Modules\Base\Helpers\CacheHelper::class);
+        });
     }
 
     /**

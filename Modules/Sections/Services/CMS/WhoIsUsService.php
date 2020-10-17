@@ -3,8 +3,10 @@
 namespace Modules\Sections\Services\CMS;
 
 use Illuminate\Http\JsonResponse;
+use Modules\Base\Facade\CacheHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
+use Modules\Sections\Facade\SectionsCache;
 use Modules\Sections\Repositories\WhoIsUsRepository;
 use Modules\Sections\Transformers\CMS\WhoIsUsResource;
 use Modules\Users\Transformers\CMS\AccountResource;
@@ -45,6 +47,8 @@ class WhoIsUsService extends LaravelServiceClass
 
             $whoIsUs =  $this->whoIsUsRepository->create($request->all());
 
+            CacheHelper::forgetCache(SectionsCache::whoIsUs());
+
             $whoIsUs = WhoIsUsResource::make($whoIsUs);
             return ApiResponse::format(201, $whoIsUs, 'Content Created!');
         });
@@ -64,6 +68,8 @@ class WhoIsUsService extends LaravelServiceClass
     {
         $whoIsUs = $this->whoIsUsRepository->update($id, $request->all());
 
+        CacheHelper::forgetCache(SectionsCache::whoIsUs());
+
         $whoIsUs = WhoIsUsResource::make($whoIsUs);
 
         return ApiResponse::format(200, $whoIsUs,'Content Updated');
@@ -72,6 +78,7 @@ class WhoIsUsService extends LaravelServiceClass
     public function delete($id)
     {
         $whoIsUs = $this->whoIsUsRepository->delete($id);
+        CacheHelper::forgetCache(SectionsCache::whoIsUs());
         return ApiResponse::format(200, $whoIsUs, 'Content Deleted!');
     }
 

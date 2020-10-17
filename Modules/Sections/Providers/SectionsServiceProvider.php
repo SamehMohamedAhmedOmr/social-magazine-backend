@@ -4,6 +4,7 @@ namespace Modules\Sections\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Sections\Helpers\SectionsCache;
 
 class SectionsServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,15 @@ class SectionsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->registerHelpers();
+    }
+
+    private function registerHelpers(){
+        \App::bind('SectionsCache', function()
+        {
+            return \App::make(SectionsCache::class);
+        });
     }
 
     /**

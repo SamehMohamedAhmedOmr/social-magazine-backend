@@ -2,10 +2,6 @@
 
 namespace Modules\Base\Helpers;
 
-use Auth;
-use Illuminate\Support\Arr;
-use Modules\Users\Repositories\AddressRepository;
-use Request;
 
 class DbHelper
 {

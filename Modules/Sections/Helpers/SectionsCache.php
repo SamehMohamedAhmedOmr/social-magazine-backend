@@ -21,4 +21,8 @@ class SectionsCache
     public function visitors(){
         return 'visitors';
     }
+
+    public function publicationRule(){
+        return 'publication_rules';
+    }
 }

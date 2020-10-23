@@ -18,4 +18,7 @@ class SectionsCache
         return 'magazine_information';
     }
 
+    public function visitors(){
+        return 'visitors';
+    }
 }

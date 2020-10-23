@@ -21,7 +21,14 @@ class SectionsServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Sections', 'Database/Migrations'));
+
+        $this->generateObservers();
     }
+
+    public function generateObservers()
+    {
+    }
+
 
     /**
      * Register the service provider.

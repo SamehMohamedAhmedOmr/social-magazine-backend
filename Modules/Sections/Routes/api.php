@@ -32,3 +32,12 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
 
     });
 });
+
+Route::namespace('Common')->group(function () {
+
+    Route::prefix('trackers')->group(function () {
+        Route::get('/','TrackerController@index');
+        Route::post('/','TrackerController@store');
+    });
+
+});

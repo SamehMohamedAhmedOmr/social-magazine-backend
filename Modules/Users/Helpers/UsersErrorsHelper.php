@@ -54,6 +54,6 @@ class UsersErrorsHelper
 
     public function regexName()
     {
-        return '/^[a-z ,.\'_-]+$/i';
+        return '/^[a-zA-Z \p{L} ,.\'_-]+$/iu';
     }
 }

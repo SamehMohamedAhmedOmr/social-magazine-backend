@@ -25,4 +25,21 @@ class SectionsCache
     public function publicationRule(){
         return 'publication_rules';
     }
+
+    public function advisoryBody(){
+        return 'advisory_body';
+    }
+
+    public function magazineCategory(){
+        return 'magazine_category';
+    }
+
+    public function testimonial(){
+        return 'testimonial';
+    }
+
+    public function news(){
+        return 'news';
+    }
+
 }

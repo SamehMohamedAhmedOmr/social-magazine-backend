@@ -19,6 +19,7 @@ Route::namespace('FRONT')->group(function () {
     Route::get('magazine-goals','MagazineGoalsController@index');
     Route::get('magazine-information','MagazineInformationController@index');
     Route::get('publication-rules','PublicationRulesController@index');
+    Route::get('advisory-bodies','AdvisoryBodyController@index');
 });
 
 Route::namespace('CMS')->prefix('admins')->group(function () {
@@ -27,6 +28,8 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
         Route::apiResource('who-is-us-sections','WhoIsUsController');
         Route::apiResource('publication-rules','PublicationRulesController');
         Route::apiResource('magazine-goals','MagazineGoalsController');
+        Route::apiResource('advisory-bodies','AdvisoryBodyController');
+
         Route::prefix('magazine-information')->group(function () {
             Route::get('/','MagazineInformationController@index');
             Route::post('/','MagazineInformationController@store');

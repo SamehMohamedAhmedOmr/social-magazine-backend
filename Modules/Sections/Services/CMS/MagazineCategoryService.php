@@ -50,7 +50,9 @@ class MagazineCategoryService extends LaravelServiceClass
 
             $content =  $this->repository->create($request->all());
 
-            $this->repository->attach($content, $request->images);
+            if (isset($request->images)){
+                $this->repository->attach($content, $request->images);
+            }
 
             CacheHelper::forgetCache(SectionsCache::magazineCategory());
 

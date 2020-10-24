@@ -18,7 +18,7 @@ class MagazineCategoryResource extends Resource
     {
         return [
             'content' => $this->content,
-            'images' => GalleryResource::collection($this->whenLoaded('image')),
+            'images' => GalleryResource::collection($this->whenLoaded('images')),
         ];
     }
 }

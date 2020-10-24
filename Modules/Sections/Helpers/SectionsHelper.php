@@ -3,6 +3,8 @@
 namespace Modules\Sections\Helpers;
 
 
+use Illuminate\Validation\ValidationException;
+
 class SectionsHelper
 {
 
@@ -25,5 +27,14 @@ class SectionsHelper
         return $body;
     }
 
+    /**
+     * @throws ValidationException
+     */
+    public function duplicateNewsTitle()
+    {
+        throw ValidationException::withMessages([
+            'title' => trans('sections::errors.duplicate_slug'),
+        ]);
+    }
 
 }

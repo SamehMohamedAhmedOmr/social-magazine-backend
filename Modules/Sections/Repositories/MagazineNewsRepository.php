@@ -46,4 +46,20 @@ class MagazineNewsRepository extends LaravelRepositoryClass
         $model->images()->attach($images);
     }
 
+    public function getBySlug($value, $column = 'id', $conditions = [])
+    {
+        $data = $column
+            ? $this->model->where($column, $value)
+            : $this->model;
+
+        $data = $conditions != []
+            ? $data->where($conditions)
+            : $data;
+
+        $data = $data->first();
+
+        return $data;
+    }
+
+
 }

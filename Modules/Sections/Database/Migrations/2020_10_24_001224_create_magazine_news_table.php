@@ -16,7 +16,7 @@ class CreateMagazineNewsTable extends Migration
         Schema::create('magazine_news', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',500);
-            $table->string('slug',500)->unique();
+            $table->string('slug',500);
             $table->longText('content');
             $table->integer('views')->default(0);
             $table->boolean('is_active')->default(1);

@@ -4,9 +4,11 @@ namespace Modules\Sections\Services\CMS;
 
 use Illuminate\Http\JsonResponse;
 use Modules\Base\Facade\CacheHelper;
+use Modules\Base\Facade\UtilitiesHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Sections\Facade\SectionsCache;
+use Modules\Sections\Facade\SectionsHelper;
 use Modules\Sections\Repositories\MagazineNewsRepository;
 use Modules\Sections\Transformers\CMS\MagazineNewsResource;
 use Throwable;
@@ -48,9 +50,21 @@ class MagazineNewsService extends LaravelServiceClass
     {
         return \DB::transaction(function () use ($request) {
 
-            $content =  $this->repository->create($request->all());
+            $data = $request->all();
+            $slug = UtilitiesHelper::generateSlug($data['title']);
+            $data['slug'] = $slug;
 
-            $this->repository->attach($content, $request->images);
+            $news = $this->repository->getBySlug($slug,'slug');
+
+            if ($news){
+                SectionsHelper::duplicateNewsTitle();
+            }
+
+            $content =  $this->repository->create($data);
+
+            if (isset($request->images)){
+                $this->repository->attach($content, $request->images);
+            }
 
             CacheHelper::forgetCache(SectionsCache::magazineNews());
 
@@ -79,7 +93,23 @@ class MagazineNewsService extends LaravelServiceClass
 
     public function update($id, $request = null)
     {
-        $content = $this->repository->update($id, $request->all());
+        $data = $request->all();
+        if (isset($request->title)){
+            $slug = UtilitiesHelper::generateSlug($data['title']);
+            $data['slug'] = $slug;
+
+            $news = $this->repository->getBySlug($slug,'slug',[
+                [
+                    'id' , '!=' , $id
+                ]
+            ]);
+
+            if ($news){
+                SectionsHelper::duplicateNewsTitle();
+            }
+        }
+
+        $content = $this->repository->update($id, $data);
 
         if (isset($request->images)){
             $this->repository->attach($content, $request->images);

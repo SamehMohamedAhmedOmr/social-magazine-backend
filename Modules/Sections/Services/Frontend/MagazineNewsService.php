@@ -37,4 +37,15 @@ class MagazineNewsService extends LaravelServiceClass
         return ApiResponse::format(200, $content);
     }
 
+    public function show($slug)
+    {
+        $content = $this->main_repository->get($slug,[
+            'is_active' => true
+        ],'slug',['images']);
+
+        $content = MagazineNewsResource::make($content);
+
+        return ApiResponse::format(200, $content);
+    }
+
 }

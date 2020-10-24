@@ -22,7 +22,12 @@ Route::namespace('FRONT')->group(function () {
     Route::get('advisory-bodies','AdvisoryBodyController@index');
 
     Route::get('magazine-categories','MagazineCategoryController@index');
-    Route::get('magazine-news','MagazineNewsController@index');
+
+    Route::prefix('magazine-news')->group(function () {
+        Route::get('/','MagazineNewsController@index');
+        Route::get('/{slug}','MagazineNewsController@get');
+    });
+
     Route::get('testimonials','TestimonialController@index');
 });
 

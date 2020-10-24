@@ -19,7 +19,6 @@ class GalleryResource extends Resource
     public function toArray($request)
     {
         $folder = $this->galleryType->folder;
-        $folder = GalleryHelper::projectSlug().'/'.$folder;
 
         return GalleryHelper::getImagePath($folder, $this->image);
     }
@@ -27,7 +26,6 @@ class GalleryResource extends Resource
     public static function singleImage($resource){
         if(isset($resource) && !($resource instanceof MissingValue)){
             $folder = $resource->galleryType->folder;
-            $folder = GalleryHelper::projectSlug().'/'.$folder;
             return GalleryHelper::getImagePath($folder, $resource->image);
         }
         return null;

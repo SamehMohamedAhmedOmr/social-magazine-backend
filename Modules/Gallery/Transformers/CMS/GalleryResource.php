@@ -18,8 +18,6 @@ class GalleryResource extends Resource
     {
         $folder = $this->galleryType->folder;
 
-        $folder = GalleryHelper::projectSlug().'/'.$folder;
-
         $resource = [
             'id' => $this->id,
             'image' => GalleryHelper::getImagePath($folder, $this->image),

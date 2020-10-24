@@ -51,8 +51,6 @@ class GalleryService extends LaravelServiceClass
 
         $folder = $gallery_type->folder;
 
-        $folder = GalleryHelper::projectSlug().'/'.$folder;
-
         $thumbnail = $this->generateThumbnail($folder, $image);
 
         $path = Storage::putFile('public/images/'. $folder, $image);

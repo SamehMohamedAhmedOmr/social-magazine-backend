@@ -11,7 +11,8 @@ class MagazineNews extends Model
     use SoftDeletes;
     protected $table = 'magazine_news';
     protected $fillable = [
-        'title' , 'content' , 'views' , 'is_active'
+        'title' , 'slug',
+        'content' , 'views' , 'is_active'
     ];
 
     public function images()

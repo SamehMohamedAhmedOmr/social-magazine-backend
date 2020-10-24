@@ -38,8 +38,8 @@ class SectionsCache
         return 'testimonial';
     }
 
-    public function news(){
-        return 'news';
+    public function magazineNews(){
+        return 'magazine_news';
     }
 
 }

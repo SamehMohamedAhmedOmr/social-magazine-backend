@@ -24,6 +24,19 @@ class MagazineInformationRequest extends FormRequest
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'vision' => 'الرؤية',
+            'mission' => 'الرسالة',
+            'address' => 'العنوان',
+            'phone' => 'الهاتف',
+            'fax_number' => 'الفاكس',
+            'email' => 'البريد الالكتروني',
+            'postal_code' => 'الكود البريدي',
+        ];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *

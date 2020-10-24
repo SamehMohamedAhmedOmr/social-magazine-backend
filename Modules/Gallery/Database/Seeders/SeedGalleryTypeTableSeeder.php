@@ -16,13 +16,10 @@ class SeedGalleryTypeTableSeeder extends Seeder
     public function run()
     {
         $types = collect([
-            ['name' => 'Products', 'folder' => 'products'],
-            ['name' => 'Brands', 'folder' => 'brands'],
-            ['name' => 'Categories', 'folder' => 'categories'],
-            ['name' => 'Banners', 'folder' => 'banners'],
-            ['name' => 'Companies', 'folder' => 'companies'],
-            ['name' => 'Toppings', 'folder' => 'toppings'],
-            ['name' => 'Frontend_Settings', 'folder' => 'Frontend_Settings'],
+            ['name' => 'Users', 'folder' => 'users'],
+            ['name' => 'Magazine_Category', 'folder' => 'magazine_category'], // التصنيف
+            ['name' => 'testimonials', 'folder' => 'testimonials'],
+            ['name' => 'news', 'folder' => 'news'],
         ]);
 
         foreach ($types as $type) {

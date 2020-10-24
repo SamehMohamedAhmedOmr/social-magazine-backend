@@ -16,6 +16,6 @@ class GalleryDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-//        $this->call(SeedGalleryTypeTableSeeder::class);
+        $this->call(SeedGalleryTypeTableSeeder::class);
     }
 }

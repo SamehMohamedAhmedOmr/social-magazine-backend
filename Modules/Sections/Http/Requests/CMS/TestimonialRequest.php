@@ -3,9 +3,8 @@
 namespace Modules\Sections\Http\Requests\CMS;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Modules\Users\Facades\UsersErrorsHelper;
 
-class AdvisoryBodyRequest extends FormRequest
+class TestimonialRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -20,23 +19,30 @@ class AdvisoryBodyRequest extends FormRequest
             case 'GET':
             case 'DELETE':
                 $default = [
-                    'advisory_body' => 'required|integer|exists:advisory_body,id' . $delete_check,
+                    'testimonial' => 'required|integer|exists:magazine_testimonial,id' . $delete_check,
                 ];
                 break;
             case 'POST':
                 $default = [
-                    'name' => 'required|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
-                    'job' => 'required|string|max:255',
+                    'name' => 'required|string|max:255',
+                    'content' => 'required|string|max:65535',
+                    'stars' => 'required|integer|min:1|max:5',
                     'is_active' => 'boolean',
+
+                    'image_id' => 'required|integer|exists:gallery,id',
                 ];
                 break;
             case 'PUT':
                 $default = [
-                    'advisory_body' => 'required|integer|exists:advisory_body,id' . $delete_check,
+                    'testimonial' => 'required|integer|exists:magazine_testimonial,id' . $delete_check,
 
-                    'name' => 'nullable|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
-                    'job' => 'nullable|string|max:255',
+                    'name' => 'nullable|string|max:255',
+                    'content' => 'nullable|string|max:65535',
+                    'stars' => 'nullable|integer|min:1|max:5',
+
                     'is_active' => 'boolean',
+
+                    'image_id' => 'integer|exists:gallery,id',
                 ];
                 break;
 
@@ -46,7 +52,9 @@ class AdvisoryBodyRequest extends FormRequest
         }
 
         return $default;
+
     }
+
 
     /**
      * Determine if the user is authorized to make this request.
@@ -61,13 +69,14 @@ class AdvisoryBodyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'advisory_body' => 'الاستشاري',
-            'job' => 'الوظيفة'
+            'testimonial' => 'التوصية',
+            'stars' => 'التقييم',
+            'image_id' => 'الصورة',
         ];
     }
 
     protected function prepareForValidation()
     {
-        prepareBeforeValidation($this, [], 'advisory_body');
+        prepareBeforeValidation($this, [], 'testimonial');
     }
 }

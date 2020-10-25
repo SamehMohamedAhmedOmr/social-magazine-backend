@@ -18,7 +18,7 @@ class CountryResource extends Resource
         return [
             'id' => $this->id ,
             'country_code' => $this->country_code,
-            'name' => $this->name . ' جمهوريةِ',
+            'name' => $this->name,
             'image'  => getImagePath('flags', $this->image) ,
         ];
     }

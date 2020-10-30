@@ -44,6 +44,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\Base\Middleware\SetLanguage::class,
             \Fruitcake\Cors\HandleCors::class,
+            \App\Http\Middleware\Cors::class
             // \Modules\ACL\Http\Middleware\PermissionMiddleware::class,
         ],
     ];

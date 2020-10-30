@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "barryvdh/laravel-cors": "^2.0",
         "barryvdh/laravel-dompdf": "^0.8.6",
         "cviebrock/eloquent-sluggable": "^6.0",
         "doctrine/dbal": "^2.10",

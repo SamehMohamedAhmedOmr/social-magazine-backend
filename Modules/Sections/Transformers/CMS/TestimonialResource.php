@@ -21,6 +21,7 @@ class TestimonialResource extends Resource
             'name' => $this->name,
             'content' => $this->content,
             'stars' => $this->stars,
+            'image_id' => $this->image_id ,
             'image'  => GalleryResource::singleImage($this->whenLoaded('image')) ,
             'is_active' => $this->is_active,
         ];

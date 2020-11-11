@@ -42,4 +42,8 @@ class SectionsCache
         return 'magazine_news';
     }
 
+
+    public function latestMagazineNews(){
+        return 'latest_magazine_news';
+    }
 }

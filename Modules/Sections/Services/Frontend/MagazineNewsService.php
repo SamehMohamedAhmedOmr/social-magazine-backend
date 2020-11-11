@@ -37,11 +37,36 @@ class MagazineNewsService extends LaravelServiceClass
         return ApiResponse::format(200, $content);
     }
 
+
+    public function LatestNews()
+    {
+        $content = CacheHelper::getCache(SectionsCache::latestMagazineNews());
+
+        if (!$content) {
+            $content = $this->main_repository->all([
+                'is_active' => true
+            ],[],6);
+            CacheHelper::putCache(SectionsCache::latestMagazineNews(), $content);
+        }
+
+        $content->load([
+            'images'
+        ]);
+
+        $content = MagazineNewsResource::collection($content);
+        return ApiResponse::format(200, $content);
+    }
+
     public function show($slug)
     {
         $content = $this->main_repository->get($slug,[
             'is_active' => true
         ],'slug',['images']);
+
+        $content = $this->main_repository->updateVisitors($content);
+
+        CacheHelper::forgetCache(SectionsCache::magazineNews());
+        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
 
         $content = MagazineNewsResource::make($content);
 

@@ -29,6 +29,15 @@ class MagazineNewsController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @return JsonResponse|void
+     */
+    public function LatestNews()
+    {
+        return $this->service->LatestNews();
+    }
+
+    /**
+     * Display a listing of the resource.
      * @param MagazineNewsRequest $request
      * @return JsonResponse|void
      */

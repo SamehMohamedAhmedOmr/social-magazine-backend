@@ -67,6 +67,7 @@ class MagazineNewsService extends LaravelServiceClass
             }
 
             CacheHelper::forgetCache(SectionsCache::magazineNews());
+            CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
 
             $content->load([
                 'images'
@@ -116,6 +117,7 @@ class MagazineNewsService extends LaravelServiceClass
         }
 
         CacheHelper::forgetCache(SectionsCache::magazineNews());
+        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
 
         $content->load([
             'images'
@@ -130,6 +132,7 @@ class MagazineNewsService extends LaravelServiceClass
     {
         $content = $this->repository->delete($id);
         CacheHelper::forgetCache(SectionsCache::magazineNews());
+        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
         return ApiResponse::format(200, $content, 'Content Deleted!');
     }
 

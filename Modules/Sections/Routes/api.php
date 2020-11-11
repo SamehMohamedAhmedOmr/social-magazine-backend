@@ -28,6 +28,9 @@ Route::namespace('FRONT')->group(function () {
         Route::get('/{slug}','MagazineNewsController@get');
     });
 
+    Route::get('latest-magazine-news','MagazineNewsController@LatestNews');
+
+
     Route::get('testimonials','TestimonialController@index');
 });
 

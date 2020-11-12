@@ -30,6 +30,7 @@ Route::namespace('FRONT')->group(function () {
 
     Route::get('latest-magazine-news','MagazineNewsController@LatestNews');
 
+    Route::get('home','HomeController@index');
 
     Route::get('testimonials','TestimonialController@index');
 });

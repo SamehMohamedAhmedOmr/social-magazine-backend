@@ -38,7 +38,7 @@ class MagazineNewsRepository extends LaravelRepositoryClass
         }
 
         if ($limit){
-            $query = $query->take($limit);
+            $query = $query->take($limit)->orderBy('created_at','desc');
         }
 
         return $query;

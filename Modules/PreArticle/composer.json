@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/prearticle",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\PreArticle\\Providers\\PreArticleServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PreArticle\\": ""
+        }
+    }
+}

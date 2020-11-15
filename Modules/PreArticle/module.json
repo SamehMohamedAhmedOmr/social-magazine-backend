@@ -1,0 +1,13 @@
+{
+    "name": "PreArticle",
+    "alias": "prearticle",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\PreArticle\\Providers\\PreArticleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

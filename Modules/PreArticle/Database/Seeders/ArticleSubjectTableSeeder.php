@@ -4,32 +4,30 @@ namespace Modules\PreArticle\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
-use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\ArticleSubject;
+use Modules\PreArticle\Facades\ArticleSubjectCollection;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class ArticleSubjectTableSeeder extends Seeder
 {
-    public function statusFilter()
+    public function subjects()
     {
-        $status_filter = collect([]);
-        $status_filter->push(StatusFilterCollection::NEW());
-        $status_filter->push(StatusFilterCollection::NOT_COMPLETED());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_EDITOR());
-        $status_filter->push(StatusFilterCollection::DONE_BY_EDITOR());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_REFEREES());
-        $status_filter->push(StatusFilterCollection::NOT_BEEN_JUDGED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_ALL());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_SOME());
-        $status_filter->push(StatusFilterCollection::NEED_REVIEW());
-        $status_filter->push(StatusFilterCollection::BEEN_REVIEWED());
-        $status_filter->push(StatusFilterCollection::NOT_REVIEWED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::NOT_PUBLISHED());
-        $status_filter->push(StatusFilterCollection::FINALLY_ACCEPTED());
-        $status_filter->push(StatusFilterCollection::REJECTED());
-        $status_filter->push(StatusFilterCollection::SENT_FOR_PAYMENT());
+        $subjects = collect([]);
+        $subjects->push(ArticleSubjectCollection::ARCHAEOLOGY());
+        $subjects->push(ArticleSubjectCollection::SOCIOLOGY());
+        $subjects->push(ArticleSubjectCollection::LITERATURE());
+        $subjects->push(ArticleSubjectCollection::TOURIST_GUIDES());
+        $subjects->push(ArticleSubjectCollection::MEDIA());
+        $subjects->push(ArticleSubjectCollection::HISTORY());
+        $subjects->push(ArticleSubjectCollection::GEOGRAPHY());
+        $subjects->push(ArticleSubjectCollection::PHILOSOPHICAL_STUDIES());
+        $subjects->push(ArticleSubjectCollection::ARTS());
+        $subjects->push(ArticleSubjectCollection::LANGUAGES());
+        $subjects->push(ArticleSubjectCollection::INFORMATION());
+        $subjects->push(ArticleSubjectCollection::LIBRARIES());
+        $subjects->push(ArticleSubjectCollection::PSYCHOLOGY());
 
-        return $status_filter;
+        return $subjects;
     }
 
     /**
@@ -39,19 +37,19 @@ class ArticleFilterTableSeeder extends Seeder
      */
     public function run()
     {
-        CacheHelper::forgetCache(PreArticleCache::statusFilter());
+        CacheHelper::forgetCache(PreArticleCache::articleSubject());
 
-        $statusFilter = $this->statusFilter();
+        $subjects = $this->subjects();
 
-        $this->seed($statusFilter);
+        $this->seed($subjects);
     }
 
-    protected function seed($filters){
-        foreach ($filters as $filter) {
+    protected function seed($subjects){
+        foreach ($subjects as $subject) {
 
-            ArticleFilter::updateOrCreate([
-                'name' => $filter['name'],
-                'key' => $filter['key'],
+            ArticleSubject::updateOrCreate([
+                'name' => $subject['name'],
+                'key' => $subject['key'],
             ],[]);
         }
     }

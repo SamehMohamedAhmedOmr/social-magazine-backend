@@ -4,6 +4,7 @@ namespace Modules\PreArticle\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\PreArticle\Helpers\ArticleSubjectCollection;
 use Modules\PreArticle\Helpers\PreArticleCache;
 use Modules\PreArticle\Helpers\StatusFilterCollection;
 use Modules\PreArticle\Helpers\StatusFilterKey;
@@ -66,7 +67,9 @@ class PreArticleServiceProvider extends ServiceProvider
             return \App::make(StatusFilterKey::class);
         });
 
-
+        \App::bind('ArticleSubjectCollection', function () {
+            return \App::make(ArticleSubjectCollection::class);
+        });
 
     }
     /**

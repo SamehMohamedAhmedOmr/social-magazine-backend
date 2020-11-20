@@ -3,13 +3,13 @@
 namespace Modules\PreArticle\Repositories;
 
 use Modules\Base\Repositories\Classes\LaravelRepositoryClass;
-use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\CurrencyType;
 
-class ArticleFilterRepository extends LaravelRepositoryClass
+class CurrencyTypeRepository extends LaravelRepositoryClass
 {
-    public function __construct(ArticleFilter $articleFilter)
+    public function __construct(CurrencyType $model)
     {
-        $this->model = $articleFilter;
+        $this->model = $model;
     }
 
     public function paginate($per_page = 15, $conditions = [], $search_keys = null, $sort_key = 'id', $sort_order = 'asc', $lang = null)

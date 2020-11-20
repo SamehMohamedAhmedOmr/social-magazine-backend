@@ -18,8 +18,8 @@ class PreArticleCache
         return 'article_subject';
     }
 
-    public function arbitratorsRecommendation(){
-        return 'Arbitrators_recommendation';
+    public function refereesRecommendation(){
+        return 'referees_recommendation';
     }
 
     public function articleType(){

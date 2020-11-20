@@ -12,4 +12,9 @@ class ArticleStatusType extends Model
     protected $fillable = [
         'name' , 'key'
     ];
+
+    public function statusList(){
+        return $this->hasMany(ArticleStatusList::class,'type_id','id');
+    }
+
 }

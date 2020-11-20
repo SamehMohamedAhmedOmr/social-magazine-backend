@@ -16,6 +16,8 @@ class PreArticleDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(ArticleStatusTableSeeder::class);
+
+
     }
 }

@@ -12,4 +12,9 @@ class ArticleStatusList extends Model
     protected $fillable = [
         'name' , 'description', 'key', 'type_id'
     ];
+
+    public function type(){
+        return $this->belongsTo(ArticleStatusType::class,'type_id','id');
+    }
+
 }

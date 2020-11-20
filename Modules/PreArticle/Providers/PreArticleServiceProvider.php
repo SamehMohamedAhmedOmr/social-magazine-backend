@@ -4,6 +4,11 @@ namespace Modules\PreArticle\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\PreArticle\Helpers\StatusFilterCollection;
+use Modules\PreArticle\Helpers\StatusFilterKey;
+use Modules\PreArticle\Helpers\StatusListCollection;
+use Modules\PreArticle\Helpers\StatusListHelper;
+use Modules\PreArticle\Helpers\StatusTypesHelper;
 
 class PreArticleServiceProvider extends ServiceProvider
 {
@@ -29,8 +34,33 @@ class PreArticleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->registerHelpers();
     }
 
+    protected function registerHelpers()
+    {
+        \App::bind('StatusTypesHelper', function () {
+            return \App::make(StatusTypesHelper::class);
+        });
+
+        \App::bind('StatusListHelper', function () {
+            return \App::make(StatusListHelper::class);
+        });
+
+        \App::bind('StatusListCollection', function () {
+            return \App::make(StatusListCollection::class);
+        });
+
+        \App::bind('StatusFilterCollection', function () {
+            return \App::make(StatusFilterCollection::class);
+        });
+
+        \App::bind('StatusFilterKey', function () {
+            return \App::make(StatusFilterKey::class);
+        });
+
+    }
     /**
      * Register config.
      *

@@ -60,12 +60,13 @@ class HomeService extends LaravelServiceClass
             $content = $this->magazineNewsRepository->all([
                 'is_active' => true
             ],[],6);
+
+            $content->load([
+                'images'
+            ]);
+
             CacheHelper::putCache(SectionsCache::latestMagazineNews(), $content);
         }
-
-        $content->load([
-            'images'
-        ]);
 
         return MagazineNewsResource::collection($content);
     }
@@ -78,12 +79,14 @@ class HomeService extends LaravelServiceClass
             $content = $this->testimonialRepository->all([
                 'is_active' => true
             ]);
+
+            $content->load([
+                'image'
+            ]);
+
+
             CacheHelper::putCache(SectionsCache::testimonial(), $content);
         }
-
-        $content->load([
-            'image'
-        ]);
 
         return TestimonialResource::collection($content);
     }

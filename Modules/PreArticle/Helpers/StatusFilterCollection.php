@@ -2,164 +2,128 @@
 
 namespace Modules\PreArticle\Helpers;
 
-use Modules\PreArticle\Facades\StatusTypesHelper;
-use Modules\PreArticle\Facades\StatusListHelper;
-
+use Modules\PreArticle\Facades\StatusFilterKey;
 
 class StatusFilterCollection
 {
 
-    public function newStatus()
+    public function NEW()
     {
         return [
-            'type' => StatusTypesHelper::new(),
-            'attributes' => [
-                [
-                    'name' => 'غير مكتمل',
-                    'key' => StatusListHelper::NOT_COMPLETED(),
-                    'description' => 'غير مكتمل'
-                ],
-                [
-                    'name' => 'جديد',
-                    'key' => StatusListHelper::NEW(),
-                    'description' => 'مرسل بواسطة المؤلف'
-                ],
-            ]
+            'key' => StatusFilterKey::NEW(),
+            'name' => 'مقالات جديدة',
         ];
     }
 
-    public function specializedStatus()
+    public function NOT_COMPLETED()
     {
         return [
-            'type' => StatusTypesHelper::specialized(),
-            'attributes' => [
-                [
-                    'name' => 'مخصص لمحرر المجلة',
-                    'key' => StatusListHelper::SPECIALIZED_FOR_EDITOR(),
-                    'description' => 'تخصيص لمحرر'
-                ],
-                [
-                    'name' => 'مخصص للتحكيم',
-                    'key' => StatusListHelper::SPECIALIZED_FOR_REFEREES(),
-                    'description' => 'تخصيص للمحكمين'
-                ],
-            ]
+            'key' => StatusFilterKey::NOT_COMPLETED(),
+            'name' => 'مقالات غير مكتملة',
         ];
     }
 
-    public function reviewStatus()
+    public function SPECIALIZED_FOR_EDITOR()
     {
         return [
-            'type' => StatusTypesHelper::review(),
-            'attributes' => [
-                [
-                    'name' => 'تحتاج الى اعادة ارسال',
-                    'key' => StatusListHelper::NEED_FOR_RESENT(),
-                    'description' => 'تحتاج الى اعادة ارسال من المؤلف'
-                ],
-                [
-                    'name' => 'المقالة تحتاج الى مراجعة كبيرة',
-                    'key' => StatusListHelper::NEED_FOR_BIG_REVIEW(),
-                    'description' => 'المقالة تحتاج الى مراجعة كبيرة'
-                ],
-                [
-                    'name' => 'المقالة تحتاج الى مراجعة ضئيلة',
-                    'key' => StatusListHelper::NEED_FOR_SMALL_REVIEW(),
-                    'description' => 'المقالة تحتاج الى مراجعة ضئيلة'
-                ],
-                [
-                    'name' => 'المقالة موافق عليها لكن تحتاج الى مراجعة ضئيلة',
-                    'key' => StatusListHelper::ACCEPTED_WITH_NEED_FOR_SMALL_REVIEW(),
-                    'description' => 'المقالة موافق عليها لكن تحتاج الى مراجعة ضئيلة'
-                ],
-            ]
+            'key' => StatusFilterKey::SPECIALIZED_FOR_EDITOR(),
+            'name' => 'مقالات مخصصة للمحرر',
         ];
     }
 
-    public function rejectedStatus()
+    public function DONE_BY_EDITOR()
     {
         return [
-            'type' => StatusTypesHelper::rejected(),
-            'attributes' => [
-                [
-                    'name' => 'رفض للأهداف و النطاق',
-                    'key' => StatusListHelper::REJECTED_DUE_GOALS(),
-                    'description' => 'رفض المقالة للأهداف و النطاق',
-                ],
-                [
-                    'name' => 'رفض للارسال المتكرر',
-                    'key' => StatusListHelper::REJECTED_DUE_MANY_RESENT(),
-                    'description' => 'رفض المقالة للارسال المتكرر',
-                ],
-                [
-                    'name' => 'رفض للنتائج المتشابهة',
-                    'key' => StatusListHelper::REJECTED_DUPLICATE(),
-                    'description' => 'رفض المقالة للنتائج المتشابهة',
-                ],
-                [
-                    'name' => 'رفض لعدم الأولوية',
-                    'key' => StatusListHelper::REJECTED_DUE_NO_PRIORITY(),
-                    'description' => 'رفض المقالة لعدم الأولوية',
-                ],
-                [
-                    'name' => 'رفض لمشاكل ادبية',
-                    'key' => StatusListHelper::REJECTED_DUE_LITERARY_PROBLEMS(),
-                    'description' => 'رفض المقالة لمشاكل ادبية',
-                ],
-                [
-                    'name' => 'رفض بسبب  كل المحكمين رفضوا التحكيم',
-                    'key' => StatusListHelper::REJECTED_DUE_ALL_ARBITRATORS_REFUSED_THE_ARBITRATION(),
-                    'description' => 'رفض المقالة بسبب  كل المحكمين رفضوا التحكيم',
-                ],
-                [
-                    'name' => 'رفض بسبب توصيات المحكمين/المحرر',
-                    'key' => StatusListHelper::REJECTED_DUE_REFEREES_RECOMMENDATIONS_OR_EDITOR(),
-                    'description' => 'رفض المقالة بسبب توصيات المحكمين/المحرر',
-                ],
-                [
-                    'name' => 'رفض',
-                    'key' => StatusListHelper::REJECTED(),
-                    'description' => 'رفض المقالة',
-                ],
-            ]
+            'key' => StatusFilterKey::DONE_BY_EDITOR(),
+            'name' => 'مقالات قام بهاالمحرر',
         ];
     }
 
-    public function acceptedStatus()
+    public function SPECIALIZED_FOR_REFEREES()
     {
         return [
-            'type' => StatusTypesHelper::accepted(),
-            'attributes' => [
-                [
-                    'name' => 'مرسلة للسداد',
-                    'key' => StatusListHelper::SENT_FOR_PAYMENT(),
-                    'description' => 'ارسال المقالة للمؤلف للسداد',
-                ],
-                [
-                    'name' => 'قبول المقالة علميا',
-                    'key' => StatusListHelper::ACCEPTED_SCIENTIFICALLY(),
-                    'description' => 'قبول المقالة علميا',
-                ],
-                [
-                    'name' => 'قبول المقالة بشكل نهائي',
-                    'key' => StatusListHelper::FINALLY_ACCEPTED(),
-                    'description' => 'قبول المقالة بشكل نهائي',
-                ],
-            ]
+            'key' => StatusFilterKey::SPECIALIZED_FOR_REFEREES(),
+            'name' => 'مقالات مخصصة للتحكيم',
         ];
     }
 
-    public function withdrawalStatus()
+    public function NOT_BEEN_JUDGED_AT_TIME()
     {
         return [
-            'type' => StatusTypesHelper::withdrawal(),
-            'attributes' => [
-                [
-                    'name' => 'سحب',
-                    'key' => StatusListHelper::WITHDRAWAL(),
-                    'description' => 'سحب',
-                ],
-            ]
+            'key' => StatusFilterKey::NOT_BEEN_JUDGED_AT_TIME(),
+            'name' => 'مقالات لم يتم تحكيمها في التاريخ المحدد',
+        ];
+    }
+
+    public function BEEN_JUDGED_FROM_ALL()
+    {
+        return [
+            'key' => StatusFilterKey::BEEN_JUDGED_FROM_ALL(),
+            'name' => 'مقالات تم تحكيمها من كل المحكمين',
+        ];
+    }
+
+    public function BEEN_JUDGED_FROM_SOME()
+    {
+        return [
+            'key' => StatusFilterKey::BEEN_JUDGED_FROM_SOME(),
+            'name' => 'مقالات تم تحكيمها من بعض المحكمين',
+        ];
+    }
+
+    public function NEED_REVIEW()
+    {
+        return [
+            'key' => StatusFilterKey::NEED_REVIEW(),
+            'name' => 'مقالات تحتاج لمراجعة من المؤلف',
+        ];
+    }
+
+    public function BEEN_REVIEWED()
+    {
+        return [
+            'key' => StatusFilterKey::BEEN_REVIEWED(),
+            'name' => 'مقالات تم مراجعتها من المؤلف',
+        ];
+    }
+
+    public function NOT_REVIEWED_AT_TIME()
+    {
+        return [
+            'key' => StatusFilterKey::NOT_REVIEWED_AT_TIME(),
+            'name' => 'مقالات لم يقم المؤلفون بمراجعتها بعد انتهاء التاريخ المحدد للمراجعة',
+        ];
+    }
+
+    public function NOT_PUBLISHED()
+    {
+        return [
+            'key' => StatusFilterKey::NOT_PUBLISHED(),
+            'name' => 'كل المقالات المعلقة (غير منشورة)',
+        ];
+    }
+
+    public function FINALLY_ACCEPTED()
+    {
+        return [
+            'key' => StatusFilterKey::FINALLY_ACCEPTED(),
+            'name' => 'المقالات المقبولة للنشر نهائيا',
+        ];
+    }
+
+    public function REJECTED()
+    {
+        return [
+            'key' => StatusFilterKey::REJECTED(),
+            'name' => 'المقالات المرفوضة',
+        ];
+    }
+
+    public function SENT_FOR_PAYMENT()
+    {
+        return [
+            'key' => StatusFilterKey::SENT_FOR_PAYMENT(),
+            'name' => 'مقالات مرسلة للمؤلف للسداد',
         ];
     }
 

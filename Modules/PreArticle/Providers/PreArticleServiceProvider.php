@@ -4,6 +4,7 @@ namespace Modules\PreArticle\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\PreArticle\Helpers\PreArticleCache;
 use Modules\PreArticle\Helpers\StatusFilterCollection;
 use Modules\PreArticle\Helpers\StatusFilterKey;
 use Modules\PreArticle\Helpers\StatusListCollection;
@@ -40,6 +41,11 @@ class PreArticleServiceProvider extends ServiceProvider
 
     protected function registerHelpers()
     {
+
+        \App::bind('PreArticleCache', function () {
+            return \App::make(PreArticleCache::class);
+        });
+
         \App::bind('StatusTypesHelper', function () {
             return \App::make(StatusTypesHelper::class);
         });
@@ -59,6 +65,8 @@ class PreArticleServiceProvider extends ServiceProvider
         \App::bind('StatusFilterKey', function () {
             return \App::make(StatusFilterKey::class);
         });
+
+
 
     }
     /**

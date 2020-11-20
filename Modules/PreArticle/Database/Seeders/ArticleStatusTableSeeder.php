@@ -3,8 +3,10 @@
 namespace Modules\PreArticle\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\ArticleStatusList;
 use Modules\PreArticle\Entities\ArticleStatusType;
+use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Facades\StatusListCollection;
 
 class ArticleStatusTableSeeder extends Seeder
@@ -28,6 +30,8 @@ class ArticleStatusTableSeeder extends Seeder
      */
     public function run()
     {
+        CacheHelper::forgetCache(PreArticleCache::statusList());
+
         $statusList = $this->statusList();
 
         $article_status_type = ArticleStatusType::with('statusList')->get();

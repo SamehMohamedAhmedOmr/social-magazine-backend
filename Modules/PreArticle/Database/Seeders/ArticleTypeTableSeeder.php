@@ -5,17 +5,16 @@ namespace Modules\PreArticle\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\ArticleType;
+use Modules\PreArticle\Facades\ArticleTypeCollection;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class ArticleTypeTableSeeder extends Seeder
 {
     public function types()
     {
         $types = collect([]);
-        $types->push(StatusFilterCollection::NEW());
-
-
+        $types->push(ArticleTypeCollection::ORIGINAL_ARTICLE());
         return $types;
     }
 
@@ -26,7 +25,7 @@ class ArticleFilterTableSeeder extends Seeder
      */
     public function run()
     {
-        CacheHelper::forgetCache(PreArticleCache::statusFilter());
+        CacheHelper::forgetCache(PreArticleCache::articleType());
 
         $types = $this->types();
 
@@ -36,7 +35,7 @@ class ArticleFilterTableSeeder extends Seeder
     protected function seed($types){
         foreach ($types as $type){
 
-            ArticleFilter::updateOrCreate([
+            ArticleType::updateOrCreate([
                 'name' => $type['name'],
                 'key' => $type['key'],
             ],[]);

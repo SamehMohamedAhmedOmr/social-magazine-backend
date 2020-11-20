@@ -2,18 +2,18 @@
 
 namespace Modules\PreArticle\Helpers;
 
-use Modules\PreArticle\Facades\StatusFilterKey;
-
-class StatusFilterCollection
+class ArticleTypeCollection
 {
 
-    public function NEW()
+    public function ORIGINAL_ARTICLE()
     {
         return [
-            'key' => StatusFilterKey::NEW(),
-            'name' => 'مقالات جديدة',
+            'key' => $this->ORIGINAL_ARTICLE_KEY(),
+            'name' => 'المقالة الأصلية',
         ];
     }
-
+    public function ORIGINAL_ARTICLE_KEY(){
+        return 'ORIGINAL_ARTICLE';
+    }
 
 }

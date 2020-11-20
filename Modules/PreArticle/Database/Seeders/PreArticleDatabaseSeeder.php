@@ -21,6 +21,7 @@ class PreArticleDatabaseSeeder extends Seeder
         $this->call(ArticleFilterTableSeeder::class);
 
         $this->call(ArticleSubjectTableSeeder::class);
+        $this->call(ArticleTypeTableSeeder::class);
 
     }
 }

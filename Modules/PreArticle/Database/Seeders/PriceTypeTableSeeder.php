@@ -4,7 +4,7 @@ namespace Modules\PreArticle\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
-use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\PriceType;
 use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Facades\StatusFilterCollection;
 
@@ -26,7 +26,7 @@ class ArticleFilterTableSeeder extends Seeder
      */
     public function run()
     {
-        CacheHelper::forgetCache(PreArticleCache::statusFilter());
+        CacheHelper::forgetCache(PreArticleCache::priceType());
 
         $types = $this->types();
 
@@ -36,7 +36,7 @@ class ArticleFilterTableSeeder extends Seeder
     protected function seed($types){
         foreach ($types as $type){
 
-            ArticleFilter::updateOrCreate([
+            PriceType::updateOrCreate([
                 'name' => $type['name'],
                 'key' => $type['key'],
             ],[]);

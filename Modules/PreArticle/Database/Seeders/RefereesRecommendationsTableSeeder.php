@@ -4,32 +4,19 @@ namespace Modules\PreArticle\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
-use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\RefereesRecommendations;
 use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Facades\StatusFilterCollection;
 
 class ArticleFilterTableSeeder extends Seeder
 {
-    public function statusFilter()
+    public function recommendations()
     {
-        $status_filter = collect([]);
-        $status_filter->push(StatusFilterCollection::NEW());
-        $status_filter->push(StatusFilterCollection::NOT_COMPLETED());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_EDITOR());
-        $status_filter->push(StatusFilterCollection::DONE_BY_EDITOR());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_REFEREES());
-        $status_filter->push(StatusFilterCollection::NOT_BEEN_JUDGED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_ALL());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_SOME());
-        $status_filter->push(StatusFilterCollection::NEED_REVIEW());
-        $status_filter->push(StatusFilterCollection::BEEN_REVIEWED());
-        $status_filter->push(StatusFilterCollection::NOT_REVIEWED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::NOT_PUBLISHED());
-        $status_filter->push(StatusFilterCollection::FINALLY_ACCEPTED());
-        $status_filter->push(StatusFilterCollection::REJECTED());
-        $status_filter->push(StatusFilterCollection::SENT_FOR_PAYMENT());
+        $recommendations = collect([]);
+        $recommendations->push(StatusFilterCollection::NEW());
 
-        return $status_filter;
+
+        return $recommendations;
     }
 
     /**
@@ -39,19 +26,19 @@ class ArticleFilterTableSeeder extends Seeder
      */
     public function run()
     {
-        CacheHelper::forgetCache(PreArticleCache::statusFilter());
+        CacheHelper::forgetCache(PreArticleCache::refereesRecommendation());
 
-        $statusFilter = $this->statusFilter();
+        $recommendations = $this->recommendations();
 
-        $this->seed($statusFilter);
+        $this->seed($recommendations);
     }
 
-    protected function seed($filters){
-        foreach ($filters as $filter) {
+    protected function seed($recommendations){
+        foreach ($recommendations as $recommendation) {
 
-            ArticleFilter::updateOrCreate([
-                'name' => $filter['name'],
-                'key' => $filter['key'],
+            RefereesRecommendations::updateOrCreate([
+                'name' => $recommendation['name'],
+                'key' => $recommendation['key'],
             ],[]);
         }
     }

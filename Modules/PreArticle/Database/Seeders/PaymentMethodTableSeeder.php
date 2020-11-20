@@ -4,32 +4,18 @@ namespace Modules\PreArticle\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
-use Modules\PreArticle\Entities\ArticleFilter;
+use Modules\PreArticle\Entities\PaymentMethod;
 use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Facades\StatusFilterCollection;
 
 class ArticleFilterTableSeeder extends Seeder
 {
-    public function statusFilter()
+    public function payment_methods()
     {
-        $status_filter = collect([]);
-        $status_filter->push(StatusFilterCollection::NEW());
-        $status_filter->push(StatusFilterCollection::NOT_COMPLETED());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_EDITOR());
-        $status_filter->push(StatusFilterCollection::DONE_BY_EDITOR());
-        $status_filter->push(StatusFilterCollection::SPECIALIZED_FOR_REFEREES());
-        $status_filter->push(StatusFilterCollection::NOT_BEEN_JUDGED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_ALL());
-        $status_filter->push(StatusFilterCollection::BEEN_JUDGED_FROM_SOME());
-        $status_filter->push(StatusFilterCollection::NEED_REVIEW());
-        $status_filter->push(StatusFilterCollection::BEEN_REVIEWED());
-        $status_filter->push(StatusFilterCollection::NOT_REVIEWED_AT_TIME());
-        $status_filter->push(StatusFilterCollection::NOT_PUBLISHED());
-        $status_filter->push(StatusFilterCollection::FINALLY_ACCEPTED());
-        $status_filter->push(StatusFilterCollection::REJECTED());
-        $status_filter->push(StatusFilterCollection::SENT_FOR_PAYMENT());
+        $payment_methods = collect([]);
+        $payment_methods->push(StatusFilterCollection::NEW());
 
-        return $status_filter;
+        return $payment_methods;
     }
 
     /**
@@ -39,19 +25,19 @@ class ArticleFilterTableSeeder extends Seeder
      */
     public function run()
     {
-        CacheHelper::forgetCache(PreArticleCache::statusFilter());
+        CacheHelper::forgetCache(PreArticleCache::paymentMethod());
 
-        $statusFilter = $this->statusFilter();
+        $payment_methods = $this->payment_methods();
 
-        $this->seed($statusFilter);
+        $this->seed($payment_methods);
     }
 
-    protected function seed($filters){
-        foreach ($filters as $filter) {
+    protected function seed($payment_methods){
+        foreach ($payment_methods as $payment_method) {
 
-            ArticleFilter::updateOrCreate([
-                'name' => $filter['name'],
-                'key' => $filter['key'],
+            PaymentMethod::updateOrCreate([
+                'name' => $payment_method['name'],
+                'key' => $payment_method['key'],
             ],[]);
         }
     }

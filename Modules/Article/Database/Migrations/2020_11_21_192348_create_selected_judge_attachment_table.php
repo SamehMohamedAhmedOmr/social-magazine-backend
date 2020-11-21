@@ -15,15 +15,15 @@ class CreateSelectedJudgeAttachmentTable extends Migration
     {
         Schema::create('selected_judge_attachment', function (Blueprint $table) {
 
-            $table->unsignedInteger('selected_judge_id')->nullable();
-            $table->foreign('selected_judge_id')->references('id')
-                ->on('article_selected_judge')->onDelete('set null')->onUpdate('cascade');
+            $table->unsignedInteger('judge_id');
+            $table->foreign('judge_id')->references('id')
+                ->on('article_selected_judge')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->unsignedInteger('attachment_id')->nullable();
+            $table->unsignedInteger('attachment_id');
             $table->foreign('attachment_id')->references('id')
-                ->on('article_attachment')->onDelete('set null')->onUpdate('cascade');
+                ->on('article_attachment')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->primary(['selected_judge_id','attachment_id']);
+            $table->primary(['judge_id','attachment_id']);
         });
     }
 

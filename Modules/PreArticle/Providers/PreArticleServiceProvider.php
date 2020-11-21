@@ -6,7 +6,12 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\PreArticle\Helpers\ArticleSubjectCollection;
 use Modules\PreArticle\Helpers\ArticleTypeCollection;
+use Modules\PreArticle\Helpers\AttachmentTypeCollection;
+use Modules\PreArticle\Helpers\CurrencyTypeCollection;
+use Modules\PreArticle\Helpers\PaymentMethodCollection;
 use Modules\PreArticle\Helpers\PreArticleCache;
+use Modules\PreArticle\Helpers\PriceTypeCollection;
+use Modules\PreArticle\Helpers\RefereesRecommendationsCollection;
 use Modules\PreArticle\Helpers\StatusFilterCollection;
 use Modules\PreArticle\Helpers\StatusFilterKey;
 use Modules\PreArticle\Helpers\StatusListCollection;
@@ -76,6 +81,25 @@ class PreArticleServiceProvider extends ServiceProvider
             return \App::make(ArticleTypeCollection::class);
         });
 
+        \App::bind('AttachmentTypeCollection', function () {
+            return \App::make(AttachmentTypeCollection::class);
+        });
+
+        \App::bind('CurrencyTypeCollection', function () {
+            return \App::make(CurrencyTypeCollection::class);
+        });
+
+        \App::bind('PaymentMethodCollection', function () {
+            return \App::make(PaymentMethodCollection::class);
+        });
+
+        \App::bind('PriceTypeCollection', function () {
+            return \App::make(PriceTypeCollection::class);
+        });
+
+        \App::bind('RefereesRecommendationsCollection', function () {
+            return \App::make(RefereesRecommendationsCollection::class);
+        });
     }
     /**
      * Register config.

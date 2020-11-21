@@ -2,18 +2,30 @@
 
 namespace Modules\PreArticle\Helpers;
 
-use Modules\PreArticle\Facades\StatusFilterKey;
 
-class StatusFilterCollection
+class PriceTypeCollection
 {
 
-    public function NEW()
+    public function ARTICLE_JUDGEMENT_FEES()
     {
         return [
-            'key' => StatusFilterKey::NEW(),
-            'name' => 'مقالات جديدة',
+            'key' => $this->ARTICLE_JUDGEMENT_FEES_KEY(),
+            'name' => 'رسوم تحكيم المقال (الابتدائي)',
         ];
     }
+    public function ARTICLE_JUDGEMENT_FEES_KEY(){
+        return 'ARTICLE_JUDGEMENT_FEES';
+    }
 
+    public function ARTICLE_ACCEPTANCE_FEES()
+    {
+        return [
+            'key' => $this->ARTICLE_ACCEPTANCE_FEES_KEY(),
+            'name' => 'رسوم قبول المقال (النهائي)',
+        ];
+    }
+    public function ARTICLE_ACCEPTANCE_FEES_KEY(){
+        return 'ARTICLE_ACCEPTANCE_FEES';
+    }
 
 }

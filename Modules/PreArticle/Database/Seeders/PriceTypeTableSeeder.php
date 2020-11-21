@@ -6,14 +6,15 @@ use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\PriceType;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
+use Modules\PreArticle\Facades\PriceTypeCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class PriceTypeTableSeeder extends Seeder
 {
     public function types()
     {
         $types = collect([]);
-        $types->push(StatusFilterCollection::NEW());
+        $types->push(PriceTypeCollection::ARTICLE_JUDGEMENT_FEES());
+        $types->push(PriceTypeCollection::ARTICLE_ACCEPTANCE_FEES());
 
 
         return $types;

@@ -2,18 +2,19 @@
 
 namespace Modules\PreArticle\Helpers;
 
-use Modules\PreArticle\Facades\StatusFilterKey;
 
-class StatusFilterCollection
+class PaymentMethodCollection
 {
 
-    public function NEW()
+    public function MANUAL_PAYMENT()
     {
         return [
-            'key' => StatusFilterKey::NEW(),
-            'name' => 'مقالات جديدة',
+            'key' => $this->MANUAL_PAYMENT_KEY(),
+            'name' => 'سداد يدوي',
         ];
     }
-
+    public function MANUAL_PAYMENT_KEY(){
+        return 'MANUAL_PAYMENT';
+    }
 
 }

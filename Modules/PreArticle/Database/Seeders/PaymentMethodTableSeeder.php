@@ -5,15 +5,15 @@ namespace Modules\PreArticle\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\PaymentMethod;
+use Modules\PreArticle\Facades\PaymentMethodCollection;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class PaymentMethodTableSeeder extends Seeder
 {
     public function payment_methods()
     {
         $payment_methods = collect([]);
-        $payment_methods->push(StatusFilterCollection::NEW());
+        $payment_methods->push(PaymentMethodCollection::MANUAL_PAYMENT());
 
         return $payment_methods;
     }

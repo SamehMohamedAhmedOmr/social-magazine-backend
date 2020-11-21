@@ -22,6 +22,11 @@ class PreArticleDatabaseSeeder extends Seeder
 
         $this->call(ArticleSubjectTableSeeder::class);
         $this->call(ArticleTypeTableSeeder::class);
+        $this->call(AttachmentTypeTableSeeder::class);
+        $this->call(CurrencyTypeTableSeeder::class);
+        $this->call(PaymentMethodTableSeeder::class);
+        $this->call(PriceTypeTableSeeder::class);
+        $this->call(RefereesRecommendationsTableSeeder::class);
 
     }
 }

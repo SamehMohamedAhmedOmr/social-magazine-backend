@@ -5,10 +5,10 @@ namespace Modules\PreArticle\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class StatusFilterCollection extends Facade
+class RefereesRecommendationsCollection extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'StatusFilterCollection';
+        return 'RefereesRecommendationsCollection';
     }
 }

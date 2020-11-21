@@ -6,15 +6,18 @@ use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\ArticleFilter;
 use Modules\PreArticle\Entities\CurrencyType;
+use Modules\PreArticle\Facades\CurrencyTypeCollection;
 use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Facades\StatusFilterCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class CurrencyTypeTableSeeder extends Seeder
 {
     public function types()
     {
         $types = collect([]);
-        $types->push(StatusFilterCollection::NEW());
+        $types->push(CurrencyTypeCollection::DOLLAR());
+        $types->push(CurrencyTypeCollection::EURO());
+        $types->push(CurrencyTypeCollection::EGYPTIAN_POUND());
 
 
         return $types;

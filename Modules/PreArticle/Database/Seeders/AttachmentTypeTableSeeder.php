@@ -5,16 +5,17 @@ namespace Modules\PreArticle\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\AttachmentType;
+use Modules\PreArticle\Facades\AttachmentTypeCollection;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class AttachmentTypeTableSeeder extends Seeder
 {
     public function types()
     {
         $types = collect([]);
-        $types->push(StatusFilterCollection::NEW());
-
+        $types->push(AttachmentTypeCollection::COVER_PAGE());
+        $types->push(AttachmentTypeCollection::ORIGINAL_ARTICLE());
+        $types->push(AttachmentTypeCollection::SUMMARY_OF_RESEARCH());
 
         return $types;
     }

@@ -6,14 +6,18 @@ use Illuminate\Database\Seeder;
 use Modules\Base\Facade\CacheHelper;
 use Modules\PreArticle\Entities\RefereesRecommendations;
 use Modules\PreArticle\Facades\PreArticleCache;
-use Modules\PreArticle\Facades\StatusFilterCollection;
+use Modules\PreArticle\Facades\RefereesRecommendationsCollection;
 
-class ArticleFilterTableSeeder extends Seeder
+class RefereesRecommendationsTableSeeder extends Seeder
 {
     public function recommendations()
     {
         $recommendations = collect([]);
-        $recommendations->push(StatusFilterCollection::NEW());
+        $recommendations->push(RefereesRecommendationsCollection::ACCEPTED());
+        $recommendations->push(RefereesRecommendationsCollection::PARTIAL_REVIEW());
+        $recommendations->push(RefereesRecommendationsCollection::FULL_REVIEW());
+        $recommendations->push(RefereesRecommendationsCollection::REJECTED());
+        $recommendations->push(RefereesRecommendationsCollection::UNABLE_TO_JUDGEMENT());
 
 
         return $recommendations;

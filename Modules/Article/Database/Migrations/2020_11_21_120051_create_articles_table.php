@@ -42,6 +42,9 @@ class CreateArticlesTable extends Migration
             $table->json('keywords_en')->nullable();
             $table->json('keywords_ar')->nullable();
 
+            $table->bigInteger('watched')->default(0);
+            $table->bigInteger('downloaded')->default(0);
+
             $table->timestamps();
             $table->softDeletes();
         });

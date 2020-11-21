@@ -162,7 +162,7 @@ class PreArticleService extends LaravelServiceClass
         $content = CacheHelper::getCache(PreArticleCache::currencyType());
 
         if (!$content) {
-            $content = $this->currencyType()->all();
+            $content = $this->currencyTypeRepository->all();
 
             CacheHelper::putCache(PreArticleCache::currencyType(), $content);
         }

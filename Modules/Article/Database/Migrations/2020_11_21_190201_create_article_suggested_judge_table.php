@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateArticleSuggestedJudgeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,19 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('article_suggested_judge', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('first_name');
             $table->string('family_name');
 
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
             $table->string('alternative_email')->nullable();
-            $table->dateTime('token_last_renew')->nullable();
-
-            $table->boolean('is_active')->default(1);
 
             $table->unsignedInteger('gender_id'); // male / female
             $table->foreign('gender_id')->references('id')
@@ -52,6 +46,12 @@ class CreateUsersTable extends Migration
             $table->foreign('country_id')->references('id')
                 ->on('countries')->onDelete('restrict')->onUpdate('cascade');
 
+
+            $table->unsignedInteger('article_id')->nullable();
+            $table->foreign('article_id')->references('id')
+                ->on('articles')->onDelete('set null')->onUpdate('cascade');
+
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -64,8 +64,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('users');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::dropIfExists('article_suggested_judge');
     }
 }

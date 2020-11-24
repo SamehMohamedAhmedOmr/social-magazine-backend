@@ -21,8 +21,8 @@ class CreateArticlesTable extends Migration
             $table->string('title_en');
             $table->string('slug');
 
-            $table->string('content_ar');
-            $table->string('content_en');
+            $table->string('content_ar')->nullable();
+            $table->string('content_en')->nullable();
 
             $table->unsignedInteger('article_subject_id')->nullable();
             $table->foreign('article_subject_id')->references('id')

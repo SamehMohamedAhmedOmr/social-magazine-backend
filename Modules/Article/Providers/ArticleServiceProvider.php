@@ -4,6 +4,8 @@ namespace Modules\Article\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Article\Helpers\ArticleCache;
+use Modules\Article\Helpers\ArticleHelper;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,19 @@ class ArticleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->registerHelpers();
+    }
+
+    private function registerHelpers(){
+        \App::bind('ArticleCache', function()
+        {
+            return \App::make(ArticleCache::class);
+        });
+
+        \App::bind('ArticleHelper', function()
+        {
+            return \App::make(ArticleHelper::class);
+        });
     }
 
     /**

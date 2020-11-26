@@ -7,7 +7,7 @@ use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\PreArticle\Facades\PreArticleCache;
 use Modules\PreArticle\Repositories\ArticleFilterRepository;
-use Modules\PreArticle\Repositories\ArticleStatusRepository;
+use Modules\PreArticle\Repositories\ArticleStatusTypeRepository;
 use Modules\PreArticle\Repositories\ArticleSubjectRepository;
 use Modules\PreArticle\Repositories\ArticleTypeRepository;
 use Modules\PreArticle\Repositories\AttachmentTypeRepository;
@@ -33,7 +33,7 @@ class PreArticleService extends LaravelServiceClass
             $paymentMethodRepository, $priceTypeRepository,
             $refereesRecommendationsRepository;
 
-    public function __construct(ArticleStatusRepository $articleStatusRepository,
+    public function __construct(ArticleStatusTypeRepository $articleStatusRepository,
                                 ArticleFilterRepository $articleFilterRepository,
                                 ArticleSubjectRepository $articleSubjectRepository,
                                 ArticleTypeRepository $articleTypeRepository,

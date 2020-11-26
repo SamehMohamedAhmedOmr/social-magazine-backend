@@ -27,6 +27,13 @@ class Article extends Model
         'keywords_ar' => 'array',
     ];
 
+    protected $with = [
+        'type',
+        'mainAuthor',
+        'lastStatus'
+    ];
+
+
     public function subject(){
         return $this->belongsTo(ArticleSubject::class,'article_subject_id','id');
     }
@@ -62,7 +69,7 @@ class Article extends Model
     }
 
     public function lastStatus(){
-        return $this->hasMany(ArticleStatus::class,'article_id','id')->latest();
+        return $this->hasOne(ArticleStatus::class,'article_id','id')->orderBy('id')->latest();
     }
 
 }

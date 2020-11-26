@@ -4,7 +4,7 @@
 
 Route::namespace('Front')->group(function () {
     Route::middleware('auth:api')->group(function () {
-        Route::prefix('articles')->group(function (){
+        Route::prefix('manage-articles')->group(function (){
             Route::get('','ArticleManagementController@index');
 
             Route::post('','ArticleManagementController@store');
@@ -35,6 +35,8 @@ Route::namespace('Front')->group(function () {
 
         });
     });
+
+    // TODO
 });
 
 Route::namespace('CMS')->prefix('admins')->group(function () {

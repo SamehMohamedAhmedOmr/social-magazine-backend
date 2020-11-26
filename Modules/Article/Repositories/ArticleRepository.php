@@ -41,4 +41,27 @@ class ArticleRepository extends LaravelRepositoryClass
         return $query;
     }
 
+    public function getBySlug($value, $column = 'id', $conditions = [])
+    {
+        $data = $column
+            ? $this->model->where($column, $value)
+            : $this->model;
+
+        $data = $conditions != []
+            ? $data->where($conditions)
+            : $data;
+
+        $data = $data->first();
+
+        return $data;
+    }
+
+    public function relationships($article, $optional = []){
+
+        $default = [];
+
+        $relations = array_merge($default, $optional);
+
+        return count($relations) ? $article->load($relations) : $article;
+    }
 }

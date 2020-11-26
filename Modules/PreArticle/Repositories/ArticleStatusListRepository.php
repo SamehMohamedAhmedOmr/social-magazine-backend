@@ -3,13 +3,13 @@
 namespace Modules\PreArticle\Repositories;
 
 use Modules\Base\Repositories\Classes\LaravelRepositoryClass;
-use Modules\PreArticle\Entities\ArticleStatusType;
+use Modules\PreArticle\Entities\ArticleStatusList;
 
-class ArticleStatusRepository extends LaravelRepositoryClass
+class ArticleStatusListRepository extends LaravelRepositoryClass
 {
-    public function __construct(ArticleStatusType $articleStatusType)
+    public function __construct(ArticleStatusList $model)
     {
-        $this->model = $articleStatusType;
+        $this->model = $model;
     }
 
     public function paginate($per_page = 15, $conditions = [], $search_keys = null, $sort_key = 'id', $sort_order = 'asc', $lang = null)

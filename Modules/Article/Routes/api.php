@@ -18,7 +18,7 @@ Route::namespace('Front')->group(function () {
         });
 
         Route::apiResource('article-authors','ArticleAuthorsController');
-        Route::apiResource('article-judges','ArticleSuggestedJudgesService');
+        Route::apiResource('article-judges','ArticleSuggestedJudgesController');
         Route::apiResource('article-attachments','ArticleAttachmentsController');
 
     });

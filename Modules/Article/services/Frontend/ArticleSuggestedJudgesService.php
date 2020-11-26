@@ -3,7 +3,7 @@
 namespace Modules\Article\Services\Frontend;
 
 use Illuminate\Http\JsonResponse;
-use Modules\Article\Repositories\ArticleRepository;
+use Modules\Article\Repositories\ArticleSuggestedJudgeRepository;
 use Modules\Article\Transformers\Front\ArticleSuggestedJudgesResource;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
@@ -13,7 +13,7 @@ class ArticleSuggestedJudgesService extends LaravelServiceClass
 {
     private $main_repository;
 
-    public function __construct(ArticleRepository $repository)
+    public function __construct(ArticleSuggestedJudgeRepository $repository)
     {
         $this->main_repository = $repository;
     }

@@ -21,11 +21,12 @@ class ArticleSuggestedJudgesRequest extends FormRequest
             case 'DELETE':
                 $default = [
                     'article_judge' => 'required|integer|exists:article_suggested_judge,id' . $delete_check,
+                    'article_id' => 'required|integer|exists:articles,id' . $delete_check,
                 ];
                 break;
             case 'POST':
                 $default = [
-                    'article_id' => 'required|integer|articles:users,id' . $delete_check,
+                    'article_id' => 'required|integer|exists:articles,id' . $delete_check,
 
                     'first_name' => 'required|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
                     'family_name' => 'required|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
@@ -48,7 +49,7 @@ class ArticleSuggestedJudgesRequest extends FormRequest
                 $default = [
                     'article_judge' => 'required|integer|exists:article_suggested_judge,id' . $delete_check,
 
-                    'article_id' => 'required|integer|articles:users,id' . $delete_check,
+                    'article_id' => 'required|integer|exists:articles,id' . $delete_check,
 
                     'first_name' => 'nullable|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',
                     'family_name' => 'nullable|string|regex:' . UsersErrorsHelper::regexName() . '|max:255',

@@ -46,18 +46,18 @@ class ArticleSuggestedJudgesController extends Controller
 
     public function show(ArticleSuggestedJudgesRequest $request)
     {
-        return $this->service->show($request->article_author, $request);
+        return $this->service->show($request->article_judge, $request);
     }
 
 
     public function update(ArticleSuggestedJudgesRequest $request)
     {
-        return $this->service->update($request->article_author, $request);
+        return $this->service->update($request->article_judge, $request);
     }
 
     public function destroy(ArticleSuggestedJudgesRequest $request)
     {
-        return $this->service->delete($request->article_author, $request);
+        return $this->service->delete($request->article_judge, $request);
     }
 
 

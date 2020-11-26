@@ -15,4 +15,10 @@ class ArticleSelectedJudge extends Model
     ];
 
 
+    public function attachment(){
+        return $this->belongsToMany(ArticleAttachment::class,'selected_judge_attachment',
+            'selected_judge_id','attachment_id')
+            ->using(SelectedJudgeAttachment::class);
+    }
+
 }

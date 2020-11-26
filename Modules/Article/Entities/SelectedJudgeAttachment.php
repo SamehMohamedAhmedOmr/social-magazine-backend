@@ -10,4 +10,5 @@ class SelectedJudgeAttachment extends Pivot
     protected $fillable = [
         'selected_judge_id', 'attachment_id'
     ];
+
 }

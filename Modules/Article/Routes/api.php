@@ -15,25 +15,12 @@ Route::namespace('Front')->group(function () {
 
             Route::post('confirm','ArticleManagementController@confirm');
 
-            Route::prefix('authors')->group(function (){
-                Route::get('','ArticleAuthorsController@list');
-                Route::post('','ArticleAuthorsController@store');
-                Route::delete('','ArticleAuthorsController@delete');
-            });
-
-            Route::prefix('judges')->group(function (){
-                Route::get('','ArticleSuggestedJudgesService@list');
-                Route::post('','ArticleSuggestedJudgesService@store');
-                Route::delete('','ArticleSuggestedJudgesService@delete');
-            });
-
-            Route::prefix('attachments')->group(function (){
-                Route::get('','ArticleAttachmentsController@list');
-                Route::post('','ArticleAttachmentsController@store');
-                Route::delete('','ArticleAttachmentsController@delete');
-            });
-
         });
+
+        Route::apiResource('article-authors','ArticleAuthorsController');
+        Route::apiResource('article-judges','ArticleSuggestedJudgesService');
+        Route::apiResource('article-attachments','ArticleAttachmentsController');
+
     });
 
     // TODO

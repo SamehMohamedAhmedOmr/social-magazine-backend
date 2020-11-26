@@ -19,7 +19,7 @@ class CreateArticleSuggestedJudgeTable extends Migration
             $table->string('first_name');
             $table->string('family_name');
 
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('alternative_email')->nullable();
 
             $table->unsignedInteger('gender_id'); // male / female

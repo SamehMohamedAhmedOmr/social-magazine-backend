@@ -19,7 +19,8 @@ class Article extends Model
         'article_subject_id', 'author_id', 'article_type_id',
         'review_date', 'acceptance_date',
         'keywords_en', 'keywords_ar',
-        'watched', 'downloaded'
+        'watched', 'downloaded',
+        'chapter_id'
     ];
 
     protected $casts = [

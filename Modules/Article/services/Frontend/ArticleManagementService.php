@@ -140,6 +140,8 @@ class ArticleManagementService extends LaravelServiceClass
                 ]);
             }
 
+            // TODO SEND EMAIL
+
             $article = ArticleResource::make($article);
             return ApiResponse::format(201, $article, 'Content Created!');
         });

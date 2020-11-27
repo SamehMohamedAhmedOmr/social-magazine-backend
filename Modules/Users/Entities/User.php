@@ -37,9 +37,7 @@ class User extends Authenticatable
         'is_active',
 
         // Submit Research Data
-        'alternative_email' , 'educational_level_id', 'educational_degree_id',
-        'educational_field' , 'university', 'faculty',
-        'fax_number', 'address',
+        'alternative_email' , 'educational_level_id', 'educational_degree_id', 'address',
     ];
 
     /**

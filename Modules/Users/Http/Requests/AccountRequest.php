@@ -44,10 +44,6 @@ class AccountRequest extends FormRequest
                     'educational_level_id' => 'required|integer|exists:educational_levels,id' . $delete_check,
                     'educational_degree_id' => 'required|integer|exists:educational_degrees,id' . $delete_check,
 
-                    'educational_field' => 'nullable|string|max:255',
-                    'university' => 'nullable|string|max:255',
-                    'faculty' => 'nullable|string|max:255',
-                    'fax_number' => 'nullable|string|max:255',
                     'address' => 'nullable|string|max:255',
                 ];
                 break;
@@ -71,10 +67,6 @@ class AccountRequest extends FormRequest
                     'educational_level_id' => 'nullable|integer|exists:educational_levels,id' . $delete_check,
                     'educational_degree_id' => 'nullable|integer|exists:educational_degrees,id' . $delete_check,
 
-                    'educational_field' => 'nullable|string|max:255',
-                    'university' => 'nullable|string|max:255',
-                    'faculty' => 'nullable|string|max:255',
-                    'fax_number' => 'nullable|string|max:255',
                     'address' => 'nullable|string|max:255',
                 ];
                 break;

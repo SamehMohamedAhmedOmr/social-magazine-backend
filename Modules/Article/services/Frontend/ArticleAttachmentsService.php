@@ -27,7 +27,7 @@ class ArticleAttachmentsService extends LaravelServiceClass
         $pagination = null;
 
         $contents = parent::list($this->main_repository, true,[
-            'article_id' => $request->article_id
+            'article_id' => $request->id
         ]);
 
         $contents = ArticleAttachmentsResource::collection($contents);

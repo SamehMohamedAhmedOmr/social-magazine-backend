@@ -16,6 +16,8 @@ class CreateArticleAttachmentTable extends Migration
         Schema::create('article_attachment', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('title');
+
             $table->string('file');
 
             $table->unsignedInteger('article_id')->nullable();

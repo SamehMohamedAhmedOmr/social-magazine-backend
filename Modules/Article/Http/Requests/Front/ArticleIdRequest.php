@@ -16,7 +16,15 @@ class ArticleIdRequest extends FormRequest
         $delete_check = ',deleted_at,NULL';
 
         return [
-            'article_id' => 'required|integer|exists:articles,id' . $delete_check,
+            'id' => 'required|integer|exists:articles,id' . $delete_check,
+        ];
+    }
+
+
+    public function attributes()
+    {
+        return [
+            'id' => 'المقال'
         ];
     }
 
@@ -28,5 +36,10 @@ class ArticleIdRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        prepareBeforeValidation($this, [], 'id');
     }
 }

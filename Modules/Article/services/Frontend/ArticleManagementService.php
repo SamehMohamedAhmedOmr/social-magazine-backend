@@ -28,17 +28,25 @@ class ArticleManagementService extends LaravelServiceClass
 
     public function index()
     {
-//        $content = CacheHelper::getCache(SectionsCache::advisoryBody());
-//
-//        if (!$content) {
-//            $content = $this->main_repository->all([
-//                'is_active' => true
-//            ]);
-//            CacheHelper::putCache(SectionsCache::advisoryBody(), $content);
-//        }
-//
-//        $content = AdvisoryBodyResource::collection($content);
-//        return ApiResponse::format(200, $content);
+        $pagination = null;
+
+        $contents = parent::list($this->main_repository, true,[
+            'author_id' => \Auth::id()
+        ]);
+
+        $contents = ArticleResource::collection($contents);
+        return ApiResponse::format(200, $contents, null, $pagination);
+    }
+
+    public function show($id, $request = null)
+    {
+        $content = $this->main_repository->get($id,[
+            'author_id' => \Auth::id()
+        ]);
+
+        $content = ArticleResource::make($content);
+
+        return ApiResponse::format(200, $content);
     }
 
     public function store($request = null)
@@ -113,5 +121,28 @@ class ArticleManagementService extends LaravelServiceClass
         return 'ARTICLE-'.$unique_date.'-'.$uniqId;
     }
 
+    public function confirm($request = null)
+    {
+        return \DB::transaction(function () use ($request) {
+
+            $article = $this->main_repository->get($request->id);
+
+            $target_status = $this->articleStatusListRepository->get(StatusListHelper::NEW(),[],'key');
+
+            $status = $this->articleStatusRepository->get($article->id,[
+                'status_id' => $target_status->id
+            ],'article_id');
+
+            if (!$status){
+                $this->articleStatusRepository->create([
+                    'article_id' => $article->id,
+                    'status_id' => $target_status->id
+                ]);
+            }
+
+            $article = ArticleResource::make($article);
+            return ApiResponse::format(201, $article, 'Content Created!');
+        });
+    }
 
 }

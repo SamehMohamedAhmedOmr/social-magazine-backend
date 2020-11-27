@@ -3,10 +3,13 @@
 namespace Modules\Article\Http\Controllers\Front;
 
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Article\Http\Requests\Front\AddArticleInfoRequest;
 use Modules\Article\Http\Requests\Front\AddArticleRequest;
+use Modules\Article\Http\Requests\Front\ArticleIdRequest;
 use Modules\Article\Services\Frontend\ArticleManagementService;
+use Modules\Base\Requests\PaginationRequest;
 
 class ArticleManagementController extends Controller
 {
@@ -18,6 +21,21 @@ class ArticleManagementController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * Display a listing of the resource.
+     * @param PaginationRequest $request
+     * @return JsonResponse|void
+     */
+    public function index(PaginationRequest $request)
+    {
+        return $this->service->index();
+    }
+
+    public function show(ArticleIdRequest $request)
+    {
+        return $this->service->show($request->id);
+    }
+
     public function store(AddArticleRequest $request)
     {
         return $this->service->store($request);
@@ -26,6 +44,11 @@ class ArticleManagementController extends Controller
     public function updateInfo(AddArticleInfoRequest $request)
     {
         return $this->service->updateInfo($request);
+    }
+
+    public function confirm(ArticleIdRequest $request)
+    {
+        return $this->service->confirm($request);
     }
 
 }

@@ -41,4 +41,23 @@ class ArticleStatusRepository extends LaravelRepositoryClass
         return $query;
     }
 
+    public function get($value, $conditions = [], $column = 'id', $with = [])
+    {
+        $data = $conditions != []
+            ? $this->model->where($conditions)
+            : $this->model;
+
+        $data = $with != []
+            ? $data->with($with)
+            : $data;
+
+        $data = $column
+            ? $data->where($column, $value)
+            : $data;
+
+        $data = $data->first();
+
+        return $data;
+    }
+
 }

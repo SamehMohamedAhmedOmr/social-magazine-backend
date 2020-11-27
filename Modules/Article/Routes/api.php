@@ -9,11 +9,11 @@ Route::namespace('Front')->group(function () {
 
             Route::post('','ArticleManagementController@store');
 
-            Route::get('{id}','ArticleManagementController@get');
+            Route::get('{id}','ArticleManagementController@show');
 
             Route::post('info','ArticleManagementController@updateInfo');
 
-            Route::post('confirm','ArticleManagementController@confirm');
+            Route::put('confirm/{id}','ArticleManagementController@confirm');
 
         });
 
@@ -24,6 +24,12 @@ Route::namespace('Front')->group(function () {
     });
 
     // TODO
+    Route::prefix('articles')->group(function (){
+        Route::get('','ArticleManagementController@index');
+
+        Route::get('{slug}','ArticleManagementController@get');
+
+    });
 });
 
 Route::namespace('CMS')->prefix('admins')->group(function () {

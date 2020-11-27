@@ -69,7 +69,7 @@ class Article extends Model
     }
 
     public function lastStatus(){
-        return $this->hasOne(ArticleStatus::class,'article_id','id')->orderBy('id')->latest();
+        return $this->hasOne(ArticleStatus::class,'article_id','id')->orderBy('id','desc')->latest();
     }
 
 }

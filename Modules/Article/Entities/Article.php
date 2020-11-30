@@ -49,7 +49,7 @@ class Article extends Model
 
     /* Thing Belongs to Article */
 
-    public function attachment(){
+    public function attachments(){
         return $this->hasMany(ArticleAttachment::class,'article_id','id');
     }
 
@@ -57,11 +57,11 @@ class Article extends Model
         return $this->hasMany(ArticleAuthors::class,'article_id','id');
     }
 
-    public function selectedJudge(){
+    public function selectedJudges(){
         return $this->hasMany(ArticleSelectedJudge::class,'article_id','id');
     }
 
-    public function suggestedJudge(){
+    public function suggestedJudges(){
         return $this->hasMany(ArticleSuggestedJudge::class,'article_id','id');
     }
 

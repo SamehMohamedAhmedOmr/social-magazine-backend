@@ -34,6 +34,10 @@ class ArticleResource extends Resource
             'article_type' => ArticleType::make($this->whenLoaded('type')),
             'main_author' => UserResource::make($this->whenLoaded('mainAuthor')),
             'last_status' => ArticleStatusResource::make($this->whenLoaded('lastStatus')),
+
+            'attachments' => ArticleAttachmentsResource::collection($this->whenLoaded('attachments')),
+            'authors' => ArticleAuthorsResource::collection($this->whenLoaded('authors')),
+            'selected_judges' => ArticleSuggestedJudgesResource::collection($this->whenLoaded('suggestedJudges')),
         ];
     }
 }

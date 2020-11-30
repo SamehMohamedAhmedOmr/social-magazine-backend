@@ -40,13 +40,19 @@ class ArticleManagementService extends LaravelServiceClass
 
     public function show($id, $request = null)
     {
-        $content = $this->main_repository->get($id,[
+        $article = $this->main_repository->get($id,[
             'author_id' => \Auth::id()
         ]);
 
-        $content = ArticleResource::make($content);
+        $article->load([
+            'attachments',
+            'authors',
+            'suggestedJudges'
+        ]);
 
-        return ApiResponse::format(200, $content);
+        $article = ArticleResource::make($article);
+
+        return ApiResponse::format(200, $article);
     }
 
     public function store($request = null)
@@ -104,6 +110,12 @@ class ArticleManagementService extends LaravelServiceClass
             }
 
             $article =  $this->main_repository->update($request->article_id,$data);
+
+            $article->load([
+                'attachments',
+                'authors',
+                'suggestedJudges'
+            ]);
 
             $article = ArticleResource::make($article);
             return ApiResponse::format(201, $article, 'Content Created!');

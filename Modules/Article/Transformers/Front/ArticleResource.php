@@ -37,7 +37,7 @@ class ArticleResource extends Resource
 
             'attachments' => ArticleAttachmentsResource::collection($this->whenLoaded('attachments')),
             'authors' => ArticleAuthorsResource::collection($this->whenLoaded('authors')),
-            'selected_judges' => ArticleSuggestedJudgesResource::collection($this->whenLoaded('suggestedJudges')),
+            'suggested_judges' => ArticleSuggestedJudgesResource::collection($this->whenLoaded('suggestedJudges')),
         ];
     }
 }

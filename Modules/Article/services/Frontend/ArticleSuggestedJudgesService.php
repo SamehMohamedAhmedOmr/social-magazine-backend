@@ -41,7 +41,6 @@ class ArticleSuggestedJudgesService extends LaravelServiceClass
     {
         return \DB::transaction(function () use ($request) {
 
-            dd($request->all());
             $content =  $this->main_repository->create($request->all());
 
             $content = ArticleSuggestedJudgesResource::make($content);

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Article\Http\Requests\Front\AddArticleInfoRequest;
 use Modules\Article\Http\Requests\Front\AddArticleRequest;
 use Modules\Article\Http\Requests\Front\ArticleIdRequest;
+use Modules\Article\Http\Requests\Front\ArticleSTATUSRequest;
 use Modules\Article\Services\Frontend\ArticleManagementService;
 use Modules\Base\Requests\PaginationRequest;
 
@@ -24,9 +25,10 @@ class ArticleManagementController extends Controller
     /**
      * Display a listing of the resource.
      * @param PaginationRequest $request
+     * @param ArticleSTATUSRequest $articleSTATUSRequest
      * @return JsonResponse|void
      */
-    public function index(PaginationRequest $request)
+    public function index(PaginationRequest $request, ArticleSTATUSRequest $articleSTATUSRequest)
     {
         return $this->service->index();
     }

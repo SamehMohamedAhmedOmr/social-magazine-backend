@@ -4,8 +4,8 @@ namespace Modules\Article\Services\Frontend;
 
 use Carbon\Carbon;
 use Modules\Article\Facade\ArticleHelper;
-use Modules\Article\Repositories\ArticleRepository;
 use Modules\Article\Repositories\ArticleStatusRepository;
+use Modules\Article\Repositories\MyArticleRepository;
 use Modules\Article\Transformers\Front\ArticleResource;
 use Modules\Base\Facade\UtilitiesHelper;
 use Modules\Base\ResponseShape\ApiResponse;
@@ -17,7 +17,7 @@ class ArticleManagementService extends LaravelServiceClass
 {
     private $main_repository, $articleStatusRepository, $articleStatusListRepository;
 
-    public function __construct(ArticleRepository $repository,
+    public function __construct(MyArticleRepository $repository,
                                 ArticleStatusListRepository $articleStatusListRepository,
                                 ArticleStatusRepository $articleStatusRepository)
     {

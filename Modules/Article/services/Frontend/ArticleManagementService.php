@@ -28,10 +28,22 @@ class ArticleManagementService extends LaravelServiceClass
 
     public function index()
     {
-        $pagination = null;
+        if (request('is_pagination')) {
+            list($contents, $pagination) = parent::paginate($this->main_repository, null,
+                false,[
+                    'author_id' => \Auth::id()
+                ]);
+        } else {
+            $contents = parent::list($this->main_repository, true,[
+                'author_id' => \Auth::id()
+            ]);
+            $pagination = null;
+        }
 
-        $contents = parent::list($this->main_repository, true,[
-            'author_id' => \Auth::id()
+        $contents->load([
+            'attachments',
+            'authors',
+            'suggestedJudges'
         ]);
 
         $contents = ArticleResource::collection($contents);

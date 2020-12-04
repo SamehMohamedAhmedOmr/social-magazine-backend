@@ -40,12 +40,6 @@ class ArticleManagementService extends LaravelServiceClass
             $pagination = null;
         }
 
-        $contents->load([
-            'attachments',
-            'authors',
-            'suggestedJudges'
-        ]);
-
         $contents = ArticleResource::collection($contents);
         return ApiResponse::format(200, $contents, null, $pagination);
     }

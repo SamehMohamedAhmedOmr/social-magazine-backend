@@ -55,7 +55,9 @@ class ArticleAttachmentsService extends LaravelServiceClass
 
             $title = $request->file('file')->getClientOriginalName();
 
-            $path = \Storage::putFile('public/files/'. $request->article_id, $request->file);
+            $file_path = 'public/files/'. $request->article_id;
+
+            $path = \Storage::putFileAs($file_path, $request->file, $title);
 
             $path =  explode('/', $path);
 

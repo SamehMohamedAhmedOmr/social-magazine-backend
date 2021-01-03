@@ -46,4 +46,8 @@ class SectionsCache
     public function latestMagazineNews(){
         return 'latest_magazine_news';
     }
+
+    public function mostViewedNews(){
+        return 'most_viewed_news';
+    }
 }

@@ -72,5 +72,15 @@ class MagazineNewsRepository extends LaravelRepositoryClass
         return $content;
     }
 
+    public function orderByViews($conditions = [], $limit = null ){
+        $query = $this->model;
+
+        if ($limit){
+            $query = $query->take($limit)->orderBy('views','desc');
+        }
+
+        return $query->where($conditions)->get();
+    }
+
 
 }

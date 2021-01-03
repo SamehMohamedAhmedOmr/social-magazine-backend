@@ -23,7 +23,6 @@ Route::namespace('Front')->group(function () {
 
     });
 
-    // TODO
     Route::prefix('articles')->group(function (){
         Route::get('','ArticleManagementController@index');
 
@@ -34,6 +33,8 @@ Route::namespace('Front')->group(function () {
 
 Route::namespace('CMS')->prefix('admins')->group(function () {
     Route::middleware('auth:api')->as('admins.')->group(function () {
-
+        Route::get('manager/articles', 'ArticleController@articleForManager');
+        Route::get('editor/articles', 'ArticleController@articleForEditor');
+        Route::get('judge/articles', 'ArticleController@articleForJudges');
     });
 });

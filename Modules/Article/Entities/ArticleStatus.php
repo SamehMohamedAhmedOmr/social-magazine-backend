@@ -14,7 +14,7 @@ class ArticleStatus extends Model
     protected $fillable = [
         'article_id', 'status_id', 'review_date', 'judgement_date',
         'magazine_director_id', 'magazine_manager_note', 'price_type_id', 'payment_method_id',
-        'currency_type_id', 'fees'
+        'currency_type_id', 'fees', 'done'
     ];
 
     protected $with = [

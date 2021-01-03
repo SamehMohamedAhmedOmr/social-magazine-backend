@@ -6,29 +6,53 @@ use Modules\Base\Facade\CacheHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Sections\Facade\SectionsCache;
+use Modules\Sections\Repositories\AdvisoryBodyRepository;
+use Modules\Sections\Repositories\MagazineCategoryRepository;
+use Modules\Sections\Repositories\MagazineGoalsRepository;
 use Modules\Sections\Repositories\MagazineInformationRepository;
 use Modules\Sections\Repositories\MagazineNewsRepository;
+use Modules\Sections\Repositories\PublicationRuleRepository;
 use Modules\Sections\Repositories\TestimonialRepository;
 use Modules\Sections\Repositories\TrackerRepository;
+use Modules\Sections\Repositories\WhoIsUsRepository;
 use Modules\Sections\Transformers\Common\TrackerResource;
+use Modules\Sections\Transformers\Front\AdvisoryBodyResource;
+use Modules\Sections\Transformers\Front\MagazineCategoryResource;
+use Modules\Sections\Transformers\Front\MagazineGoalsResource;
 use Modules\Sections\Transformers\Front\MagazineInformationResource;
 use Modules\Sections\Transformers\Front\MagazineNewsResource;
+use Modules\Sections\Transformers\Front\PublicationRulesResource;
 use Modules\Sections\Transformers\Front\TestimonialResource;
+use Modules\Sections\Transformers\Front\WhoIsUsResource;
 
 class HomeService extends LaravelServiceClass
 {
     private $magazineNewsRepository, $testimonialRepository,
+            $advisoryBodyRepository, $magazineCategoryRepository,
+            $publicationRuleRepository, $whoIsUsRepository,
+            $magazineGoalsRepository,
             $magazineInformationRepository, $trackerRepository;
 
     public function __construct(MagazineNewsRepository $magazineNewsRepository,
                                 MagazineInformationRepository $magazineInformationRepository,
                                 TrackerRepository $trackerRepository,
+                                AdvisoryBodyRepository $advisoryBodyRepository,
+                                MagazineCategoryRepository $magazineCategoryRepository,
+                                PublicationRuleRepository $publicationRuleRepository,
+                                MagazineGoalsRepository $magazineGoalsRepository,
+                                WhoIsUsRepository $whoIsUsRepository,
                                 TestimonialRepository $testimonialRepository)
     {
         $this->magazineNewsRepository = $magazineNewsRepository;
         $this->testimonialRepository = $testimonialRepository;
         $this->magazineInformationRepository = $magazineInformationRepository;
         $this->trackerRepository = $trackerRepository;
+
+        $this->advisoryBodyRepository = $advisoryBodyRepository;
+        $this->magazineCategoryRepository = $magazineCategoryRepository;
+        $this->publicationRuleRepository = $publicationRuleRepository;
+        $this->whoIsUsRepository = $whoIsUsRepository;
+        $this->magazineGoalsRepository = $magazineGoalsRepository;
     }
 
     public function index()
@@ -37,18 +61,26 @@ class HomeService extends LaravelServiceClass
         $testimonial = $this->testimonial();
         $magazine_information = $this->magazineInformation();
         $visitors = $this->visitorsCount();
-        $most_download_article = $this->mostDownloadedArticle();
-        $most_viewed_article = $this->mostViewedArticle();
-        $archive = $this->archive();
+        $most_viewed_news = $this->mostViewedNews();
+
+        $advisory_body = $this->advisoryBody();
+        $magazine_categories = $this->magazineCategories();
+        $publication_rules = $this->publicationRules();
+        $who_is_us = $this->whoIsUs();
+        $magazine_goals = $this->magazineGoals();
+
 
         return ApiResponse::format(200, [
             'latest_news' => $latestNews,
             'testimonial' => $testimonial,
             'magazine_information' => $magazine_information,
             'visitors_count' => $visitors,
-            'most_download_article' => $most_download_article,
-            'most_viewed_article' => $most_viewed_article,
-            'archive' => $archive
+            'most_viewed_news' => $most_viewed_news,
+            'advisory_body' => $advisory_body,
+            'magazine_categories' => $magazine_categories,
+            'publication_rules' => $publication_rules,
+            'who_is_us' => $who_is_us,
+            'magazine_goals' => $magazine_goals,
         ]);
     }
 
@@ -118,16 +150,98 @@ class HomeService extends LaravelServiceClass
         return TrackerResource::make($number_of_visitors);
     }
 
-    public function mostViewedArticle(){
-        return [];
+    public function mostViewedNews()
+    {
+        $content = CacheHelper::getCache(SectionsCache::mostViewedNews());
+
+        if (!$content) {
+            $content = $this->magazineNewsRepository->orderByViews([
+                'is_active' => true
+            ],5);
+
+            $content->load([
+                'images'
+            ]);
+
+            CacheHelper::putCache(SectionsCache::mostViewedNews(), $content);
+        }
+
+        return MagazineNewsResource::collection($content);
     }
 
-    public function mostDownloadedArticle(){
-        return [];
+    public function advisoryBody()
+    {
+        $content = CacheHelper::getCache(SectionsCache::advisoryBody());
+
+        if (!$content) {
+            $content = $this->advisoryBodyRepository->all([
+                'is_active' => true
+            ]);
+            CacheHelper::putCache(SectionsCache::advisoryBody(), $content);
+        }
+
+        return AdvisoryBodyResource::collection($content);
     }
 
-    public function archive(){
-        return [];
+    public function magazineCategories()
+    {
+        $content = CacheHelper::getCache(SectionsCache::magazineCategory());
+
+        if (!$content) {
+            $content = $this->magazineCategoryRepository->all([
+                'is_active' => true
+            ]);
+            CacheHelper::putCache(SectionsCache::magazineCategory(), $content);
+        }
+
+        $content->load([
+            'images'
+        ]);
+
+        return MagazineCategoryResource::collection($content);
     }
 
+    public function publicationRules()
+    {
+        $content = CacheHelper::getCache(SectionsCache::publicationRule());
+
+        if (!$content) {
+            $content = $this->publicationRuleRepository->all([
+                'is_active' => true
+            ]);
+            CacheHelper::putCache(SectionsCache::publicationRule(), $content);
+        }
+
+        return PublicationRulesResource::collection($content);
+    }
+
+    public function whoIsUs()
+    {
+        $whoIsUs = CacheHelper::getCache(SectionsCache::whoIsUs());
+
+        if (!$whoIsUs) {
+            $whoIsUs = $this->whoIsUsRepository->all([
+                'is_active' => true
+            ]);
+            CacheHelper::putCache(SectionsCache::whoIsUs(), $whoIsUs);
+        }
+
+        return WhoIsUsResource::collection($whoIsUs);
+    }
+
+    public function magazineGoals()
+    {
+        $goals = CacheHelper::getCache(SectionsCache::magazineGoals());
+
+        if (!$goals){
+
+            $goals = $this->magazineGoalsRepository->all([
+                'is_active' => true
+            ]);
+
+            CacheHelper::putCache(SectionsCache::magazineGoals(), $goals);
+        }
+
+        return MagazineGoalsResource::collection($goals);
+    }
 }

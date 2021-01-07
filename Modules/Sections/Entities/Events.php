@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Facade\UtilitiesHelper;
 use Modules\Gallery\Entities\Gallery;
 
-class MagazineNews extends Model
+class Events extends Model
 {
     use SoftDeletes;
-    protected $table = 'magazine_news';
+    protected $table = 'events';
     protected $fillable = [
         'title' , 'slug',
-        'content' , 'views' , 'is_active'
+        'content' , 'date' , 'is_active'
     ];
 
-    public function getCreatedAtAttribute($value)
+    public function getDateAttribute($value)
     {
         return UtilitiesHelper::dateShape($value);
     }
@@ -25,9 +25,9 @@ class MagazineNews extends Model
     {
         return $this->belongsToMany(
             Gallery::class,
-            'magazine_news_images',
-            'news_id',
+            'events_images',
+            'event_id',
             'image_id'
-        )->using(MagazineNewsImages::class);
+        )->using(EventsImages::class);
     }
 }

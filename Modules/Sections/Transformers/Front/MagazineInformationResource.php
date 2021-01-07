@@ -24,6 +24,7 @@ class MagazineInformationResource extends Resource
             'fax_number' => $this->fax_number,
             'email' => $this->email,
             'postal_code' => $this->postal_code,
+            'magazine_link' => $this->magazine_link,
         ];
     }
 }

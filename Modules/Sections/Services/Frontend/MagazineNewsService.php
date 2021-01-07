@@ -20,21 +20,16 @@ class MagazineNewsService extends LaravelServiceClass
 
     public function index()
     {
-        $content = CacheHelper::getCache(SectionsCache::magazineNews());
+        list($contents, $pagination) = parent::paginate($this->main_repository, null, true,[
+            'is_active' => 1
+        ]);
 
-        if (!$content) {
-            $content = $this->main_repository->all([
-                'is_active' => true
-            ]);
-            CacheHelper::putCache(SectionsCache::magazineNews(), $content);
-        }
-
-        $content->load([
+        $contents->load([
             'images'
         ]);
 
-        $content = MagazineNewsResource::collection($content);
-        return ApiResponse::format(200, $content);
+        $contents = MagazineNewsResource::collection($contents);
+        return ApiResponse::format(200, $contents, null, $pagination);
     }
 
 

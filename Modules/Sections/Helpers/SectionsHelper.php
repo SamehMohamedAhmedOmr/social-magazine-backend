@@ -17,6 +17,7 @@ class SectionsHelper
         $body = $this->returnProfileUpdateBody($body,$request_body ,'fax_number');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'email');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'postal_code');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'magazine_link');
         return $body;
     }
 

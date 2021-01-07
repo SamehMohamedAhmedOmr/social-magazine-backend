@@ -10,7 +10,7 @@ use Modules\Gallery\Entities\Gallery;
 class Video extends Model
 {
     use SoftDeletes;
-    protected $table = 'activities';
+    protected $table = 'videos';
     protected $fillable = [
         'title' , 'slug',
         'content',

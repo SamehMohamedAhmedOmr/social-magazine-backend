@@ -9,15 +9,15 @@ use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Sections\Facade\SectionsCache;
 use Modules\Sections\Facade\SectionsHelper;
-use Modules\Sections\Repositories\MagazineNewsRepository;
-use Modules\Sections\Transformers\CMS\MagazineNewsResource;
+use Modules\Sections\Repositories\ActivityRepository;
+use Modules\Sections\Transformers\CMS\ActivityResource;
 use Throwable;
 
-class MagazineNewsService extends LaravelServiceClass
+class ActivitiesService extends LaravelServiceClass
 {
     protected $repository;
 
-    public function __construct(MagazineNewsRepository $repository)
+    public function __construct(ActivityRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -35,7 +35,7 @@ class MagazineNewsService extends LaravelServiceClass
             'images'
         ]);
 
-        $contents = MagazineNewsResource::collection($contents);
+        $contents = ActivityResource::collection($contents);
         return ApiResponse::format(200, $contents, null, $pagination);
     }
 
@@ -72,7 +72,7 @@ class MagazineNewsService extends LaravelServiceClass
                 'images'
             ]);
 
-            $content = MagazineNewsResource::make($content);
+            $content = ActivityResource::make($content);
             return ApiResponse::format(201, $content, 'Content Created!');
         });
 
@@ -86,7 +86,7 @@ class MagazineNewsService extends LaravelServiceClass
             'images'
         ]);
 
-        $content = MagazineNewsResource::make($content);
+        $content = ActivityResource::make($content);
 
         return ApiResponse::format(200, $content);
     }
@@ -121,7 +121,7 @@ class MagazineNewsService extends LaravelServiceClass
             'images'
         ]);
 
-        $content = MagazineNewsResource::make($content);
+        $content = ActivityResource::make($content);
 
         return ApiResponse::format(200, $content,'Content Updated');
     }
@@ -134,8 +134,8 @@ class MagazineNewsService extends LaravelServiceClass
     }
 
     private function forgetCache(){
-        CacheHelper::forgetCache(SectionsCache::magazineNews());
-        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
+        CacheHelper::forgetCache(SectionsCache::activities());
+        CacheHelper::forgetCache(SectionsCache::latestActivities());
     }
 
 }

@@ -6,14 +6,14 @@ use Modules\Base\Facade\CacheHelper;
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
 use Modules\Sections\Facade\SectionsCache;
-use Modules\Sections\Repositories\MagazineNewsRepository;
-use Modules\Sections\Transformers\Front\MagazineNewsResource;
+use Modules\Sections\Repositories\PhotosRepository;
+use Modules\Sections\Transformers\Front\PhotoResource;
 
-class MagazineNewsService extends LaravelServiceClass
+class PhotosService extends LaravelServiceClass
 {
     private $main_repository;
 
-    public function __construct(MagazineNewsRepository $repository)
+    public function __construct(PhotosRepository $repository)
     {
         $this->main_repository = $repository;
     }
@@ -28,14 +28,14 @@ class MagazineNewsService extends LaravelServiceClass
             'images'
         ]);
 
-        $contents = MagazineNewsResource::collection($contents);
+        $contents = PhotoResource::collection($contents);
         return ApiResponse::format(200, $contents, null, $pagination);
     }
 
 
-    public function LatestNews()
+    public function latest()
     {
-        $content = CacheHelper::getCache(SectionsCache::latestMagazineNews());
+        $content = CacheHelper::getCache(SectionsCache::latestPhotos());
 
         if (!$content) {
             $content = $this->main_repository->all([
@@ -46,10 +46,10 @@ class MagazineNewsService extends LaravelServiceClass
                 'images'
             ]);
 
-            CacheHelper::putCache(SectionsCache::latestMagazineNews(), $content);
+            CacheHelper::putCache(SectionsCache::latestPhotos(), $content);
         }
 
-        $content = MagazineNewsResource::collection($content);
+        $content = PhotoResource::collection($content);
         return ApiResponse::format(200, $content);
     }
 
@@ -59,12 +59,7 @@ class MagazineNewsService extends LaravelServiceClass
             'is_active' => true
         ],'slug',['images']);
 
-        $content = $this->main_repository->updateVisitors($content);
-
-        CacheHelper::forgetCache(SectionsCache::magazineNews());
-        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
-
-        $content = MagazineNewsResource::make($content);
+        $content = PhotoResource::make($content);
 
         return ApiResponse::format(200, $content);
     }

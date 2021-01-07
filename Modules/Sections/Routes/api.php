@@ -33,6 +33,26 @@ Route::namespace('FRONT')->group(function () {
     Route::get('home','HomeController@index');
 
     Route::get('testimonials','TestimonialController@index');
+
+    Route::prefix('events')->group(function () {
+        Route::get('/','MagazineNewsController@index');
+        Route::get('/{slug}','MagazineNewsController@get');
+    });
+
+    Route::prefix('activities')->group(function () {
+        Route::get('/','MagazineNewsController@index');
+        Route::get('/{slug}','MagazineNewsController@get');
+    });
+
+    Route::prefix('videos')->group(function () {
+        Route::get('/','MagazineNewsController@index');
+        Route::get('/{slug}','MagazineNewsController@get');
+    });
+
+    Route::prefix('photos')->group(function () {
+        Route::get('/','MagazineNewsController@index');
+        Route::get('/{slug}','MagazineNewsController@get');
+    });
 });
 
 Route::namespace('CMS')->prefix('admins')->group(function () {
@@ -46,6 +66,11 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
         Route::apiResource('magazine-categories','MagazineCategoryController');
         Route::apiResource('magazine-news','MagazineNewsController');
         Route::apiResource('testimonials','TestimonialController');
+
+        Route::apiResource('events','EventsController');
+        Route::apiResource('activities','ActivityController');
+        Route::apiResource('videos','MagazineNewsController');
+        Route::apiResource('photos','MagazineNewsController');
 
         Route::prefix('magazine-information')->group(function () {
             Route::get('/','MagazineInformationController@index');

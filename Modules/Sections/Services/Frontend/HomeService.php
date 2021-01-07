@@ -4,6 +4,7 @@ namespace Modules\Sections\Services\Frontend;
 
 use Modules\Base\ResponseShape\ApiResponse;
 use Modules\Base\Services\Classes\LaravelServiceClass;
+use Modules\Sections\Services\Common\DependenciesService;
 
 
 class HomeService extends LaravelServiceClass

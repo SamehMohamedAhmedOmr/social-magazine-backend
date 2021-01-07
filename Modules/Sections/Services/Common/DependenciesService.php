@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Sections\Services\Frontend;
+namespace Modules\Sections\Services\Common;
 
 use Modules\Base\Facade\CacheHelper;
 use Modules\Base\Services\Classes\LaravelServiceClass;
@@ -304,6 +304,26 @@ class DependenciesService extends LaravelServiceClass
         }
 
         return EventsResource::collection($content);
+    }
+
+    public function numberOfNews(){
+        return $this->magazineNewsRepository->numberOfActive();
+    }
+
+    public function numberOfActivities(){
+        return $this->activityRepository->numberOfActive();
+    }
+
+    public function numberOfEvents(){
+        return $this->eventsRepository->numberOfActive();
+    }
+
+    public function numberOfVideos(){
+        return $this->videosRepository->numberOfActive();
+    }
+
+    public function numberOfAdvisoryBody(){
+        return $this->advisoryBodyRepository->numberOfActive();
     }
 
 }

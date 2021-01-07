@@ -79,6 +79,8 @@ Route::namespace('CMS')->prefix('admins')->group(function () {
         Route::apiResource('videos', 'VideosController');
         Route::apiResource('photos', 'PhotosController');
 
+        Route::get('statistics', 'StatisticsController@index');
+
         Route::prefix('magazine-information')->group(function () {
             Route::get('/', 'MagazineInformationController@index');
             Route::post('/', 'MagazineInformationController@store');

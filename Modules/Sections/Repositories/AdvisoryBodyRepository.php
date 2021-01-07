@@ -40,4 +40,9 @@ class AdvisoryBodyRepository extends LaravelRepositoryClass
         return $query;
     }
 
+    public function numberOfActive(){
+        $query = $this->model;
+
+        return $query->where('is_active', 1)->count();
+    }
 }

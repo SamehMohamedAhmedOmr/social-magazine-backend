@@ -136,7 +136,7 @@ class DependenciesService extends LaravelServiceClass
         $number_of_visitors = collect([]);
         $number_of_visitors->put('visitors', $visitors);
 
-        return TrackerResource::make($number_of_visitors);
+        return isset($number_of_visitors) ? intval($number_of_visitors['visitors']) : 0;
     }
 
     public function mostViewedNews()

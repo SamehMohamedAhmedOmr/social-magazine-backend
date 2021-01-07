@@ -47,7 +47,7 @@ class ActivityController extends Controller
      */
     public function show(ActivitiesRequest $request)
     {
-        return $this->service->show($request->magazine_news);
+        return $this->service->show($request->activity);
     }
 
     /**
@@ -57,7 +57,7 @@ class ActivityController extends Controller
      */
     public function update(ActivitiesRequest $request)
     {
-        return $this->service->update($request->magazine_news, $request);
+        return $this->service->update($request->activity, $request);
     }
 
     /**
@@ -67,6 +67,6 @@ class ActivityController extends Controller
      */
     public function destroy(ActivitiesRequest $request)
     {
-        return $this->service->delete($request->magazine_news);
+        return $this->service->delete($request->activity);
     }
 }

@@ -47,7 +47,7 @@ class VideosController extends Controller
      */
     public function show(VideoRequest $request)
     {
-        return $this->service->show($request->magazine_news);
+        return $this->service->show($request->video);
     }
 
     /**
@@ -57,7 +57,7 @@ class VideosController extends Controller
      */
     public function update(VideoRequest $request)
     {
-        return $this->service->update($request->magazine_news, $request);
+        return $this->service->update($request->video, $request);
     }
 
     /**
@@ -67,6 +67,6 @@ class VideosController extends Controller
      */
     public function destroy(VideoRequest $request)
     {
-        return $this->service->delete($request->magazine_news);
+        return $this->service->delete($request->video);
     }
 }

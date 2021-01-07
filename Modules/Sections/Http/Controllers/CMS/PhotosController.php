@@ -47,7 +47,7 @@ class PhotosController extends Controller
      */
     public function show(PhotoRequest $request)
     {
-        return $this->service->show($request->magazine_news);
+        return $this->service->show($request->photo);
     }
 
     /**
@@ -57,7 +57,7 @@ class PhotosController extends Controller
      */
     public function update(PhotoRequest $request)
     {
-        return $this->service->update($request->magazine_news, $request);
+        return $this->service->update($request->photo, $request);
     }
 
     /**
@@ -67,6 +67,6 @@ class PhotosController extends Controller
      */
     public function destroy(PhotoRequest $request)
     {
-        return $this->service->delete($request->magazine_news);
+        return $this->service->delete($request->photo);
     }
 }

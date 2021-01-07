@@ -24,10 +24,6 @@ class VideosService extends LaravelServiceClass
             'is_active' => 1
         ]);
 
-        $contents->load([
-            'images'
-        ]);
-
         $contents = VideoResource::collection($contents);
         return ApiResponse::format(200, $contents, null, $pagination);
     }
@@ -42,10 +38,6 @@ class VideosService extends LaravelServiceClass
                 'is_active' => true
             ],[],6);
 
-            $content->load([
-                'images'
-            ]);
-
             CacheHelper::putCache(SectionsCache::latestVideos(), $content);
         }
 
@@ -57,7 +49,7 @@ class VideosService extends LaravelServiceClass
     {
         $content = $this->main_repository->get($slug,[
             'is_active' => true
-        ],'slug',['images']);
+        ],'slug');
 
         $content = VideoResource::make($content);
 

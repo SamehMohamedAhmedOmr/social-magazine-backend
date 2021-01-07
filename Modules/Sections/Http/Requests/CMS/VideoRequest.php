@@ -3,6 +3,7 @@
 namespace Modules\Sections\Http\Requests\CMS;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\Sections\Rules\YoutubeVideoRule;
 
 class VideoRequest extends FormRequest
 {
@@ -26,7 +27,12 @@ class VideoRequest extends FormRequest
                 $default = [
                     'title' => 'required|string|max:255',
                     'content' => 'required|string|max:65535',
-                    'link' => 'required|active_url|max:255',
+                    'link' => [
+                        'required',
+                        'max:255',
+                        'active_url',
+                        new YoutubeVideoRule
+                    ],
                     'is_active' => 'boolean',
                 ];
                 break;
@@ -36,7 +42,11 @@ class VideoRequest extends FormRequest
 
                     'title' => 'nullable|string|max:255',
                     'content' => 'nullable|string|max:65535',
-                    'link' => 'active_url|max:255',
+                    'link' => [
+                        'max:255',
+                        'active_url',
+                        new YoutubeVideoRule
+                    ],
                     'is_active' => 'boolean',
                 ];
                 break;

@@ -20,6 +20,9 @@ class SeedGalleryTypeTableSeeder extends Seeder
             ['name' => 'Magazine_Category', 'folder' => 'magazine_category'], // التصنيف
             ['name' => 'testimonials', 'folder' => 'testimonials'],
             ['name' => 'news', 'folder' => 'news'],
+            ['name' => 'events', 'folder' => 'events'],
+            ['name' => 'photos', 'folder' => 'photos'],
+            ['name' => 'activities', 'folder' => 'activities'],
         ]);
 
         foreach ($types as $type) {

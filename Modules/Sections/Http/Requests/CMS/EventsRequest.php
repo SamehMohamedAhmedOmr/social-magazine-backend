@@ -26,7 +26,7 @@ class EventsRequest extends FormRequest
                 $default = [
                     'title' => 'required|string|max:255',
                     'content' => 'required|string|max:65535',
-                    'date' => 'required|date',
+                    'date' => 'required|date_format:Y-m-d',
                     'is_active' => 'boolean',
 
                     'images' => 'array',

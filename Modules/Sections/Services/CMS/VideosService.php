@@ -31,10 +31,6 @@ class VideosService extends LaravelServiceClass
             $contents = parent::list($this->repository, true);
         }
 
-        $contents->load([
-            'images'
-        ]);
-
         $contents = VideoResource::collection($contents);
         return ApiResponse::format(200, $contents, null, $pagination);
     }
@@ -62,15 +58,7 @@ class VideosService extends LaravelServiceClass
 
             $content =  $this->repository->create($data);
 
-            if (isset($request->images)){
-                $this->repository->attach($content, $request->images);
-            }
-
             $this->forgetCache();
-
-            $content->load([
-                'images'
-            ]);
 
             $content = VideoResource::make($content);
             return ApiResponse::format(201, $content, 'Content Created!');
@@ -81,10 +69,6 @@ class VideosService extends LaravelServiceClass
     public function show($id)
     {
         $content = $this->repository->get($id);
-
-        $content->load([
-            'images'
-        ]);
 
         $content = VideoResource::make($content);
 
@@ -111,15 +95,7 @@ class VideosService extends LaravelServiceClass
 
         $content = $this->repository->update($id, $data);
 
-        if (isset($request->images)){
-            $this->repository->attach($content, $request->images);
-        }
-
         $this->forgetCache();
-
-        $content->load([
-            'images'
-        ]);
 
         $content = VideoResource::make($content);
 

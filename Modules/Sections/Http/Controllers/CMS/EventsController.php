@@ -47,7 +47,7 @@ class EventsController extends Controller
      */
     public function show(EventsRequest $request)
     {
-        return $this->service->show($request->magazine_news);
+        return $this->service->show($request->event);
     }
 
     /**
@@ -57,7 +57,7 @@ class EventsController extends Controller
      */
     public function update(EventsRequest $request)
     {
-        return $this->service->update($request->magazine_news, $request);
+        return $this->service->update($request->event, $request);
     }
 
     /**
@@ -67,6 +67,6 @@ class EventsController extends Controller
      */
     public function destroy(EventsRequest $request)
     {
-        return $this->service->delete($request->magazine_news);
+        return $this->service->delete($request->event);
     }
 }

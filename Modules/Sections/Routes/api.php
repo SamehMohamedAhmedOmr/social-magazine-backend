@@ -32,6 +32,8 @@ Route::namespace('FRONT')->group(function () {
 
     Route::get('home', 'HomeController@index');
 
+    Route::get('dependencies', 'HomeController@dependencies');
+
     Route::get('testimonials', 'TestimonialController@index');
 
     Route::get('latest-events', 'EventsController@latest');

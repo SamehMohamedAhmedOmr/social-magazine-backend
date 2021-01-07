@@ -25,4 +25,13 @@ class HomeController extends Controller
         return $this->service->index();
     }
 
+    /**
+     * Display a listing of the resource.
+     * @return JsonResponse|void
+     */
+    public function dependencies()
+    {
+        return $this->service->dependencies();
+    }
+
 }

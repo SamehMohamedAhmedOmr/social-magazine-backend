@@ -4,6 +4,7 @@ namespace Modules\Sections\Transformers\Front;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Base\Facade\UtilitiesHelper;
 use Modules\Gallery\Transformers\Frontend\GalleryResource;
 
 class EventsResource extends Resource
@@ -21,7 +22,7 @@ class EventsResource extends Resource
             'slug' => $this->slug,
             'content' => $this->content,
             'images' => GalleryResource::collection($this->whenLoaded('images')),
-            'date' => $this->date
+            'date' => UtilitiesHelper::dateShape($this->date)
         ];
     }
 }

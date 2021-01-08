@@ -16,11 +16,6 @@ class Events extends Model
         'content' , 'date' , 'is_active'
     ];
 
-    public function getDateAttribute($value)
-    {
-        return UtilitiesHelper::dateShape($value);
-    }
-
     public function images()
     {
         return $this->belongsToMany(

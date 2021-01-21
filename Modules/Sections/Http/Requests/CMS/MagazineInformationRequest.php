@@ -22,6 +22,11 @@ class MagazineInformationRequest extends FormRequest
             'email' => 'nullable|email:rfc,filter',
             'postal_code' => 'nullable|string|max:255',
             'magazine_link' => 'nullable|active_url|max:255',
+
+            'facebook' => 'nullable|string|max:65535',
+            'twitter' => 'nullable|string|max:65535',
+            'instgram' => 'nullable|string|max:65535',
+            'whatsapp' => 'nullable|string|max:65535',
         ];
     }
 
@@ -35,7 +40,12 @@ class MagazineInformationRequest extends FormRequest
             'fax_number' => 'الفاكس',
             'email' => 'البريد الالكتروني',
             'postal_code' => 'الكود البريدي',
-            'magazine_link' => 'لينك المجلة'
+            'magazine_link' => 'لينك المجلة',
+
+            'facebook' => 'فيسبوك',
+            'twitter' => 'تويتر',
+            'instgram' => 'انستجرام',
+            'whatsapp' => 'واتساب',
         ];
     }
 

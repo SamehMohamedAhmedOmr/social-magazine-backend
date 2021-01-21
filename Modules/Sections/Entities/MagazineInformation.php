@@ -15,7 +15,9 @@ class MagazineInformation extends Model
         'mission', 'address',
         'phone' , 'fax_number',
         'email', 'postal_code',
-        'magazine_link'
+        'magazine_link',
+        'facebook', 'twitter',
+        'instgram', 'whatsapp',
     ];
 
 

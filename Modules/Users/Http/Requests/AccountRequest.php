@@ -38,6 +38,8 @@ class AccountRequest extends FormRequest
                     'is_active' => 'boolean',
                     'phone_number' => 'required|string|min:4|max:14',
 
+                    'user_type' => 'boolean',
+
                     'country_id' => 'required|integer|exists:countries,id' . $delete_check,
                     'gender_id' => 'required|integer|exists:genders,id' . $delete_check,
                     'title_id' => 'required|integer|exists:titles,id' . $delete_check,
@@ -60,6 +62,8 @@ class AccountRequest extends FormRequest
                     'alternative_email' => 'nullable|email:rfc,filter',
                     'is_active' => 'nullable|boolean',
                     'phone_number' => 'nullable|string|min:4|max:14',
+
+                    'user_type' => 'boolean',
 
                     'country_id' => 'nullable|integer|exists:countries,id' . $delete_check,
                     'gender_id' => 'nullable|integer|exists:genders,id' . $delete_check,

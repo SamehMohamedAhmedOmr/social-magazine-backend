@@ -27,6 +27,7 @@ class AccountResource extends Resource
             'family_name' => $this->family_name,
 
             'email' => $this->email,
+            'user_type' => $this->user_type,
             'alternative_email' => $this->alternative_email,
             'is_active' => $this->is_active,
 

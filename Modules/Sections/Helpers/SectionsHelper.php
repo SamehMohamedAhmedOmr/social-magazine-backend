@@ -18,6 +18,10 @@ class SectionsHelper
         $body = $this->returnProfileUpdateBody($body,$request_body ,'email');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'postal_code');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'magazine_link');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'facebook');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'twitter');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'instgram');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'whatsapp');
         return $body;
     }
 

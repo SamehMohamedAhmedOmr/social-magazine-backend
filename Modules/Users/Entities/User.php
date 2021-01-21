@@ -34,7 +34,7 @@ class User extends Authenticatable
         'email_verified_at', 'token_last_renew',
 
         // cms attributes
-        'is_active',
+        'is_active', 'user_type',
 
         // Submit Research Data
         'alternative_email' , 'educational_level_id', 'educational_degree_id', 'address',

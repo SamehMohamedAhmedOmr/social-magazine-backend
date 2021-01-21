@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'application_name' => 'مجلة مستقبل العلوم الاجتماعية',
+    'application_name' => 'الجمعية العربية للتنمية البشرية و البيئية',
 
     'name' => env('APP_NAME', 'Laravel'),
 

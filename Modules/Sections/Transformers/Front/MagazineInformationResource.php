@@ -25,6 +25,11 @@ class MagazineInformationResource extends Resource
             'email' => $this->email,
             'postal_code' => $this->postal_code,
             'magazine_link' => $this->magazine_link,
+
+            'facebook' => $this->facebook,
+            'twitter' => $this->twitter,
+            'instgram' => $this->instgram,
+            'whatsapp' => $this->whatsapp,
         ];
     }
 }

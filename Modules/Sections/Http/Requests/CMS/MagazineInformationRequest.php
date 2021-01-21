@@ -23,10 +23,10 @@ class MagazineInformationRequest extends FormRequest
             'postal_code' => 'nullable|string|max:255',
             'magazine_link' => 'nullable|active_url|max:255',
 
-            'facebook' => 'nullable|string|max:65535',
-            'twitter' => 'nullable|string|max:65535',
-            'instgram' => 'nullable|string|max:65535',
-            'whatsapp' => 'nullable|string|max:65535',
+            'facebook' => 'nullable|active_url|max:255',
+            'twitter' => 'nullable|active_url|max:255',
+            'instgram' => 'nullable|active_url|max:255',
+            'whatsapp' => 'nullable|active_url|max:255',
         ];
     }
 

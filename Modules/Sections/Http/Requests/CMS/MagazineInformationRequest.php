@@ -26,7 +26,7 @@ class MagazineInformationRequest extends FormRequest
             'facebook' => 'nullable|active_url|max:255',
             'twitter' => 'nullable|active_url|max:255',
             'instgram' => 'nullable|active_url|max:255',
-            'whatsapp' => 'nullable|active_url|max:255',
+            'whatsapp' => 'nullable|string|max:255',
         ];
     }
 

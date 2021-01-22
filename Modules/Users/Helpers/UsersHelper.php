@@ -42,6 +42,7 @@ class UsersHelper
         $body = $this->returnProfileUpdateBody($body,$request_body ,'educational_level_id');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'educational_degree_id');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'address');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'user_type');
 
         return $body;
     }
@@ -61,6 +62,7 @@ class UsersHelper
         $body = $this->returnProfileUpdateBody($body,$request_body ,'educational_level_id');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'educational_degree_id');
         $body = $this->returnProfileUpdateBody($body,$request_body ,'address');
+        $body = $this->returnProfileUpdateBody($body,$request_body ,'user_type');
         return $body;
     }
     private function returnProfileUpdateBody($body, $request_body ,$key){

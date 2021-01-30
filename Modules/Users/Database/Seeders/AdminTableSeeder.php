@@ -25,11 +25,11 @@ class AdminTableSeeder extends Seeder
         $country = Country::where('country_code','EG')->first();
 
         $user = User::updateOrCreate([
-            'email' => 'admin@magzine.com',
+            'email' => 'drabosohaib2015@gmail.com',
         ], [
-            'first_name' => 'Admin',
-            'family_name' => 'of Magazine',
-            'password' => bcrypt('123456789'),
+            'first_name' => 'Bassem',
+            'family_name' => 'Youssef',
+            'password' => bcrypt('01014264334'),
             'gender_id' => $gender->id,
             'country_id' => $country->id
         ]);

@@ -4,6 +4,7 @@ namespace Modules\Sections\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Facade\UtilitiesHelper;
 use Modules\Gallery\Entities\Gallery;
 
 class MagazineNews extends Model
@@ -14,6 +15,11 @@ class MagazineNews extends Model
         'title' , 'slug',
         'content' , 'views' , 'is_active'
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return UtilitiesHelper::dateShape($value);
+    }
 
     public function images()
     {

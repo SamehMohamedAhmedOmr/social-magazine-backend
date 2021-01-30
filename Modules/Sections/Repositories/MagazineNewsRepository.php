@@ -19,14 +19,14 @@ class MagazineNewsRepository extends LaravelRepositoryClass
         return parent::paginate($query, $per_page, $conditions, $sort_key, $sort_order);
     }
 
-    public function all($conditions = [], $search_keys = null)
+    public function all($conditions = [], $search_keys = [], $limit = null)
     {
-        $query = $this->filtering($search_keys);
+        $query = $this->filtering($search_keys, $limit);
 
         return $query->where($conditions)->get();
     }
 
-    private function filtering($search_keys){
+    private function filtering($search_keys, $limit = null ){
         $query = $this->model;
 
         if ($search_keys) {
@@ -35,6 +35,10 @@ class MagazineNewsRepository extends LaravelRepositoryClass
                 $q->where('title', 'LIKE', '%'.$search_keys.'%')
                     ->orWhere('id', 'LIKE', '%'.$search_keys.'%');
             });
+        }
+
+        if ($limit){
+            $query = $query->take($limit)->orderBy('created_at','desc');
         }
 
         return $query;
@@ -61,5 +65,28 @@ class MagazineNewsRepository extends LaravelRepositoryClass
         return $data;
     }
 
+    public function updateVisitors($content){
+        $content->views = $content->views + 1;
+        $content->save();
+
+        return $content;
+    }
+
+    public function orderByViews($conditions = [], $limit = null ){
+        $query = $this->model;
+
+        if ($limit){
+            $query = $query->take($limit)->orderBy('views','desc');
+        }
+
+        return $query->where($conditions)->get();
+    }
+
+
+    public function numberOfActive(){
+        $query = $this->model;
+
+        return $query->where('is_active', 1)->count();
+    }
 
 }

@@ -53,6 +53,7 @@ class UserResource extends Resource
             'first_name' => $this->first_name,
             'family_name' => $this->family_name,
             'email' => $this->email,
+            'user_type' => $this->user_type,
             'account_types' => AccountTypeResource::collection($this->whenLoaded('accountTypes')),
         ];
 

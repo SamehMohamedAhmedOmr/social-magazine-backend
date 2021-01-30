@@ -30,11 +30,7 @@ class ProfileResource extends Resource
             'country_id' => $this->country_id,
             'types' => AccountTypeResource::collection($this->whenLoaded('accountTypes')),
 
-            'educational_field' => $this->educational_field,
-            'university' => $this->university,
-            'faculty' => $this->faculty,
             'phone_number' => $this->phone_number,
-            'fax_number' => $this->fax_number,
             'address' => $this->address,
         ];
     }

@@ -38,16 +38,14 @@ class AccountRequest extends FormRequest
                     'is_active' => 'boolean',
                     'phone_number' => 'required|string|min:4|max:14',
 
+                    'user_type' => 'boolean',
+
                     'country_id' => 'required|integer|exists:countries,id' . $delete_check,
                     'gender_id' => 'required|integer|exists:genders,id' . $delete_check,
                     'title_id' => 'required|integer|exists:titles,id' . $delete_check,
                     'educational_level_id' => 'required|integer|exists:educational_levels,id' . $delete_check,
                     'educational_degree_id' => 'required|integer|exists:educational_degrees,id' . $delete_check,
 
-                    'educational_field' => 'nullable|string|max:255',
-                    'university' => 'nullable|string|max:255',
-                    'faculty' => 'nullable|string|max:255',
-                    'fax_number' => 'nullable|string|max:255',
                     'address' => 'nullable|string|max:255',
                 ];
                 break;
@@ -65,16 +63,14 @@ class AccountRequest extends FormRequest
                     'is_active' => 'nullable|boolean',
                     'phone_number' => 'nullable|string|min:4|max:14',
 
+                    'user_type' => 'boolean',
+
                     'country_id' => 'nullable|integer|exists:countries,id' . $delete_check,
                     'gender_id' => 'nullable|integer|exists:genders,id' . $delete_check,
                     'title_id' => 'nullable|integer|exists:titles,id' . $delete_check,
                     'educational_level_id' => 'nullable|integer|exists:educational_levels,id' . $delete_check,
                     'educational_degree_id' => 'nullable|integer|exists:educational_degrees,id' . $delete_check,
 
-                    'educational_field' => 'nullable|string|max:255',
-                    'university' => 'nullable|string|max:255',
-                    'faculty' => 'nullable|string|max:255',
-                    'fax_number' => 'nullable|string|max:255',
                     'address' => 'nullable|string|max:255',
                 ];
                 break;

@@ -42,4 +42,43 @@ class SectionsCache
         return 'magazine_news';
     }
 
+    public function latestMagazineNews(){
+        return 'latest_magazine_news';
+    }
+
+    public function mostViewedNews(){
+        return 'most_viewed_news';
+    }
+
+    public function events(){
+        return 'events';
+    }
+
+    public function latestEvents(){
+        return 'latest_events';
+    }
+
+    public function activities(){
+        return 'activities';
+    }
+
+    public function latestActivities(){
+        return 'latest_activities';
+    }
+
+    public function photos(){
+        return 'photos';
+    }
+
+    public function latestPhotos(){
+        return 'latest_photos';
+    }
+
+    public function videos(){
+        return 'videos';
+    }
+
+    public function latestVideos(){
+        return 'latest_videos';
+    }
 }

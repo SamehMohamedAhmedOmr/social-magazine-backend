@@ -10,9 +10,6 @@ use Modules\Sections\Facade\SectionsCache;
 use Modules\Sections\Facade\SectionsHelper;
 use Modules\Sections\Repositories\MagazineInformationRepository;
 use Modules\Sections\Transformers\Front\MagazineInformationResource;
-use Modules\Users\Facades\UsersHelper;
-use Modules\Users\Facades\UsersTypesHelper;
-use Modules\Users\Transformers\CMS\AccountResource;
 use Throwable;
 
 class MagazineInformationService extends LaravelServiceClass

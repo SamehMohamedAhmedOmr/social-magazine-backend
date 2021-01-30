@@ -19,3 +19,5 @@ Route::get('educational-levels','EducationalLevelController@index');
 Route::get('genders','GenderController@index');
 Route::get('titles','TitleController@index');
 
+
+Route::get('account-dependencies','AccountDependenciesController@index');

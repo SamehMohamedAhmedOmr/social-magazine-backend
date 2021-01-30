@@ -4,6 +4,7 @@ namespace Modules\Sections\Http\Controllers\FRONT;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Modules\Base\Requests\PaginationRequest;
 use Modules\Sections\Http\Requests\FRONT\MagazineNewsRequest;
 use Modules\Sections\Services\Frontend\MagazineNewsService;
 
@@ -20,11 +21,21 @@ class MagazineNewsController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param PaginationRequest $request
      * @return JsonResponse|void
      */
-    public function index()
+    public function index(PaginationRequest $request)
     {
         return $this->service->index();
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @return JsonResponse|void
+     */
+    public function LatestNews()
+    {
+        return $this->service->LatestNews();
     }
 
     /**

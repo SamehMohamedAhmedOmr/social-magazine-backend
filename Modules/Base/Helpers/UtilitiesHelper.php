@@ -2,6 +2,7 @@
 
 namespace Modules\Base\Helpers;
 
+use Carbon\Carbon;
 use Request;
 
 class UtilitiesHelper
@@ -59,5 +60,11 @@ class UtilitiesHelper
         $string = preg_replace("/[\s_]/", '-', $string);
 
         return $string;
+    }
+
+    public function dateShape($value){
+        $date = Carbon::parse($value, 'UTC');
+
+        return $date->isoFormat('dddd - Do MMMM YYYY');
     }
 }

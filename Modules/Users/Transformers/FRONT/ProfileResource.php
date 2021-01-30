@@ -34,11 +34,7 @@ class ProfileResource extends Resource
             'educational_degree' => EducationalDegreeResource::make($this->whenLoaded('educationalDegree')),
             'country' => CountryResource::make($this->whenLoaded('country')),
 
-            'educational_field' => $this->educational_field,
-            'university' => $this->university,
-            'faculty' => $this->faculty,
             'phone_number' => $this->phone_number,
-            'fax_number' => $this->fax_number,
             'address' => $this->address,
         ];
     }

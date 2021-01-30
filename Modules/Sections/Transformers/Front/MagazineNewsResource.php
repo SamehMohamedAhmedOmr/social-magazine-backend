@@ -22,6 +22,7 @@ class MagazineNewsResource extends Resource
             'content' => $this->content,
             'views' => $this->views,
             'images' => GalleryResource::collection($this->whenLoaded('images')),
+            'created_at' => $this->created_at
         ];
     }
 }

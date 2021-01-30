@@ -5,5 +5,7 @@
     "Gallery": true,
     "Base": true,
     "Basic": true,
-    "Sections": true
+    "Sections": true,
+    "PreArticle": true,
+    "Article": true
 }

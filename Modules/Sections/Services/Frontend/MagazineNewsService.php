@@ -20,18 +20,34 @@ class MagazineNewsService extends LaravelServiceClass
 
     public function index()
     {
-        $content = CacheHelper::getCache(SectionsCache::magazineNews());
+        list($contents, $pagination) = parent::paginate($this->main_repository, null, true,[
+            'is_active' => 1
+        ]);
+
+        $contents->load([
+            'images'
+        ]);
+
+        $contents = MagazineNewsResource::collection($contents);
+        return ApiResponse::format(200, $contents, null, $pagination);
+    }
+
+
+    public function LatestNews()
+    {
+        $content = CacheHelper::getCache(SectionsCache::latestMagazineNews());
 
         if (!$content) {
             $content = $this->main_repository->all([
                 'is_active' => true
-            ]);
-            CacheHelper::putCache(SectionsCache::magazineNews(), $content);
-        }
+            ],[],6);
 
-        $content->load([
-            'images'
-        ]);
+            $content->load([
+                'images'
+            ]);
+
+            CacheHelper::putCache(SectionsCache::latestMagazineNews(), $content);
+        }
 
         $content = MagazineNewsResource::collection($content);
         return ApiResponse::format(200, $content);
@@ -42,6 +58,11 @@ class MagazineNewsService extends LaravelServiceClass
         $content = $this->main_repository->get($slug,[
             'is_active' => true
         ],'slug',['images']);
+
+        $content = $this->main_repository->updateVisitors($content);
+
+        CacheHelper::forgetCache(SectionsCache::magazineNews());
+        CacheHelper::forgetCache(SectionsCache::latestMagazineNews());
 
         $content = MagazineNewsResource::make($content);
 

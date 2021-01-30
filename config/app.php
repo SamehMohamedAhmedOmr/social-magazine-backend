@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'application_name' => 'مجلة مستقبل دراسات العلوم البينية في العلوم الاجتماعية',
+    'application_name' => 'الجمعية العربية للتنمية البشرية و البيئية',
 
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -182,6 +182,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        FruitCake\Cors\CorsServiceProvider::class,
 
     ],
 

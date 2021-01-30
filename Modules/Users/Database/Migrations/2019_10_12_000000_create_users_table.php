@@ -45,17 +45,10 @@ class CreateUsersTable extends Migration
             $table->foreign('educational_degree_id')->references('id')
                 ->on('educational_degrees')->onDelete('restrict')->onUpdate('cascade');
 
-            $table->text('educational_field')->nullable();
-
-            $table->string('university')->nullable();
-            $table->string('faculty')->nullable();
-
             $table->string('phone_number')->nullable();
-            $table->string('fax_number')->nullable();
-
             $table->text('address')->nullable();
 
-            $table->unsignedInteger('country_id')->nullable(); // أستاذ / أستاذ مشارك / أستاذ مساعد
+            $table->unsignedInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')
                 ->on('countries')->onDelete('restrict')->onUpdate('cascade');
 

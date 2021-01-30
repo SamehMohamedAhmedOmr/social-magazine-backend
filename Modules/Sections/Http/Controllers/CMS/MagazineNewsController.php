@@ -5,7 +5,6 @@ namespace Modules\Sections\Http\Controllers\CMS;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Base\Requests\PaginationRequest;
-use Modules\Sections\Http\Requests\CMS\AdvisoryBodyRequest;
 use Modules\Sections\Http\Requests\CMS\MagazineNewsRequest;
 use Modules\Sections\Services\CMS\MagazineNewsService;
 use Throwable;

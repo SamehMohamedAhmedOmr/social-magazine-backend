@@ -182,8 +182,6 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        FruitCake\Cors\CorsServiceProvider::class,
-
     ],
 
     /*
